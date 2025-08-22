@@ -1,0 +1,268 @@
+<div [dir]="'dir'|translate" class="sticky-button" [ngClass]="{'left': ('dir'|translate)==='ltr', 'right': ('dir'|translate)==='rtl'}">
+    <button *ngIf="isEditable" (click)="save() " class="btn btn-circle btn-xl help"><i class="fa-solid fa-floppy-disk" style="font-size: 20px;cursor: pointer;"></i>&nbsp;&nbsp;{{'SAVE'|translate}}</button><br> <br>
+</div>
+<div class="col-12 d-flex align-items-center justify-content-center mt-4 ml-2">
+    <img alt="" src="{{etape77.project.logo | defaultimage :etape77.project.name:'':true}}" class="size-20 rounded-lg object-contain shadow-sm mr-3" />
+    <h1 class="text-center flex-grow-1">{{'COMPANY_PROFILE'|translate}}</h1>
+</div>
+
+<br>
+<br>
+
+<p *ngIf="isEditable" style="margin-left: 3%;position: relative;">
+    {{'DOWNLOAD_COMPANY_PROFILE_AS'|translate}} <a (click)="downloadPDF()" style="cursor: pointer;text-decoration: underline; font-weight: bold;">PDF</a> {{'OR'|translate}} <a style="cursor: pointer;text-decoration: underline; font-weight: bold;" (click)="downloadWord()">Word(.docs)</a>
+</p>
+<form [formGroup]="etape7" (ngSubmit)="onSubmit()">
+    <div class="main-conatiner" id="certificate">
+        <div class="operation">
+            <div class="row center-div ">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4" style="align-items: center;">
+                    <h2 class="exclude-from-pdf" style="margin-right: auto;margin-left: 20px;">
+                        <i class="fa-regular fa-circle-question" style="font-size: 30px;cursor: pointer;" (click)="infoprofile()"></i>
+                    </h2>
+                    <div class="card-body px-0 pt-0 pb-2 col-10">
+                        <div class="form-dash" style="margin: 30px;">
+                            <table class="table table-bordered ">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{'COMPANY_NAME'|translate}} <span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input maxlength="255" type="text" formControlName="nomEntreprise" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'COMPANY_LOGO'|translate}} <span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="col-10">
+                                                <img alt="" src="{{etape77.project.logo | defaultimage :etape77.project.name:'':true}}" class="size-25 rounded-lg object-contain shadow-sm " />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'LEGAL_STATUS'|translate}}<span class="important ">*</span> <br>
+                                            <span style="color: gray;">{{'REFER_TO_COUNTRY_JURISDICTION'|translate}}</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input maxlength="255" type="text" formControlName="formeJuridique" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'ESTABLISHMENT_DATE'|translate}} <span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input type="date" formControlName="dateCreation" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'FOUNDERS'|translate}} <span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div *ngIf="etape77.project.coFounders.length==0">
+                                                No CoFounders
+                                            </div>
+                                            <div class="form-group " *ngFor="let cofounder of etape77.project.coFounders ; trackBy: trackById ">
+                                                <div class="flex h-16 shrink-0 items-center">
+                                                    <img [dir]="'dir'|translate" alt="{{cofounder.nom}}{{cofounder.prenom}}" class="h-10 w-10 rounded-full" src="{{cofounder.photo | defaultimage:cofounder.prenom :cofounder.nom }}">
+                                                    <div [dir]="'dir'|translate" class="mx-2 text-s">
+                                                        <a [dir]="'dir'|translate" [queryParams]="{id:cofounder.id}" [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']" class="m-0  text-primaryBlue text-decoration-none">{{ cofounder.prenom + ' ' + cofounder.nom|titlecase }}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'LOCATIONS'|translate}}<span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input maxlength="255" type="text" formControlName="emplacements" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'INVESTMENT_COST'|translate}}<span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input type="number" step="0.001" formControlName="coutInvestissement" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'REVENUE'|translate}} <br> <span style="color: gray;">({{'ACTUAL_OR_ESTIMATED_REVENUE'|translate}})</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input type="number" step="0.001" formControlName="chiffreAffair" class="form-control "  required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'SECTOR'|translate}}<span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <select formControlName="fournisseursPartenaires" class="form-select" required>
+                                                    <option value="Telecommunication" selected>{{'TELECOMMUNICATION'|translate}}</option>
+                                                    <option value="Consumer staples">{{'CONSUMER_STAPLES'|translate}} </option>
+                                                    <option value="Utilities">{{'UTILITIES'|translate}}</option>
+                                                    <option value="Industrials">{{'INDUSTRIALS'|translate}}</option>
+                                                    <option value="Consumer discretionary">{{'CONSUMER_DISCRETIONARY'|translate}} </option>
+                                                    <option value="Materials">{{'MATERIALS'|translate}}</option>
+                                                    <option value="Energy">{{'ENERGY'|translate}}</option>
+                                                    <option value="Real estate">{{'REAL_ESTATE'|translate}} </option>
+                                                    <option value="Financials">{{'FINANCIALS'|translate}}</option>
+                                                    <option value="Health care">{{'HEALTH_CARE'|translate}} </option>
+                                                    <option value="Technology">{{'TECHNOLOGY'|translate}}</option>
+                                                    <option value="Other">{{'OTHER'|translate}}</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'CLASSIFICATION_OF_BUSINESS_ACTIVITY'|translate}}<span class="important">*</span>
+                                        </td>
+                                        <td>
+                                            <select formControlName="entConcurrents" class="form-select " required>
+                                                <option value="Agricultural" selected>{{'AGRICULTURAL'|translate}}</option>
+                                                <option value="Service">{{'SERVICE'|translate}}</option>
+                                                <option value="Commerce">{{'COMMERCE'|translate}}</option>
+                                                <option value="Primary industry">{{'PRIMARY_INDUSTRY'|translate}}</option>
+                                                <option value="Secondary industry">{{'SECONDARY_INDUSTRY'|translate}}</option>
+                                                <option value="Tertiary industry">{{'TERTIARY_INDUSTRY'|translate}}</option>
+                                                <option value="Other">{{'OTHER'|translate}}</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <!--
+                                    <tr>
+                                        <td>
+                                            Offer proposed <span class="important">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input type="text" formControlName="offreProposee" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    -->
+                                    <tr>
+                                        <td>
+                                            {{'TARGET_CUSTOMERS_BENEFICIARIES'|translate}} <span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input maxlength="255" type="text" formControlName="beneficaires" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'PRODUCTS_SERVICES'|translate}}<span class="important ">*</span>
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <input maxlength="255" type="text" formControlName="services" class="form-control " required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'NUMBER_OF_PERMANENT_JOBS'|translate}}
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <label for="nombreEmployeHomme" style="display: inline-block; width: 100px; ">{{'MEN'|translate}}</label>
+                                                <input type="number" step="0.001" name="nombreEmployeHomme" formControlName="nombreEmployeHomme" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+                                            <br>
+                                            <div class="form-group ">
+                                                <label for="nombreEmployeFemme" style="display: inline-block; width: 100px; ">{{'WOMEN'|translate}}</label>
+                                                <input type="number" step="0.001" name="nombreEmployeFemme" formControlName="nombreEmployeFemme" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+                                            <br>
+                                            <div class="form-group ">
+                                                <label for="nombreEmployeMoins35" style="display: inline-block; width: 100px; ">{{'UNDER_35'|translate}}</label>
+                                                <input type="number" step="0.001" name="nombreEmployeMoins35" formControlName="nombreEmployeMoins35" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'NUMBER_OF_SEASONAL_JOBS'|translate}}
+                                        </td>
+                                        <td>
+                                            <div class="form-group ">
+                                                <label for="nombreSaisonnierHomme" style="display: inline-block; width: 100px; ">{{'MEN'|translate}}</label>
+                                                <input type="number" step="0.001" name="nombreSaisonnierHomme" formControlName="nombreSaisonnierHomme" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+                                            <br>
+                                            <div class="form-group ">
+                                                <label for="nombreSaisonnierFemme" style="display: inline-block; width: 100px; ">{{'WOMEN'|translate}}</label>
+                                                <input type="number" step="0.001" formControlName="nombreSaisonnierFemme" name="nombreSaisonnierFemme" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+                                            <br>
+                                            <div class="form-group ">
+                                                <label for="nombreSaisonnierMoins35 " style="display: inline-block; width: 100px; ">{{'UNDER_35'|translate}}	</label>
+                                                <input type="number" step="0.001" name="nombreSaisonnierMoins35 " formControlName="nombreSaisonnierMoins35" class="form-control " style="display: inline-block; width: calc(100% - 100px); " required/>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="position: relative;" *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('BUSINESS_PROFILE')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+    </div>
+    <br>
+    <br>
+    <div class="flex justify-content-around " style="position: relative;">
+        <button type="button" class="btn btn-outline-primary startnow"><a  [routerLink]="'/feed/etape/' + projectId + '/6'">{{'PREVIOUS_STEP'|translate}}</a></button>
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-primary startnow ">{{'TO_END'|translate}}</button>
+        <button type="button" (click)="infoCoach()" class="btn btn-outline-primary startnow ">{{'REQUEST_CERTIFICATION'|translate}}</button>
+    </div>
+</form>
+
+
+<p-dialog [(visible)]="profile" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'BUSINESS_PROFILE'|translate}}</h4>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+</p-dialog>
+<p-dialog [(visible)]="showremarque" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'REMARK'|translate}}</h4>
+    <div class="d-flex flex justify-content-center" style="text-align: center;">
+        <textarea #remarqueTextarea name="remarque" cols="50" rows="10" placeholder="{{'WRITE_REMARK'|translate}}" style="display: block;border-radius: 10px;border: 2px solid #c0aa81;"></textarea>
+        <br>
+    </div>
+    <button type="button" class="btn btn-outline-primary startnow" style="display: block;" (click)="sendRemark(remarqueTextarea.value)">{{'SEND'|translate}}</button>
+</p-dialog>
+
+<app-chooseprofessional [typeModel]="'verification'" [idProject]="2" [visible]="coach" (close)="closeInfo()"></app-chooseprofessional>

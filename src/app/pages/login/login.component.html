@@ -1,0 +1,88 @@
+<div class="row row-height fontStyle">
+    <div class="hidden lg:block col img">
+
+    </div>
+  <div class="col  colBack heropattern-linesinmotion-gold/10">
+    <div class="row mt-3 ml-8">
+      <div class="col ml-6 ">
+        <a [routerLink]="['/']"> <img class="mt-3 ml-4  h-4 " src="assets/images/logo/logo-dark-blue.png" alt="Your Company"></a>
+      </div>
+      <div class="col py-3 text-right mr-6">
+        <a [routerLink]="['/signup']" class=" text-decoration-none text-second no-underline"> {{'DONT_HAVE_ACCOUNT'|translate}}</a>
+      </div>
+    </div>
+    <div class="flex justify-center  min-h-full flex-col px-6 py-1 lg:px-8 -mt-24">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h1 class="mt-10 text-center title1">{{'WELCOME_BACK'|translate}}</h1>
+        <h2 class="mt-10 text-center title2">{{'LOGIN_ACCOUNT'|translate}}</h2>
+      </div>
+      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form [dir]="'dir'|translate" [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+          <div>
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{'EMAIL'|translate}} </label>
+            <div class="mt-2">
+              <input id="email" formControlName="email" name="email" type="email" autocomplete="email" required class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+              <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"></div>
+              <small small *ngIf="loginForm.controls['email'].errors?.['email']" class="text-red-500">{{'INVALID_EMAIL'|translate}}</small>
+            </div>
+
+          </div>
+          <div class="mt-4">
+            <div class="flex items-center justify-between">
+              <label for="password-field" class="block text-sm font-medium leading-6 text-gray-900">{{'PASSWORD'|translate}}</label>
+              <div class="text-sm">
+                <a [routerLink]="['/forgotPassword']" class="font-semibold text-main hover:text-tertiary">{{'FORGOT_PASSWORD'|translate}}</a>
+              </div>
+            </div>
+
+            <div class="relative">
+              <input
+                [type]="password" autocomplete="current-password" 
+                class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" 
+                formControlName="password"
+                id="password-field" minlength="6" name="password"
+                placeholder="{{'PASSWORD'|translate}}"
+                [ngClass]="{'pl-10': ('dir' | translate) === 'rtl', 'pr-10': ('dir' | translate) === 'ltr'}"
+                required
+              />
+            
+              <span (click)="showPassword()"
+                    class="absolute inset-y-0 grid place-content-center px-4 cursor-pointer"
+                    [ngClass]="{'left-0': ('dir' | translate) === 'rtl', 'right-0': ('dir' | translate) === 'ltr'}">
+                <svg
+                  class="size-4 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                  />
+                </svg>
+              </span>
+            </div>
+            
+          </div>
+
+          <div class="mt-8">
+            <button type="submit" class=" flex w-full justify-center rounded-md bg-main px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              {{'SIGN_IN'|translate}}
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

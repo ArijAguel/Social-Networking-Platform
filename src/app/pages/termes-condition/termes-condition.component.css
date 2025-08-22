@@ -1,0 +1,45 @@
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    padding-top: 20px;
+}
+
+img {
+    padding-left: 20px;
+    z-index: 1000;
+}
+
+.title {
+    font-size: 15px;
+    color: #1b4156;
+    padding: 70px;
+    align-items: center;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+h1 {
+    z-index: 1000;
+    color: #c0aa81;
+    font-weight: bold;
+    padding-left: 70px;
+}
+
+li {
+    padding: 2px;
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+p {
+    font-weight: normal;
+}
+
+a {
+    cursor: pointer;
+}

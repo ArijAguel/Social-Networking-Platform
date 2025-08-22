@@ -1,0 +1,25 @@
+h1{
+    font-size: 30px;
+}
+
+
+.flip-card {
+    perspective: 1000px; /* Needed to give the 3D effect */
+}
+
+.flip-card-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    backface-visibility: hidden; /* Hides the back face when not flipped */
+}
+
+.flip-card-back {
+    transform: rotateY(180deg); /* Start the back side rotated */
+}

@@ -1,0 +1,233 @@
+h1 {
+    color: #c0aa81;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+p {
+    font-size: 15px;
+}
+
+.sticky-button {
+    position: fixed;
+    top: 66vh;
+    z-index: 1;
+}
+
+.left {
+    left: 91%;
+}
+
+.right {
+    right: 91%;
+}
+
+.help {
+    border-radius: 5px;
+    font-size: 15px;
+    text-align: center;
+    align-items: center;
+    width: 120px;
+    height: 50px;
+    background-color: #c0aa81;
+    border: #c0aa81;
+    color: white;
+}
+.help:focus {
+    background-color: #c0aa81;
+    border: #c0aa81;
+}
+
+h2 {
+    color: #c0aa81;
+    font-size: 20px !important;
+    margin-top: 20px;
+}
+
+.container {
+    padding: 30px;
+}
+
+.table-responsive {
+    padding: 30px;
+}
+
+p {
+    font-size: 17px;
+}
+
+h3 {
+    color: #1b4156;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.startnow {
+    color: white;
+    background-color: #c0aa81;
+    border: 2px solid #c0aa81;
+}
+
+.startnow:hover {
+    box-shadow: 0 0 1em grey;
+}
+
+label {
+    color: #c0aa81;
+    font-size: 15px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.342);
+    /* Adjust the color and style as needed */
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.custom-checkbox {
+    width: 20px;
+    /* Adjust the size as needed */
+    height: 20px;
+    /* Adjust the size as needed */
+    accent-color: #c0aa81;
+    margin-top: 10px;
+}
+
+li {
+    font-size: 15px;
+}
+
+thead {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input:focus,
+textarea:focus {
+    color: black;
+    border-color: #c0aa81;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem #c0aa81;
+}
+
+tr {
+    text-align: center;
+}
+
+td {
+    padding: 20px;
+}
+
+li {
+    font-size: 15px;
+    color: black;
+}
+
+.col-form-label {
+    color: #c0aa81;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.mat-stepper-horizontal {
+    padding-top: 20px;
+    border-radius: 20px;
+}
+
+.mat-mdc-form-field {
+    margin-top: 16px;
+}
+
+.main-conatiner {
+    margin: 1%;
+    border: 1px solid rgba(128, 128, 128, 0.262);
+    border-radius: 20px;
+    margin-top: 2%;
+}
+
+::ng-deep .mat-step-header .mat-step-label-selected {
+    color: #c0aa81 !important;
+    font-weight: bold !important;
+    /* Change color to red */
+}
+
+ ::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: #c0aa81;
+    color: white !important;
+}
+
+.button2 {
+    color: #c0aa81;
+    background-color: white;
+    border: 2px solid #c0aa81;
+    margin-left: 10px;
+}
+
+.button2:hover {
+    box-shadow: 0 0 1em grey;
+}
+
+.noticed {
+    color: #455A64;
+    border: 2px solid #455A64;
+}
+
+.noticed:hover {
+    color: white;
+    border: 2px solid #455A64;
+    background-color: #455A64;
+}
+
+.main-conatiner {
+    background-color: white;
+    padding: 50px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* Tooltip container */
+
+select option:hover::before {
+    content: attr(title);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+
+/* Show the tooltip on hover */
+
+select option:hover::before {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Pour Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

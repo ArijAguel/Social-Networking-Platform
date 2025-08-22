@@ -1,0 +1,276 @@
+.navItem {
+    border-radius: 0 !important;
+    margin-bottom: -13px!important;
+    padding-bottom: 18px!important;
+    font-size: 28px;
+    color: #666666
+}
+
+.navItem:hover {
+    color: #c0aa81;
+}
+
+.navItemActive {
+    border-bottom: 3px solid #c0aa81;
+    color: #c0aa81;
+}
+
+.profileIcon {}
+
+.profileIcon:focus {
+    border: 1px solid #c0aa81;
+}
+
+.navItem:focus {
+    color: #c0aa81;
+}
+
+.inputSearch {
+    width: 200px!important;
+}
+
+.inputSearch:focus {
+    border: 1px solid #c0aa81!important;
+}
+
+.notifItem {
+    border-bottom: 1px solid #c9c9c9 !important;
+}
+
+.notifItemRow {
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-right: 5px;
+}
+
+.hover-icon:hover .fa-earth-americas:before {
+    color: #c0aa81;
+}
+
+
+/*.navbar {*/
+
+
+/*    display: flex;*/
+
+
+/*    justify-content: space-between;*/
+
+
+/*    align-items: center;*/
+
+
+/*    background-color: rgba(255, 255, 255, 0.692);*/
+
+
+/*    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);*/
+
+
+/*  }*/
+
+
+/*  .navbar-brand {*/
+
+
+/*    margin-right: auto; !* Push to the left *!*/
+
+
+/*  }*/
+
+
+/*  .navbar-nav {*/
+
+
+/*    margin-left: auto; !* Push to the right *!*/
+
+
+/*  }*/
+
+
+/*  .signup{*/
+
+
+/*    margin-right: 10px;*/
+
+
+/*    margin-left: 15px;*/
+
+
+/*    color: #c0aa81;*/
+
+
+/*    border:2px solid #c0aa81;*/
+
+
+/*  }*/
+
+
+/*.signin{*/
+
+
+/*  color: white ;*/
+
+
+/*    background-color: #c0aa81;*/
+
+
+/*    border:2px solid #c0aa81;*/
+
+
+/*}*/
+
+
+/*.signup:hover{*/
+
+
+/*    color: white ;*/
+
+
+/*    background-color: #c0aa81;*/
+
+
+/*}*/
+
+
+/*.signin:hover {*/
+
+
+/*  box-shadow:  0 0 1em grey;*/
+
+
+/*}*/
+
+
+/*.nav-link:hover{*/
+
+
+/*    color: #c0aa81;*/
+
+
+/*    border-bottom:3px solid #c0aa81;*/
+
+
+/*}*/
+
+
+/*.navbar-nav .nav-item a.nav-link.active {*/
+
+
+/*    color: #c0aa81;*/
+
+
+/*    border-bottom: 3px solid #c0aa81;*/
+
+
+/*  }*/
+
+
+/*.language:hover{*/
+
+
+/*   border-bottom: none;*/
+
+
+/*}*/
+
+
+/*@media screen and (max-width: 1000px) {*/
+
+
+/*  .navbar-collapse  {*/
+
+
+/*    background-color: white;!* Hide the SVG overlay on smaller screens *!*/
+
+
+/*    text-align: center;*/
+
+
+/*    padding-top: 20px;*/
+
+
+/*  }*/
+
+
+/*  .signup{*/
+
+
+/*    margin-right: 30px;*/
+
+
+/*    margin-left: 15px;*/
+
+
+/*    margin-bottom: 15px;*/
+
+
+/*    margin-top: 15px;*/
+
+
+/*  }*/
+
+
+/*  .navbar{*/
+
+
+/*    padding-top: 15px;*/
+
+
+/*  }*/
+
+
+/*}*/
+
+
+/*.navbar.scrolled {*/
+
+
+/*  background-color: white; !* Change to your desired color *!*/
+
+
+/*}*/
+
+
+/*.user-pic {*/
+
+
+/*    width: 30px;*/
+
+
+/*    border-radius: 50%;*/
+
+
+/*    cursor: pointer;*/
+
+
+/*    margin-left: 10px;*/
+
+
+/*    margin-top: -15px;*/
+
+
+/*}*/
+
+
+/*.nav-item{*/
+
+
+/*  font-size: 14px;*/
+
+
+/*}*/
+
+
+/*@media screen and (max-width: 1200px) {*/
+
+
+/*  .navbar-brand{*/
+
+
+/*    margin-top: -15px;*/
+
+
+/*  }*/
+
+
+/*}*/

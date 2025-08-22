@@ -1,0 +1,637 @@
+<ng-container *ngIf="!post.sharedBy">
+    <div class="border-2 border-gray-200 rounded-xl">
+        <div class="flex px-4 py-4 justify-between items-center">
+            <div class="flex" *ngIf="!post.publisher">
+                <img class="w-12 h-12 rounded-full"
+                    src="{{post.user.photo | defaultimage:post.user.prenom :post.user.nom }}" />
+                <div class="ml-2 mr-4 mt-0.5">
+                    <a [queryParams]="{id:post.user.id}" [routerLinkActive]="['navItemActive']"
+                        [routerLink]="['/profile']"
+                        class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.user.prenom+
+                        ' ' + post.user.nom|titlecase}}
+                    </a>
+                    <span class="block text-sm text-gray-500  font-light leading-snug">{{ post.creationDate |
+                        date}}</span>
+
+                </div>
+            </div>
+            <div class="flex" *ngIf="post.publisher">
+                <img class="w-12 h-12 rounded-full" src="{{post.publisher.photo | defaultimage:post.publisher.nom }}" />
+                <div class="ml-2 mr-4 mt-0.5">
+
+                    <div *ngIf="post.publisherType=='Organization' ">
+
+                        <a [routerLinkActive]="['navItemActive']" [routerLink]="['/feed/organization/detail']"
+                            [queryParams]="{ id: post.publisher.id }"
+                            class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+                            <span
+                                class="inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20">
+                                {{'ORGANIZATION'|translate}}
+                            </span>
+                        </a>
+                    </div>
+                    <div *ngIf="post.publisherType=='Project' ">
+                        <a [routerLinkActive]="['navItemActive']" [routerLink]="['/feed/my-business/detail']"
+                            [queryParams]="{ id: post.publisher.id }"
+                            class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+                            <span
+                                class="inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20">{{'BUSINESS'|translate}}</span>
+                        </a>
+                    </div>
+
+                    <div *ngIf="post.publisherType=='User' ">
+                        <a [routerLinkActive]="['navItemActive']" [queryParams]="{id:post.publisher.id}"
+                            [routerLink]="['/profile']"
+                            class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+
+                        </a>
+                    </div>
+
+                    <span class="block text-sm text-gray-500  font-light leading-snug">{{ post.creationDate |
+                        date}}</span>
+
+                </div>
+            </div>
+            <div *ngIf="isMyPost(post)" class="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                </svg>
+
+                <div class="dropdown-content" [dir]="'dir'|translate">
+                    <div class="my-2">
+                        <span (click)="showEditModal(post)">{{'EDIT'|translate}}</span>
+                    </div>
+                    <div class="my-2">
+                        <span (click)="showDeleteModal(post , 'post')"
+                            class="text-red-500">{{'DELETE'|translate}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div *ngIf="post.category == 'Call'" class="border-2 border-gray-200 mx-4 rounded-lg bg-gray-50 shadow-sm">
+            <div *ngIf="post.image" class="w-full">
+            <a [routerLink]="'/feed/calls/detail'" [queryParams]="{ id: post.id }">
+                <img class="centered-image mx-auto rounded-t-lg cursor-pointer" [src]="post.image" />
+            </a>
+            </div>
+            <div class="mt-4">
+            <div [innerHTML]="post.post" dir="auto" class="text-gray-800 px-4 leading-snug md:leading-normal"></div>
+            </div>
+        </div>
+        
+        <div *ngIf="post.category == 'Event'" class="border-2 border-gray-200 mx-4 rounded-lg bg-gray-50 shadow-sm">
+            <div *ngIf="post.image" class="w-full">
+            <a [routerLink]="'/feed/events/detail/' + post.id">
+                <img class="centered-image mx-auto rounded-t-lg cursor-pointer" [src]="post.image" />
+            </a>
+            </div>
+            <div class="mt-4">
+            <div [innerHTML]="post.post" dir="auto" class="text-gray-800 px-4 leading-snug md:leading-normal"></div>
+            </div>
+        </div>
+        
+        <div *ngIf=" post.category=='Article' ">
+            <div>
+                <div [innerHTML]="post.post" dir=auto class="text-gray-800 px-4 leading-snug md:leading-normal ifShow"
+                    [class.show]="show">
+                </div>
+            </div>
+            <div class="px-4 mb-2">
+                <button style="color: #c0aa81;" *ngIf="post.category=='Article' && !show"
+                    (click)="toggleShow()">{{'SHOW_MORE'|translate}}</button>
+                <button style="color: #c0aa81;" *ngIf="post.category=='Article' && show"
+                    (click)="toggleShow()">{{'SHOW_LESS'|translate}}</button>
+            </div>
+            <div *ngIf="post.image" class="w-full">
+                <img class="centered-image mx-auto" [src]="post.image">
+            </div>
+
+        </div>
+
+        <div *ngIf=" !post.category ">
+            <div class="mt-4 mb-2">
+                <div class="flex justify-center" dir=auto [innerHTML]="post.post" [class.show]="show"
+                    class="text-gray-800 px-4 leading-snug md:leading-normal ifShow">
+                </div>
+            </div>
+            <div class="px-4 mb-2" *ngIf="(post.post | content).length > 200">
+                <button style="color: #c0aa81;" *ngIf="!show" (click)="toggleShow()">{{'SHOW_MORE'|translate}}</button>
+                <button style="color: #c0aa81;" *ngIf="show" (click)="toggleShow()">{{'SHOW_LESS'|translate}}</button>
+            </div>
+            <div *ngIf="post.image" class="w-full">
+                <img class="centered-image mx-auto" [src]="post.image">
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <hr class="opacity-20">
+        <div [dir]="'dir'|translate" class="flex justify-between items-center my-2 mr-5">
+            <div class="flex">
+                <div class="ml-4 flex items-center mr-4" style="cursor: pointer;">
+                    <svg (click)="reactPost(post)" [class.fill-red-500]="isLikedByMe(post)" aria-hidden="true"
+                        class="w-6 h-6 text-red-500" fill="none" height="24" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                    </svg>
+                    <p (click)="showListLikes(post)" style="cursor: pointer;" class="m-0 text-gray-500">{{
+                        post.userLikes.length }} {{'LIKES'|translate}}</p>
+                </div>
+                <div (click)="showListComments(post)" class="mx-2 flex items-center">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-500" fill="none" height="24" viewBox="0 0 24 24"
+                        width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z" />
+                    </svg>
+                    <p class="m-0 text-gray-500">{{ post.comments.length }} {{'COMMENTS'|translate}}</p>
+                </div>
+
+                <div (click)="showSharePost()" class="mx-2 flex items-center" style="cursor: pointer;">
+                    <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m8.5 4c.27614 0 .5.22386.5.5 0 .24545778-.17687704.4496079-.41012499.49194425l-.08987501.00805575h-3c-.77969882 0-1.420449.59488554-1.49313345 1.35553954l-.00686655.14446046v8c0 .7796706.59488554 1.4204457 1.35553954 1.4931332l.14446046.0068668h8c.7796706 0 1.4204457-.5949121 1.4931332-1.3555442l.0068668-.1444558v-1c0-.2761.2239-.5.5-.5.2454222 0 .4496.1769086.4919429.4101355l.0080571.0898645v1c0 1.325472-1.0315469 2.4100378-2.3356256 2.4946823l-.1643744.0053177h-8c-1.3254816 0-2.41003853-1.0315469-2.49468231-2.3356256l-.00531769-.1643744v-8c0-1.3254816 1.03153766-2.41003853 2.33562452-2.49468231l.16437548-.00531769zm3.8776-.42218c0-.44778533.4618631-.70274151.8163008-.51603855l.0740992.04685855.0617.05301 4.4971 4.42118c.1865778.18340444.2224.46564543.1074667.68700565l-.0501667.07984435-.0572.06544-4.4971 4.42258c-.31528.3100533-.8146258.1449156-.9285862-.2465427l-.0183138-.0872573-.0053-.0823v-2.0955l-.2577.0232c-.2489.0266-.4963.0654-.7423.1164-1.53378.3183-3.01312 1.1122-4.44499 2.3907-.38943.3478-.99194.019-.92789-.5063.486252-3.98795475 2.48231514-6.23076163 5.8838529-6.60251607l.2644271-.02490393.2246-.01511zm1 1.03322v2.03152l-1.1513.07744c-1.5737.12605-2.73395.67426-3.5631 1.56852-.66903.72156-1.17827 1.72888-1.47646 3.06698 1.41552133-1.0608267 2.9105751-1.7256288 4.4876574-1.95751891l.3476026-.04395109 1.3556-.1218v2.15597l3.4462-3.38915z"
+                            fill="#212121" />
+                    </svg>
+                    <p class="m-0 text-gray-500">{{'SHARE'|translate}}</p>
+                </div>
+
+
+            </div>
+        </div>
+        <hr class="opacity-20">
+        <div [dir]="'dir'|translate" *ngIf="post.comments.length > 0" class="py-2 mx-4 bg-gray-50 rounded-xl">
+            <div *ngFor="let comment of post.comments" class="flex items-center w-full space-x-2 mb-3">
+                <div class="flex flex-shrink-0 self-start cursor-pointer">
+                    <img alt="{{comment.user.nom}}{{comment.user.prenom}}" class="h-8 w-8 object-cover rounded-full"
+                        src="{{comment.user.photo | defaultimage:comment.user.prenom :comment.user.nom }}">
+                </div>
+
+                <div [dir]="'dir'|translate" class="flex items-center justify-center space-x-2">
+                    <div class="block">
+                        <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
+                            <div class="font-medium">
+                                <p class="text-gold font-bold text-lg p-0 m-0">
+                                    <small>{{ comment.user.nom }} {{ comment.user.prenom }}</small>
+                                </p>
+                            </div>
+                            <div>
+                                {{ comment.text }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isMyComment(comment)" class="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-three-dots" viewBox="0 0 16 16">
+                        <path
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                    </svg>
+
+                    <div class="dropdown-content">
+                        <span (click)="showDeleteModal(comment , 'comment')"
+                            class="text-red-500">{{'DELETE'|translate}}</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="flex mx-4 mb-2 justify-between items-center">
+            <img [dir]="'dir'|translate" class="h-10 mr-2 w-10 rounded-full"
+                src="{{user!.photo | defaultimage : user!.prenom : user!.nom}}">
+            <input [attr.dir]="textDirection ? 'ltr' : 'rtl'" [(ngModel)]="commentText[post. id]"
+                name="comment{{post.id}}" (keydown.enter)="addComment(post.id)"
+                class="w-full  bg-gray-100 focus:outline-none px-2 h-10 border-none rounded-full"
+                placeholder="{{'WRITE_COMMENT'|translate}}" type="text">
+
+            <svg [dir]="'dir'|translate" (click)="addComment(post.id)" aria-hidden="true"
+                class="w-6 h-6 rotate-90 text-gray-500 hover:rotate-0 transition-all duration-75 hover:text-gold"
+                fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z"
+                    clip-rule="evenodd" />
+            </svg>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="post.sharedBy">
+    <div class="border-2 border-gray-200 rounded-xl">
+        <div class="flex px-4 py-4 justify-between items-center">
+            <div class="flex">
+                <img class="w-12 h-12 rounded-full"
+                    src="{{post.sharedBy.photo | defaultimage:post.sharedBy.prenom :post.sharedBy.nom }}" />
+                <div class="ml-2 mr-4 mt-0.5">
+                    <a [queryParams]="{id:post.sharedBy.id}" [routerLinkActive]="['navItemActive']"
+                        [routerLink]="['/profile']"
+                        class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.sharedBy.prenom+
+                        ' ' + post.sharedBy.nom|titlecase}} <span
+                            class="text-sm text-gray-500 font-light leading-snug">Shared a post</span>
+                    </a>
+                    <span class="block text-sm text-gray-500  font-light leading-snug">{{ post.creationDate |
+                        date}}</span>
+
+                </div>
+            </div>
+            <div *ngIf="isMyShare(post)" class="dropdown">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-three-dots" viewBox="0 0 16 16">
+                    <path
+                        d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                </svg>
+
+                <div class="dropdown-content" [dir]="'dir'|translate">
+                    <div class="my-2">
+                        <span (click)="showEditModal(post)">{{'EDIT'|translate}}</span>
+                    </div>
+                    <div class="my-2">
+                        <span (click)="showDeleteModal(post , 'post')"
+                            class="text-red-500">{{'DELETE'|translate}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <p class="px-4">{{post.sharedContent}}</p>
+
+        <div class="rounded-lg border-2 border-gray-100 mx-4">
+            <div class="flex px-4 py-4 justify-between items-center">
+                <div class="flex" *ngIf="!post.publisher">
+                    <img class="w-12 h-12 rounded-full"
+                        src="{{post.user!.photo | defaultimage:post.user!.prenom :post.user!.nom }}" />
+                    <div class="ml-2 mr-4 mt-0.5">
+                        <a [queryParams]="{id:post.user.id}" [routerLinkActive]="['navItemActive']"
+                            [routerLink]="['/profile']"
+                            class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.user.prenom+
+                            ' ' + post.user.nom|titlecase}}
+                        </a>
+                        <span class="block text-sm text-gray-500  font-light leading-snug">{{ post.creationDate |
+                            date}}</span>
+
+                    </div>
+                </div>
+                <div class="flex" *ngIf="post.publisher">
+                    <img class="w-12 h-12 rounded-full"
+                        src="{{post.publisher.photo | defaultimage:post.publisher.nom }}" />
+                    <div class="ml-2 mr-4 mt-0.5">
+                        <div *ngIf="post.publisherType=='Organization' ">
+
+                            <a [routerLinkActive]="['navItemActive']"
+                                [routerLink]="['/feed/organization/detail?id='+post.publisher.id]"
+                                class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+                                <span
+                                    class="inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20">
+                                    {{'ORGANIZATION'|translate}}
+                                </span>
+                            </a>
+                        </div>
+                        <div *ngIf="post.publisherType=='Project' ">
+                            <a [routerLinkActive]="['navItemActive']"
+                                [routerLink]="['/feed/my-business/detail?id='+post.publisher.id]"
+                                class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+                                <span
+                                    class="inline-flex items-center rounded-md bg-gold/10 px-2 py-1 text-xs font-medium text-gold ring-1 ring-inset ring-gold/20">{{'BUSINESS'|translate}}</span>
+                            </a>
+                        </div>
+
+                        <div *ngIf="post.publisherType=='User' ">
+                            <a [routerLinkActive]="['navItemActive']" [queryParams]="{id:post.publisher.id}"
+                                [routerLink]="['/profile']"
+                                class="block font-medium text-base leading-snug text-black text-decoration-none">{{post.publisher.nom|titlecase}}
+
+                            </a>
+                        </div>
+
+                        <span class="block text-sm text-gray-500  font-light leading-snug">{{ post.creationDate |
+                            date}}</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf=" post.category=='Call' || post.category=='Event' ">
+                <div class="border-2 border-gray-200 mx-4 rounded-lg bg-gray-50 shadow-sm">
+                    <div *ngIf="post.image" class="w-full">
+                        <img class="centered-image mx-auto rounded-t-lg" [src]="post.image">
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex justify-center" [innerHTML]="post.post"
+                            class="text-gray-800 px-4 leading-snug md:leading-normal">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf=" post.category=='Article' ">
+                <div>
+                    <div [innerHTML]="post.post" class="text-gray-800 px-4 leading-snug md:leading-normal  ifShow"
+                        [class.show]="show">
+                    </div>
+                </div>
+                <div class="px-4 mb-2">
+                    <button style="color: #c0aa81;" *ngIf="post.category=='Article' && !show"
+                        (click)="toggleShow()">{{'SHOW_MORE'|translate}}</button>
+                    <button style="color: #c0aa81;" *ngIf="post.category=='Article' && show"
+                        (click)="toggleShow()">{{'SHOW_LESS'|translate}}</button>
+                </div>
+                <div *ngIf="post.image" class="w-full">
+                    <img class="centered-image mx-auto" [src]="post.image">
+                </div>
+
+            </div>
+
+            <div *ngIf=" !post.category ">
+                <div class="my-4">
+                    <div class="flex justify-center" [innerHTML]="post.post" [class.show]="show"
+                        class="text-gray-800 px-4 leading-snug md:leading-normal ifShow">
+                    </div>
+                </div>
+                <div class="px-4 mb-2">
+                    <button style="color: #c0aa81;" *ngIf="!show"
+                        (click)="toggleShow()">{{'SHOW_MORE'|translate}}</button>
+                    <button style="color: #c0aa81;" *ngIf="show"
+                        (click)="toggleShow()">{{'SHOW_LESS'|translate}}</button>
+                </div>
+                <div *ngIf="post.image" class="w-full">
+                    <img class="centered-image mx-auto" [src]="post.image">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <hr class="opacity-20">
+        <div [dir]="'dir'|translate" class="flex justify-between items-center my-2">
+            <div class="flex">
+                <div class="ml-4 flex items-center" style="cursor: pointer;">
+                    <svg (click)="reactPost(post)" [class.fill-red-500]="isLikedByMe(post)" aria-hidden="true"
+                        class="w-6 h-6 text-red-500" fill="none" height="24" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+                    </svg>
+                    <p (click)="showListLikes(post)" style="cursor: pointer;" class="m-0 text-gray-500">{{
+                        post.userLikes.length }} {{'LIKES'|translate}}</p>
+                </div>
+                <div (click)="showListComments(post)" class="mx-2 flex items-center">
+                    <svg aria-hidden="true" class="w-6 h-6 text-gray-500" fill="none" height="24" viewBox="0 0 24 24"
+                        width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z" />
+                    </svg>
+                    <p class="m-0 text-gray-500">{{ post.comments.length }} {{'COMMENTS'|translate}}</p>
+                </div>
+
+                <div (click)="showSharePost()" class="mx-2 flex items-center" style="cursor: pointer;">
+                    <svg height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m8.5 4c.27614 0 .5.22386.5.5 0 .24545778-.17687704.4496079-.41012499.49194425l-.08987501.00805575h-3c-.77969882 0-1.420449.59488554-1.49313345 1.35553954l-.00686655.14446046v8c0 .7796706.59488554 1.4204457 1.35553954 1.4931332l.14446046.0068668h8c.7796706 0 1.4204457-.5949121 1.4931332-1.3555442l.0068668-.1444558v-1c0-.2761.2239-.5.5-.5.2454222 0 .4496.1769086.4919429.4101355l.0080571.0898645v1c0 1.325472-1.0315469 2.4100378-2.3356256 2.4946823l-.1643744.0053177h-8c-1.3254816 0-2.41003853-1.0315469-2.49468231-2.3356256l-.00531769-.1643744v-8c0-1.3254816 1.03153766-2.41003853 2.33562452-2.49468231l.16437548-.00531769zm3.8776-.42218c0-.44778533.4618631-.70274151.8163008-.51603855l.0740992.04685855.0617.05301 4.4971 4.42118c.1865778.18340444.2224.46564543.1074667.68700565l-.0501667.07984435-.0572.06544-4.4971 4.42258c-.31528.3100533-.8146258.1449156-.9285862-.2465427l-.0183138-.0872573-.0053-.0823v-2.0955l-.2577.0232c-.2489.0266-.4963.0654-.7423.1164-1.53378.3183-3.01312 1.1122-4.44499 2.3907-.38943.3478-.99194.019-.92789-.5063.486252-3.98795475 2.48231514-6.23076163 5.8838529-6.60251607l.2644271-.02490393.2246-.01511zm1 1.03322v2.03152l-1.1513.07744c-1.5737.12605-2.73395.67426-3.5631 1.56852-.66903.72156-1.17827 1.72888-1.47646 3.06698 1.41552133-1.0608267 2.9105751-1.7256288 4.4876574-1.95751891l.3476026-.04395109 1.3556-.1218v2.15597l3.4462-3.38915z"
+                            fill="#212121" />
+                    </svg>
+                    <p class="m-0 text-gray-500">{{'SHARE'|translate}}</p>
+                </div>
+
+
+            </div>
+        </div>
+        <hr class="opacity-20">
+        <div [dir]="'dir'|translate" *ngIf="post.comments.length > 0" class="py-2 px-2 bg-gray-50 rounded-xl">
+            <div *ngFor="let comment of post.comments" class="flex items-center w-full space-x-2 mb-3">
+                <div class="flex flex-shrink-0 self-start cursor-pointer">
+                    <img alt="{{comment.user.nom}}{{comment.user.prenom}}" class="h-8 w-8 object-cover rounded-full"
+                        src="{{comment.user.photo | defaultimage:comment.user.prenom :comment.user.nom }}">
+                </div>
+
+                <div [dir]="'dir'|translate" class="flex items-center justify-center space-x-2">
+                    <div class="block">
+                        <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
+                            <div class="font-medium">
+                                <p class="text-gold font-bold text-lg p-0 m-0">
+                                    <small>{{ comment.user.nom }} {{ comment.user.prenom }}</small>
+                                </p>
+                            </div>
+                            <div>
+                                {{ comment.text }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isMyComment(comment)" class="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-three-dots" viewBox="0 0 16 16">
+                        <path
+                            d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3" />
+                    </svg>
+
+                    <div class="dropdown-content">
+                        <span (click)="showDeleteModal(comment , 'comment')"
+                            class="text-red-500">{{'DELETE'|translate}}</span>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="flex mx-4 mb-2 justify-between items-center">
+            <img [dir]="'dir'|translate" class="h-10 mr-2 w-10 rounded-full"
+                src="{{user!.photo | defaultimage : user!.prenom : user!.nom}}">
+
+            <input [attr.dir]="textDirection ? 'ltr' : 'rtl'" [(ngModel)]="commentText[post. id]"
+                name="comment{{post.id}}" (keydown.enter)="addComment(post.id)"
+                class="w-full  bg-gray-100 focus:outline-none px-2 h-10 border-none rounded-full"
+                placeholder="{{'WRITE_COMMENT'|translate}}" type="text">
+
+            <svg [dir]="'dir'|translate" (click)="addComment(post.id)" aria-hidden="true"
+                class="w-6 h-6 rotate-90 text-gray-500 hover:rotate-0 transition-all duration-75 hover:text-gold"
+                fill="currentColor" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z"
+                    clip-rule="evenodd" />
+            </svg>
+        </div>
+    </div>
+</ng-container>
+
+
+
+
+
+
+
+<p-dialog [dir]="'dir'|translate" [(visible)]="showLikes" [closable]="true" [dismissableMask]="true" [modal]="true"
+    [resizable]="false" [style]="{width: '20vw'}" header="{{'WHO_LIKES_MY_POST'|translate}}">
+    <div>
+        <div *ngFor="let user of likes" class="flex shrink-0 items-center" style="margin: 2%;">
+            <div class="flex">
+                <img alt="" class="h-10 w-10 rounded-full" src="{{user.photo | defaultimage :user.prenom:user.nom}}">
+                <div class="mx-2 text-s" style="width: 170px;">
+                    <p class="mt-2 font-bold">
+                        <a [queryParams]="{id:user.id}" [routerLink]="['/profile']"
+                            class="text-black text-decoration-none font-medium">{{
+                            user.prenom + ' ' +
+                            user.nom|titlecase
+                            }}</a>
+                    </p>
+                </div>
+            </div>
+            <div style="float: right;">
+                <svg aria-hidden="true" class="rotate-45 w-6 h-6 text-gray-500 hover:text-gold" fill="currentColor"
+                    height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M12 2a1 1 0 0 1 .932.638l7 18a1 1 0 0 1-1.326 1.281L13 19.517V13a1 1 0 1 0-2 0v6.517l-5.606 2.402a1 1 0 0 1-1.326-1.281l7-18A1 1 0 0 1 12 2Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+
+    </div>
+</p-dialog>
+<p-dialog [dir]="'dir'|translate" [(visible)]="deletePostModal" [closable]="true" [dismissableMask]="true"
+    [modal]="true" [resizable]="false" [style]="{width: '40vw'}" header="{{'ARE_YOU_SURE'|translate}}">
+    <div>
+        <div class="px-2 -mt-2">
+            <div>
+                <div class="mt-3  sm:ml-4 sm:mt-0 sm:text-left">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title2">
+                        {{'ARE_YOU_SURE_DELETE_POST'|translate}}</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">
+                            {{'CANNOT_BE_UNDONE'|translate}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button (click)="deletePostModal = false"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'CANCEL'|translate}}
+            </button>
+            <button (click)="deletePost()"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-main px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'DELETE'|translate}}
+            </button>
+
+        </div>
+    </div>
+</p-dialog>
+<p-dialog [dir]="'dir'|translate" [(visible)]="editPostModal" [closable]="true" [dismissableMask]="true" [modal]="true"
+    [resizable]="false" [style]="{width: '40vw'}" header="{{'EDIT_POST'|translate}}">
+    <div>
+        <div class="px-2 -mt-2">
+            <div>
+                <div class="mt-3  sm:ml-4 sm:mt-0">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title2">
+                        {{'EDIT_POST'|translate}}</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">
+                            {{'EDIT_POST_HERE'|translate}}
+                        </p>
+                    </div>
+                </div>
+                <quill-editor [(ngModel)]="postToEdit" (onContentChanged)="onEditorChanged($event)"
+                    [styles]="{height: '200px'}"></quill-editor>
+
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button (click)="editPostModal = false"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'CANCEL'|translate}}
+            </button>
+            <button (click)="editPost()"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-main px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'EDIT'|translate}}
+            </button>
+
+        </div>
+    </div>
+</p-dialog>
+<p-dialog [dir]="'dir'|translate" [(visible)]="deleteCommentModal" [closable]="true" [dismissableMask]="true"
+    [modal]="true" [resizable]="false" [style]="{width: '40vw'}" header="{{'ARE_YOU_SURE'|translate}}">
+    <div>
+        <div class="px-2 -mt-2" [dir]="'dir'|translate">
+            <div>
+                <div class="mt-3sm:ml-4 sm:mt-0 ">
+                    <h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title2">
+                        {{'ARE_YOU_SURE_DELETE_COMMENT'|translate}}</h3>
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-500">
+                            {{'CANNOT_BE_UNDONE'|translate}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button (click)="deleteCommentModal = false"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'CANCEL'|translate}}
+            </button>
+            <button (click)="deleteComment()"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-main px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'DELETE'|translate}}
+            </button>
+
+        </div>
+    </div>
+</p-dialog>
+<p-dialog [dir]="'dir'|translate" [(visible)]="showShareModal" [closable]="true" [dismissableMask]="true" [modal]="true"
+    [resizable]="false" [style]="{width: '40vw'}" header="{{'SHARE_POST'|translate}}">
+    <div>
+        <div class="px-2 -mt-2">
+            <div>
+                <div class="mt-3">
+                    <p>
+                        {{'SAY_SOMETHING_ABOUT_THIS'|translate}}
+                    </p>
+                </div>
+                <textarea [(ngModel)]="shareText" name="shareText" placeholder="Write something about this post"
+                    class="w-full focus:outline-none mt-4 h-10 border-none" type="text"></textarea>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+            <button (click)="showShareModal = false"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'CANCEL'|translate}}
+            </button>
+            <button (click)="sharePost()"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-main px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300  "
+                type="button">{{'SHARE'|translate}}
+            </button>
+        </div>
+    </div>

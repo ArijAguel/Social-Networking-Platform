@@ -1,0 +1,93 @@
+<div class="h-[100px]">
+  <div *ngIf="form$ |async as form" class="mt-24 px-72  ">
+    <p class="text-main text-3xl font-medium">
+      {{ form.title }}
+    </p>
+    <p class="text-lg ">{{ form.description }}</p>
+  </div>
+  <div *ngIf="questions[questions.length-1] as question" class="mt-24 px-72   ">
+    <div
+      class="question text-2xl shadow-md  w-full border-t-2  border-b-2  border-r-2    border-gray-200 p-4 border-l-main border-l-4  rounded-md bg-white   ">
+      {{ question.question }}
+
+      <div class="mt-8 mb-8  ">
+        <ng-container *ngIf="question.type =='TEXT' || question.type =='NUMBER' || question.type =='DATE' ">
+          <input [(ngModel)]="question.responses[0].response" [type]="question.type|lowercase"
+                 class="h-10 text-lg border mt-1 rounded px-4 w-full bg-gray-50 " placeholder="Type your answer">
+        </ng-container>
+        <ng-container *ngIf="question.type =='SINGLE_CHOICE' ">
+          <div *ngFor="let option of question.choices" class="mt-4 text-xl">
+
+            <input [(ngModel)]="question.responses[0].response" class="text-main  mr-4 size-4 border-main  " name="SINGLE_CHOICE"
+                   type="radio" value="{{ option.link }}"> {{ option.link }}
+
+          </div>
+        </ng-container>
+        <ng-container *ngIf="question.type =='MULTIPLE_CHOICE' ">
+          <div *ngFor="let option of question.choices" class="mt-4 text-xl">
+            <input (change)="onCheckboxChange($event, option.link)"
+                   [value]="option.link"
+                   class="text-main  mr-4 size-4 border-main  " name="MULTIPLE_CHOICE"
+                   type="checkbox"> {{ option.link }}
+          </div>
+        </ng-container>
+        <ng-container *ngIf="question.type =='LINKED' ">
+          <div *ngFor="let option of question.nextLinkers" class="mt-4 text-xl">
+
+            <input [(ngModel)]="currentLink" class="text-main  mr-4 size-4 border-main  " name="options" type="radio"
+                   value="{{ option.link }}"> {{ option.link }}
+
+          </div>
+        </ng-container>
+      </div>
+      <p *ngIf="question.required" class="text-red-600 text-sm"> * This question is required</p>
+    </div>
+    <div class="mt-12 flex justify-center">
+      <button (click)="previousQuestion()" *ngIf="questions.length >1 "
+              class="text-white  text-xl bg-main rounded text-center px-4 py-1">
+        <i class="fa-solid fa-arrow-left"></i> Previous Question
+      </button>
+      <button (click)="nextQuestion(question.type)"
+              *ngIf="question.nextLinkers.length != 0;else  submit"
+              [disabled]="(currentLink == '' && question.type=='LINKED') || (question.type!='MULTIPLE_CHOICE' && question.required && question.responses[0].response =='' ) || (question.type =='MULTIPLE_CHOICE' && question.required && question.responses[0].responses.length == 0 )"
+              class="ml-4 disabled:bg-tertiary text-xl text-white bg-main rounded text-center px-4 py-1">
+        Next Question <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <ng-template #submit>
+        <button
+          (click)="submitQuestions()"
+          [disabled]="  (question.type!='MULTIPLE_CHOICE' && question.required && question.responses[0].response =='' ) || (question.type =='MULTIPLE_CHOICE' && question.required && question.responses[0].responses.length == 0 )"
+          class="ml-4 disabled:bg-tertiary text-xl text-white bg-main rounded text-center px-4 py-1">
+          <i class="fa-solid fa-check"></i> Submit
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<div *ngIf="submitted" [dir]="'dir'|translate" aria-labelledby="modal-title" aria-modal="true" class="relative z-10"
+     role="dialog">
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="p-4 md:p-5 text-center">
+          <svg class="mx-auto mb-4 text-green-600 w-12 h-12" fill="none" stroke="currentColor" stroke-width="1.5"
+               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+          </svg>
+
+          <h3 class="mb-2 text-lg font-normal text-gray-500 dark:text-gray-400">{{ message }}</h3>
+          <!--          <button (click)="close()"  data-modal-hide="popup-modal" type="button" class="text-white bg-red-600 hover:bg-red-800 focus:ring-1 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">-->
+          <!--            Go Back-->
+          <!--          </button>-->
+          <button (click)="close()" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100   focus:z-10 focus:ring-1 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600  dark:hover:bg-gray-700" data-modal-hide="popup-modal"
+                  type="button">
+            Go Back
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

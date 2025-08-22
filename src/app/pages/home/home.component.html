@@ -1,0 +1,601 @@
+<div class="bg-white ">
+    <app-navbar></app-navbar>
+    <!--
+Heads up! 👋
+
+This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
+<section [dir]="'dir'|translate" class="  relative bg-[url(https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1769&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)] bg-cover bg-center bg-no-repeat">
+    <div class="absolute    inset-0  lg:bg-gradient-to-r lg:from-white lg:via-white lg:to-transparent lg:opacity-80 ">
+
+    </div>
+        <div class="absolute lg:hidden   inset-0   bg-white  opacity-[88%]  ">
+
+        </div>
+
+        <div class="relative  mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+            <div class="max-w-xl   ltr:sm:text-left rtl:sm:text-right">
+                <h1 class="  text-main ">
+
+                    <span class="  font-medium text-[40px] " style="color:#1b4156">   {{'ENTREPRENEURIAL_ECOSYSTEM'|translate}} </span>
+                </h1>
+
+                <p class="mt-4 max-w-lg text-[18px]">
+                    <span class="  font-medium   ">    {{'DESCRIPTION'|translate}} </span>
+                </p>
+
+                <div class="mt-4  gap-x-6">
+                    <a [routerLink]="['/signup']" class="rounded-md text-decoration-none bg-main px-3.5 py-2.5 text-m font-semibold text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        {{'JOIN_THE_COMMUNITY'|translate}}
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div [dir]="'dir'|translate"  id="services" class="bg-primaryBlue text-white">
+
+        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16 ">
+            <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+                <!-- Card for Entrepreneurs -->
+                <div class="flip-card w-64 h-[560px]">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <!-- Front of the card -->
+                        <div class="flip-card-front absolute w-full h-full text-white flex flex-col items-center justify-center rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10">
+                            <svg class="w-10 h-10 text-main mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="..." stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h2 class="text-xl font-bold">{{ 'FIRST_CARD_FRONT_TITLE' | translate }}</h2>
+                        </div>
+        
+                        <!-- Back of the card -->
+                        <div class="flip-card-back absolute w-full h-full rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10 text-white flex flex-col items-center justify-center">
+                            <p>● <span class="font-semibold">{{ 'FIRST_CARD_P1_TITLE' | translate }}</span> {{ 'FIRST_CARD_P1' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FIRST_CARD_P2_TITLE' | translate }}</span> {{ 'FIRST_CARD_P2' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FIRST_CARD_P3_TITLE' | translate }}</span> {{ 'FIRST_CARD_P3' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FIRST_CARD_P4_TITLE' | translate }}</span> {{ 'FIRST_CARD_P4' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Card for Investors -->
+                <div class="flip-card w-64 h-[560px]">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <!-- Front of the card -->
+                        <div class="flip-card-front absolute w-full h-full text-white flex flex-col items-center justify-center rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10">
+                            <svg class="size-10 text-main" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="..." />
+                            </svg>
+                            <h2 class="mt-4 text-xl font-bold">{{ 'SECOND_CARD_FRONT_TITLE' | translate }}</h2>
+                        </div>
+        
+                        <!-- Back of the card -->
+                        <div class="flip-card-back absolute w-full h-full rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10 text-white flex flex-col items-center justify-center">
+                            <p>● <span class="font-semibold">{{ 'SECOND_CARD_P1_TITLE' | translate }}</span> {{ 'SECOND_CARD_P1' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'SECOND_CARD_P2_TITLE' | translate }}</span> {{ 'SECOND_CARD_P2' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'SECOND_CARD_P3_TITLE' | translate }}</span> {{ 'SECOND_CARD_P3' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'SECOND_CARD_P4_TITLE' | translate }}</span> {{ 'SECOND_CARD_P4' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Card for Professionals -->
+                <div class="flip-card w-64 h-[560px]">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <!-- Front of the card -->
+                        <div class="flip-card-front absolute w-full h-full text-white flex flex-col items-center justify-center rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10">
+                            <i class="fa-solid fa-user-tie" style="color: #c0aa81; font-size: 35px;"></i>
+                            <h2 class="mt-4 text-xl font-bold text-white">{{ 'THIRD_CARD_FRONT_TITLE' | translate }} </h2>
+                        </div>
+        
+                        <!-- Back of the card -->
+                        <div class="flip-card-back absolute w-full h-full rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10 text-white flex flex-col items-center justify-center">
+                            <p>● <span class="font-semibold">{{ 'THIRD_CARD_P1_TITLE' | translate }}</span> {{ 'THIRD_CARD_P1' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'THIRD_CARD_P2_TITLE' | translate }}</span> {{ 'THIRD_CARD_P2' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'THIRD_CARD_P3_TITLE' | translate }}</span> {{ 'THIRD_CARD_P3' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'THIRD_CARD_P4_TITLE' | translate }}</span> {{ 'THIRD_CARD_P4' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Card for Entrepreneurship Support Organizations -->
+                <div class="flip-card w-64 h-[560px]">
+                    <div class="flip-card-inner relative w-full h-full">
+                        <!-- Front of the card -->
+                        <div class="flip-card-front absolute w-full h-full text-white flex flex-col items-center justify-center rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10">
+                            <svg class="size-10 text-main" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="..." />
+                            </svg>
+                            <h2 class="mt-4 text-xl font-bold text-center">{{ 'FOURTH_CARD_FRONT_TITLE' | translate }}</h2>
+                        </div>
+        
+                        <!-- Back of the card -->
+                        <div class="flip-card-back absolute w-full h-full rounded-md border border-gray-800 p-8 shadow-xl transition hover:border-main hover:shadow-main/10 text-white flex flex-col items-center justify-center">
+                            <p>● <span class="font-semibold">{{ 'FOURTH_CARD_P1_TITLE' | translate }}</span> {{ 'FOURTH_CARD_P1' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FOURTH_CARD_P2_TITLE' | translate }}</span> {{ 'FOURTH_CARD_P2' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FOURTH_CARD_P3_TITLE' | translate }}</span> {{ 'FOURTH_CARD_P3' | translate }}</p>
+                            <p>● <span class="font-semibold">{{ 'FOURTH_CARD_P4_TITLE' | translate }}</span> {{ 'FOURTH_CARD_P4' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <section [dir]="'dir'|translate" class="pt-12 benefices text-center ts-block ts-xs-text-center pb-5 heropattern-linesinmotion-gold/10" id="how-it-works">
+
+        <div class="container">
+            <div class=" ">
+                <h1 class="text-main font-extrabold text-5xl ">{{'WHY_CHOOSE_US'|translate}}</h1>
+
+            </div>
+            <div class="row flex justify-center mt-6 py-8">
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://cdn2.iconfinder.com/data/icons/people-connection-diagram-2/512/901-38-512.png"  [width]="80">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'DYNAMIC_NETWORKING_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://img.icons8.com/?size=100&id=11341&format=png&color=000000"  [width]="80">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'DATA_PROTECTION_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://www.freeiconspng.com/thumbs/world-icon-png/web-icon-black-png-planet-web-world-icon-17.png"  [width]="80">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'GLOBAL_ACCESSIBILITY_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://png.pngtree.com/png-clipart/20230425/original/pngtree-adaption-line-icon-png-image_9097537.png" [width]="80">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'FLEXIBILITY_ADAPTABILITY_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://img.icons8.com/dotty/80/000000/storytelling.png" [width]="90">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'INSIGHTFUL_RESOURCES_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4 ">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md bg-tertiary rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" src="https://img.icons8.com/ios/80/000000/diploma.png" [width]="90">
+                                    </div>
+                                </figure>
+                            </div>
+                            <div class="mt-2 text-center">
+                                <h2 class="mt-4 text-xl font-bold text-black">{{ 'RENOWNED_CERTIFICATION_TITLE' | translate }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>
+    <section [dir]="'dir'|translate" class="pt-12 benefices text-center ts-block ts-xs-text-center pb-5 heropattern-linesinmotion-gold/10" id="how-it-works">
+
+        <div class="container">
+            <div class=" ">
+                <h1 class="text-main font-extrabold text-5xl ">{{ 'PARTNERS_TITLE' | translate }}</h1>
+            </div>
+            <div class="row flex justify-center mt-6 py-8">
+
+
+                <p-carousel 
+                    [value]="images" 
+                    [numVisible]="3" 
+                    [numScroll]="3" 
+                    [circular]="false" 
+                    [responsiveOptions]="responsiveOptions">
+                    
+                    <ng-template let-image pTemplate="item">
+                        <div class="border-1 surface-border border-round m-2 p-3">
+                            <img 
+                                [src]="image" 
+                                class="w-full h-64 border-round" 
+                                alt="Image Carousel"/>
+                        </div>
+                    </ng-template>
+
+                </p-carousel>
+
+
+<!--
+
+
+
+
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" class="h-40" src="../../../assets/images/partners/1kub_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" class="h-40" src="../../../assets/images/partners/CEED_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" data-bg-color="#ebf1fe">
+                                        <img alt="" class="h-40" src="../../../assets/images/partners/esprit_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" >
+                                        <img alt="" class="h-20" src="../../../assets/images/partners/TAMSS_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" >
+                                        <img alt="" class="h-20" src="../../../assets/images/partners/U_Carthage_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" >
+                                        <img alt="" class="h-30" src="../../../assets/images/partners/WallahWeCan_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" >
+                                        <img alt="" class="h-40" src="../../../assets/images/partners/U_Jendouba_logo-bg.png">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-xl-4">
+                    <div class="ts-item ts-fadeInUp animated" data-animate="ts-fadeInUp" style="visibility: visible;">
+                        <div class="ts-item-content">
+                            <div class="ts-item-header flex justify-center">
+                                <figure class="icon">
+                                    <div class="ts-circle__md  rounded" >
+                                        <img alt="" class="h-40" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYmoT1UV5XvbUN5IRrU4-CkooTo7wiKxe83Q&s">
+                                    </div>
+                                </figure>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+
+-->
+               
+
+
+                
+            </div>
+            <div class="mt-4  gap-x-6">
+                <a [routerLink]="['/signup']" class="rounded-md text-decoration-none bg-main px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {{ 'PARTNERS_BUTTON' | translate }}
+                </a>
+
+            </div>
+        </div>
+    </section>
+    
+    <!--  <div class="bg-white ">-->
+    <!--    <div class="mx-auto max-w-screen-xl text-center px-4 py-12 sm:px-6 md:py-16 lg:px-8">-->
+
+    <!--      <div class="ts-title">-->
+    <!--        <h1 class="text-main">Trusted by our Customers</h1>-->
+    <!--      </div>-->
+    <!--      <div class="mt-8 sm:mt-12">-->
+    <!--        <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">-->
+    <!--          <div class="flex flex-col rounded-lg bg-tertiary px-4 py-8 text-center">-->
+    <!--            <dt class="order-last text-lg font-medium text-gray-500">Stories</dt>-->
+    <!--            <dd class="text-4xl font-extrabold text-black md:text-5xl">+50</dd>-->
+    <!--          </div>-->
+    <!--          <div class="flex flex-col rounded-lg bg-tertiary px-4 py-8 text-center">-->
+    <!--            <dt class="order-last text-lg font-medium text-gray-500">Experts</dt>-->
+    <!--            <dd class="text-4xl font-extrabold text-black md:text-5xl">+100</dd>-->
+    <!--          </div>-->
+    <!--          <div class="flex flex-col rounded-lg bg-tertiary px-4 py-8 text-center">-->
+    <!--            <dt class="order-last text-lg font-medium text-gray-500">Projects</dt>-->
+    <!--            <dd class="text-4xl font-extrabold text-black md:text-5xl">+80</dd>-->
+    <!--          </div>-->
+    <!--        </dl>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+
+<footer id="contacts" class="bg-second py-4">
+    <div  class="">
+        <div class=" px-16 gap-8 lg:flex lg:justify-between lg:items-start">
+            <div [dir]="'dir'|translate" class="w-full max-w-sm lg:max-w-none mt-40 pt-20">
+                <br>
+                <h2 class="text-2xl font-bold text-white" style="text-align: center;">{{'ENTREPRENEURIAL_ECOSYSTEM'|translate}}</h2>
+                <div style="color: #c0aa81;text-align: center;">
+                    <strong class="font-large">
+                <a href="/termes-condition">{{'TERMS_OF_SERVICE_PRIVACY_POLICY'|translate}} </a></strong>
+                </div>
+                <br>
+                <br>
+                <div class="flex justify-center mb-5">
+                    <img [ngStyle]="{height:'30px'}" alt="" src="assets/images/logo/favicon5.png">
+                </div>
+                <div class="mt-6 flex justify-center gap-4 mb-5">
+                    <a class="text-white transition hover:text-gray-700/75" href="https://www.facebook.com/siratify" rel="noreferrer" target="_blank">
+                        <span class="sr-only"> Facebook </span>
+                        <i class="fa-brands fa-facebook" style="font-size: 22px;"></i>
+                    </a>
+
+                    <a class="text-white transition hover:text-gray-700/75" href="https://www.instagram.com/siratify" rel="noreferrer" target="_blank">
+                        <span class="sr-only"> Instagram </span>
+                        <i class="fa-brands fa-instagram" style="font-size: 23px;"></i>
+                    </a>
+                    <a class="text-white transition hover:text-gray-700/75" href="https://www.linkedin.com/company/siratify/" rel="noreferrer" target="_blank">
+                        <span class="sr-only"> Linkedin </span>
+
+                        <i class="fa-brands fa-linkedin" style="font-size: 22px;"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div [dir]="'dir'|translate" class="w-full max-w-sm lg:max-w-none">
+                <app-contact-form></app-contact-form>                
+            </div>
+        </div>
+
+    </div>
+</footer>
+<!--   <div [dir]="'dir'|translate" class="flex justify-center ">
+    <div class="max-w-screen-xl px-4  sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch md:grid-cols-3 md:gap-8">
+        <div class="divide-y divide-gray-200 rounded-2xl border border-gray-600 shadow-sm">
+          <div class="pt-6 ">
+            <h1 class="font-medium text-main sm:px-8  sm:text-4xl text-center">
+                Entrepreneurs 
+            </h1>
+            <ul class="mt-5 space-y-2 sm:mt-4 p-4 pt-0">
+              <li class="">
+              </li>
+              <li class="">
+                <span  style="color: #1b4156;"> <span style="font-weight: bold;">- Meet Your Perfect Matches: </span> Connect instantly with investors, mentors, and like-minded entrepreneurs who can help you grow.</span>
+              </li>
+              <li class="">
+                <span style="color: #1b4156;"> <span style="font-weight: bold;">- Accelerate Your Startup: </span> Use tailored business tools to create plans, analyze markets, and secure funding, all in one place.                </span>
+              </li>
+              <li class="">
+                <span style="color: #1b4156;"> <span style="font-weight: bold;">- Get Instant Professional Advice: </span> Receive  on-demand coaching and expert recommendations from experienced professionals to overcome challenges and scale faster</span>
+              </li>
+              <li class="">
+                <span style="color: #1b4156;"> <span style="font-weight: bold;">- Programs that Fit Your Needs:  </span>Enroll in workshops, training sessions, and programs designed to meet your objectives and stage of development.                </span>
+              </li>
+            </ul>
+            
+          </div>
+
+        </div>
+        <div class="divide-y divide-gray-200 rounded-2xl border border-gray-600 shadow-sm">
+            <div class="pt-6 ">
+              <h1 class="font-medium text-main sm:px-8  sm:text-4xl text-center">
+                Investors  
+              </h1>
+              <ul class="mt-5 space-y-2 sm:mt-4 p-4 pt-0">
+                <li class="">
+                </li>
+                <li class="">
+                  <span  style="color: #1b4156;"> <span style="font-weight: bold;">- Curated Investment Opportunities: </span> Discover startups that align with your investment focus, reducing time spent on sourcing deals.                    </span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Data-Driven Decisions: </span> Access comprehensive business insights and growth metrics to make informed investment choices.</span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Seamless Communication: </span> Engage directly with founders to build relationships and understand their vision early.                    </span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Portfolio Tracking:  </span> Monitor the performance of your investments with real-time updates and milestones.</span>
+                </li>
+              </ul>
+              
+            </div>
+
+          </div>
+          <div class="divide-y divide-gray-200 rounded-2xl border border-gray-600 shadow-sm">
+            <div class="pt-6 ">
+              <h1 class="font-medium text-main sm:px-8  sm:text-4xl text-center">
+                Professionals  
+              </h1>
+              <ul class="mt-5 space-y-2 sm:mt-4 p-4 pt-0">
+                <li class="">
+                </li>
+                <li class="">
+                  <span  style="color: #1b4156;"> <span style="font-weight: bold;">- Impact-Driven Engagement: </span> Connect with passionate entrepreneurs eager for guidance and achieve a tangible impact.                    </span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Flexible Mentorship Options: </span> Choose your level of involvement, from quick consultations to ongoing mentorship.</span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Showcase Your Expertise: </span> Build your reputation and expand your network within a vibrant entrepreneurial ecosystem.                    </span>
+                </li>
+                
+              </ul>
+              
+            </div>
+
+          </div>
+          <div class="divide-y divide-gray-200 rounded-2xl border border-gray-600 shadow-sm">
+            <div class="pt-6 ">
+              <h1 class="font-medium text-main sm:px-8  sm:text-4xl text-center">
+                Entrepreneurship support organizations 
+              </h1>
+              <ul class="mt-5 space-y-2 sm:mt-4 p-4 pt-0">
+                <li class="">
+                </li>
+                <li class="">
+                  <span  style="color: #1b4156;"> <span style="font-weight: bold;">- Organizational Management Suite: </span> Connect instantly with investors, mentors, and like-minded entrepreneurs who can help you grow.</span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Form Powerful Partnerships:  </span>  Collaborate with investors, mentors, and other organizations to amplify your impact.
+        </span>
+                </li>
+                <li class="">
+                    <span style="color: #1b4156;"> <span style="font-weight: bold;">- Promote Your Success:   </span> Increase your visibility by showcasing your programs, achievements, and success stories.</span>
+                  </li>
+                
+              </ul>
+              
+            </div>
+
+          </div>
+          <div class="divide-y divide-gray-200 rounded-2xl border border-gray-600 shadow-sm">
+            <div class="pt-6 ">
+              <h1 class="font-medium text-main sm:px-8  sm:text-4xl text-center">
+                  Entrepreneurs 
+              </h1>
+              <ul class="mt-5 space-y-2 sm:mt-4 p-4 pt-0">
+                <li class="">
+                </li>
+                <li class="">
+                  <span  style="color: #1b4156;"> <span style="font-weight: bold;">- Meet Your Perfect Matches: </span> Connect instantly with investors, mentors, and like-minded entrepreneurs who can help you grow.</span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Accelerate Your Startup: </span> Use tailored business tools to create plans, analyze markets, and secure funding, all in one place.                </span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Get Instant Professional Advice: </span> Receive  on-demand coaching and expert recommendations from experienced professionals to overcome challenges and scale faster</span>
+                </li>
+                <li class="">
+                  <span style="color: #1b4156;"> <span style="font-weight: bold;">- Programs that Fit Your Needs:  </span>Enroll in workshops, training sessions, and programs designed to meet your objectives and stage of development.                </span>
+                </li>
+              </ul>
+              
+            </div>
+
+          </div>
+      </div>
+    </div>
+  </div> --> 

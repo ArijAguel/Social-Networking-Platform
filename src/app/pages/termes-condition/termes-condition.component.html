@@ -1,0 +1,323 @@
+<section [dir]="'dir'|translate" class="relative bg-[url(https://images.pexels.com/photos/461082/pexels-photo-461082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] bg-cover bg-center bg-no-repeat">
+    <div class="absolute inset-0 bg-gradient-to-r from-white via-white to-transparent opacity-90"></div>
+    <div class="z-10">
+
+        <a [routerLink]="['']">
+            <img class="h-12 w-auto mr-2" src="assets/images/logo/favicon.png" alt="Your Company">
+            <span class="left-14 top-14 absolute rounded-full ring-2 ring-white  bg-tertiary px-1.5 py-0.25 text-[10px] text-second">Beta</span>
+        </a>
+
+        <br>
+        <br>
+        <br>
+        <h1 [dir]="'dir'|translate">{{'SIRATIFY_TERMS_POLICIES_COMMUNITY_STANDARD'|translate}}</h1>
+        <p class="title" [dir]="'dir'|translate">{{'OUR_GOAL'|translate}}
+            <br>{{'WE_FACILITATE_CONNECTIONS'|translate}}
+            <br>{{'OUR_SERVICES_ARE_TAILORED'|translate}}
+        </p>
+        <div class="curve"></div>
+    </div>
+</section>
+<div [dir]="'dir'|translate" class="relative flex">
+    <aside id="default-sidebar" class="sticky top-0 z-40 w-64 h-screen overflow-y-auto bg-gray-100" aria-label="Sidebar">
+        <div class="h-full px-3 py-4">
+            <ol class="space-y-2 font-medium pt-5" style="list-style-type: upper-roman; font-weight: bold;">
+                <li style="font-weight: normal;"> <a (click)="scrollToElement('service')">{{'TERMS_OF_SERVICE'|translate}}</a>
+                    <ol style="list-style-type: decimal;">
+                        <li style="font-weight: normal;" style="font-weight: normal;"><a (click)="scrollToElement('sIntroduction')">{{'INTRODUCTION'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sObligations')">{{'OBLIGATIONS'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sRights')">{{'RIGHTS_AND_LIMITS'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sDisclaimer')">{{'DISCLAIMER_AND_LIMIT_OF_LIABILITY'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sTermination')">{{'TERMINATION'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sGoverning')">{{'GOVERNING_LAW_AND_DISPUTE_RESOLUTION'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('sGeneral')">{{'GENERAL_TERMS'|translate}}</a></li>
+                    </ol>
+                </li>
+                <li style="font-weight: normal;"><a (click)="scrollToElement('privacy')">{{'PRIVACY_POLICY'|translate}}</a>
+                    <ol style="list-style-type: decimal;">
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('pcommitment')">{{'OUR_COMMITMENT'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('pmembers')">{{'COMMITMENT_OF_OUR_MEMBERS'|translate}}</a></li>
+                    </ol>
+                </li>
+                <li style="font-weight: normal;"><a (click)="scrollToElement('professional')">{{'PROFESSIONAL_COMMUNITY_POLICY'|translate}}</a>
+                    <ol style="list-style-type: decimal;">
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('p2Introduction')">{{'INTRODUCTION'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('p2commitment')">{{'OUR_COMMITMENT'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('p2content')">{{'NOT_ALLOWED_CONTENT_BEHAVIORS'|translate}}</a></li>
+                        <li style="font-weight: normal;"><a (click)="scrollToElement('p2businesses')">{{'NOT_ALLOWED_BUSINESSES'|translate}}  </a></li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+    </aside>
+    <div class="flex-1 p-4">
+        <ol style="list-style-type: upper-roman; ">
+            <li>
+                <h2 id="service">{{'TERMS_OF_SERVICE'|translate}}</h2>
+                <ol style="list-style-type: decimal; ">
+                    <li>
+                        <h3 id="sIntroduction">{{'INTRODUCTION'|translate}}
+                            <ol>
+                                <li>1.1.{{'CONTRACT'|translate}}
+                                    <p>{{'WHEN_YOU_USE_OUR_SERVICES'|translate}}
+                                        <br> <span style="text-decoration: underline;">{{'SERVICES'|translate}}</span>
+                                        <br>{{'THIS_CONTRACT_APPLIES_TO'|translate}}
+                                        <br><span style="text-decoration: underline;">Siratify</span>
+                                        <br>{{'BY_ENTERING_INTO_THIS_CONTRACT'|translate}}
+
+                                    </p>
+                                </li>
+                                <li>1.2.{{'MEMBERS_AND_VISITORS'|translate}}
+                                    <p>{{'UPON_REGISTERING_AND_JOINING'|translate}}</p>
+                                </li>
+                                <li>1.3.{{'CHANGE'|translate}}
+                                    <p>{{'WE_RESERVE_THE_RIGHT'|translate}}
+                                    </p>
+                                </li>
+                            </ol>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sObligations">{{'OBLIGATIONS'|translate}}
+                            <ol>
+                                <li>2.1.{{'SERVICE_ELIGIBILITY'|translate}}
+                                    <p>
+                                        {{'CERTIFY_ELIGIBLE'|translate}}
+                                        <br>{{'TO_UTILIZE_THE_SERVICES_YOU_AGREE'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'MAINTAIN_ONLY_ONE_ACCOUNT'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'ENSURE_NOT_RESTRICTED'|translate}}</li>
+                                    </ul>
+                                    <p>{{'CREATING_ACCOUNT_WITH_FALSE_INFO'|translate}}
+                                        <br>{{'MINIMUM_AGE'|translate}}
+                                    </p>
+                                </li>
+                                <li>2.2. {{'YOUR_ACCOUNT'|translate}}
+                                    <p>{{'MAINTAIN_PASSWORD_CONFIDENTIALITY'|translate}}
+                                        <br>{{'AS_A_MEMBER_YOU_AGREE'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'USE_STRONG_PASSWORD'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'REFRAIN_FROM_TRANSFERRING_ACCOUNT'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'ADHERE_TO_COMMUNITY_POLICIES'|translate}}</li>
+                                    </ul>
+                                    <p>{{'RESPONSIBLE_FOR_ACCOUNT_ACTIVITY'|translate}}
+                                        <br>{{'ACCOUNT_BELONGS_TO_YOU'|translate}}
+                                    </p>
+                                </li>
+                                <li>2.3.{{'PAYMENT'|translate}}
+                                    <p>{{'FULFILL_PAYMENT_OBLIGATIONS'|translate}}
+                                        <br>{{'APPLICABLE_FEES_AND_TAXES'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'FOREIGN_EXCHANGE_FEES'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'CONTINUE_BILLING_AFTER_EXPIRATION'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'AUTOMATICALLY_CHARGED'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'CALCULATE_TAXES_PAYABLE'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'COPY_OF_INVOICE'|translate}}</li>
+                                    </ul>
+                                </li>
+                                <li>2.4.{{'NOTICES_AND_MESSAGES'|translate}}
+                                    <p>{{'CONSENT_TO_RECEIVE_NOTICES'|translate}}
+                                        <br>{{'SEND_NOTICES_AND_MESSAGES'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'WITHIN_SERVICE'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'TO_CONTACT_INFO'|translate}}</li>
+                                    </ul>
+                                    <p>{{'REVIEW_SETTINGS'|translate}}</p>
+                                </li>
+                                <li>2.5.{{'SHARING'|translate}}
+                                    <p>{{'WHEN_YOU_SHARE_INFORMATION'|translate}}
+                                        <br>{{'SERVICES_FACILITATE_MESSAGING'|translate}}
+                                        <br>{{'JOB_RELATED_ACTIVITIES'|translate}} <br> {{'NOT_OBLIGATED_TO_PUBLISH'|translate}}
+                                    </p>
+
+                                </li>
+                            </ol>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sRights">{{'RIGHTS_AND_LIMITS'|translate}}
+                            <ol>
+                                <li>3.1.{{'LICENSE_TO_SIRATIFY'|translate}}
+                                    <p>{{'YOU_RETAIN_OWNERSHIP'|translate}}
+                                        <br>{{'RESPECT_CHOICES'|translate}}
+                                        <br>{{'GRANT_BUSINESSBUILDER_LICENSE'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'REVOKE_LICENSE'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'EDIT_AND_FORMAT_CHANGES'|translate}}</li>
+                                    </ul>
+                                    <p>{{'FEEDBACK_RIGHTS'|translate}}
+                                        <br>{{'PROVIDE_ONLY_INFO_YOU_CAN_SHARE'|translate}}
+                                    </p>
+                                </li>
+                                <li>3.2.{{'SERVICE_AVAILABILITY'|translate}}
+                                    <p>{{'CHANGE_SUSPEND_TERMINATE_SERVICES'|translate}}
+                                        <br>{{'NO_STORAGE_GUARANTEE'|translate}}
+                                    </p>
+                                </li>
+                                <li>3.3.{{'OTHER_CONTENT_SITES_APPS'|translate}}
+                                    <p>{{'USE_OTHERS_CONTENT_INFO'|translate}}
+                                        <br>{{'THIRD_PARTIES_OFFER_PRODUCTS'|translate}}
+                                        <br>{{'INACCURATE_CONTENT_INFO'|translate}}
+                                        <br>{{'CONNECTING_MEMBERS_SERVICES'|translate}}
+                                    </p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'NOT_RESPONSIBLE_SERVICES_2'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'NOT_ENDORSE_MEMBERS_SERVICES'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'NO_EMPLOYMENT_AGENCY_JOINT_VENTURE'|translate}}</li>
+                                    </ul>
+                                    <p>{{'REGISTER_ATTEND_EVENTS'|translate}}</p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'NOT_RESPONSIBLE_CONDUCT'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'NOT_ENDORSE_EVENT'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'NOT_REVIEW_VET_EVENTS'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'NOT_REVIEW_VET_EVENTS'|translate}}</li>
+                                    </ul>
+                                </li>
+                                <li>3.4.{{'SERVICE_LIMITS'|translate}}
+                                    <p>{{'REGULATE_CONNECTIONS_INTERACTIONS'|translate}}
+                                        <br>{{'CONTROL_USAGE'|translate}}
+                                    </p>
+                                </li>
+                                <li>3.5.{{'INTELLECTUAL_PROPERTY_RIGHTS'|translate}}
+                                    <p>{{'RETAIN_IP_RIGHTS'|translate}}</p>
+                                </li>
+                                <li>3.6.{{'AUTOMATED_PROCESSING'|translate}}
+                                    <p>{{'UTILIZE_DATA_INFO'|translate}}
+                                    </p>
+                                </li>
+                            </ol>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sDisclaimer">{{'DISCLAIMER_LIMIT_OF_LIABILITY'|translate}}
+                            <ol>
+                                <li>4.1. {{'NO_WARRANTY'|translate}}
+                                    <p>{{'DISCLAIMER_QUALITY_SAFETY'|translate}}
+                                        <br>{{'AS_IS_BASIS'|translate}}
+                                    </p>
+                                </li>
+                                <li>4.2.{{'EXCLUSION_OF_LIABILITY'|translate}}
+                                    <p>{{'LIMITATION_OF_LIABILITY'|translate}}</p>
+                                    <ul style="list-style-type: circle;">
+                                        <li style="font-weight: normal;">{{'LOST_PROFITS'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'DAMAGE_TO_REPUTATION'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'LOSS_OF_DATA'|translate}}</li>
+                                        <li style="font-weight: normal;">{{'INDIRECT_INCIDENTAL_CONSEQUENTIAL'|translate}}</li>
+                                    </ul>
+                                </li>
+                                <p>{{'LIMITATION_OF_TOTAL_LIABILITY'|translate}}</p>
+                                <li>4.3.{{'BASIS_OF_BARGAIN_EXCLUSIONS'|translate}}
+                                    <p>{{'FUNDAMENTAL_TO_AGREEMENT'|translate}}
+                                        <br>{{'LIMITATION_EXCEPTIONS'|translate}}
+                                    </p>
+                                </li>
+                            </ol>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sTermination">{{'TERMINATION'|translate}}
+                            <p>{{'TERMINATION_CLAUSE'|translate}}</p>
+                            <ul style="list-style-type: circle;">
+                                <li style="font-weight: normal;">{{'RIGHT_TO_UTILIZE_FEEDBACK'|translate}}</li>
+                                <li style="font-weight: normal;">{{'CONTINUE_SHARING_CONTENT'|translate}}</li>
+                                <li style="font-weight: normal;">{{'SPECIFIC_SECTIONS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'OUTSTANDING_AMOUNTS'|translate}}</li>
+                            </ul>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sGoverning">{{'GOVERNING_LAW_DISPUTE_RESOLUTION'|translate}}
+                            <p>{{'LOCAL_COURTS_LOCAL_LAW'|translate}}</p>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="sGeneral">{{'GENERAL_TERMS'|translate}}
+                            <p>{{'UNENFORCEABLE_PORTION'|translate}}
+                                <br>{{'SOLE_AGREEMENT'|translate}}
+                                <br>{{'ENFORCEMENT_BREACH'|translate}}
+                                <br>{{'DESIGNATED_ADDRESSES'|translate}}
+                            </p>
+                        </h3>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2 id="privacy">{{'PRIVACY_POLICY'|translate}}</h2>
+                <ol style="list-style-type: decimal; ">
+                    <li>
+                        <h3 id="pcommitment">{{'OUR_COMMITMENT'|translate}}
+                            <p>{{'CONFIDENTIALITY_COMMITMENT'|translate}}
+                                <br>{{'INCIDENTS_RESPONSE'|translate}}
+                            </p>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="pmembers">{{'MEMBERS_COMMITMENT'|translate}}
+                            <p>{{'CONFIDENTIALITY_OBLIGATION'|translate}}
+                                <br>{{'VIOLATION_CONSEQUENCES'|translate}}
+                            </p>
+                        </h3>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <h2 id="professional">{{'PROFESSIONAL_COMMUNITY_POLICY'|translate}}</h2>
+                <ol style="list-style-type: decimal; ">
+                    <li>
+                        <h3 id="p2Introduction">{{'INTRODUCTION'|translate}}
+                            <p>{{'COMMUNITY_POLICY_OBJECTIVE'|translate}}</p>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="p2commitment"> {{'OUR_COMMITMENT'|translate}}
+                            <p>{{'HUMAN_RIGHTS_FREEDOM_EXPRESSION'|translate}}</p>
+                            <ul style="list-style-type: circle;">
+                                <li style="font-weight: normal;">{{'SAFETY_USERS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'DIGNITY_USERS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'AUTHENTICITY'|translate}}</li>
+                                <li style="font-weight: normal;">{{'PRIVACY_IMPORTANCE'|translate}}</li>
+                            </ul>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="p2content">{{'NOT_ALLOWED_CONTENT_BEHAVIORS'|translate}}
+                            <p>{{'NOT_ALLOWED_CONTENT'|translate}}</p>
+                            <ul style="list-style-type: circle;">
+                                <li style="font-weight: normal;">{{'DANGER_SECURITY_THREAT'|translate}}</li>
+                                <li style="font-weight: normal;">{{'BULLY_HARASS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'HUMAN_EXPLOITATION'|translate}}</li>
+                                <li style="font-weight: normal;">{{'NEGATIVE_IMPACT'|translate}}</li>
+                                <li style="font-weight: normal;">{{'RACIST_HATEFUL_REMARKS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'PERSONAL_NATURE'|translate}}</li>
+                                <li style="font-weight: normal;">{{'PROMOTES_ILLEGAL_PRODUCTS'|translate}}</li>
+                            </ul>
+                            <p>{{'ADDITIONAL_BEHAVIORS_PROHIBITED'|translate}}</p>
+                            <ul style="list-style-type: circle;">
+                                <li style="font-weight: normal;">{{'SPAMMING'|translate}}</li>
+                                <li style="font-weight: normal;">{{'INAUTHENTIC_BEHAVIOR'|translate}}</li>
+                                <li style="font-weight: normal;">{{'MISINFORMATION'|translate}}</li>
+                                <li style="font-weight: normal;">{{'CYBER_ATTACKS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'SOLICITING_ADULT_ACTIVITY'|translate}}</li>
+                                <li style="font-weight: normal;">{{'DISREGARD_INTELLECTUAL_PROPERTY'|translate}}</li>
+                            </ul>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3 id="p2businesses">{{'NOT_ALLOWED_BUSINESSES'|translate}}
+                            <p>{{'BUSINESS_ACTIVITIES_NOT_ALLOWED'|translate}}</p>
+                            <ul style="list-style-type: circle;">
+                                <li style="font-weight: normal;">{{'SECURITY_THREAT_PROJECTS'|translate}}</li>
+                                <li style="font-weight: normal;">{{'ILLEGAL_PRODUCTS'|translate}}</li>
+                            </ul>
+                        </h3>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+</div>

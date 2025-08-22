@@ -1,0 +1,308 @@
+/*  Tailwind Integration */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+/* for onboarding user tour  */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/* You can add global styles to this file, and also import other style files */
+
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+@import '@ctrl/ngx-emoji-mart/picker';
+
+/* Add this to your styles.css or styles.scss */
+
+
+/* Add this to your styles.css or styles.scss */
+
+.cdk-overlay-pane {
+    width: 400px;
+    max-height: 450px !important;
+}
+
+
+/********************************************************/
+/* hide recaptcha badge*/
+.grecaptcha-badge {
+    visibility: hidden;
+}
+
+/* only show recaptcha badge on needed pages */
+body.recaptcha .grecaptcha-badge {
+    visibility: visible;
+}
+
+.mat-mdc-form-field {
+    background: white!important;
+    border-radius: 7px!important;
+}
+
+.mat-form-field-appearance-fill {
+    background: white!important;
+    border-radius: 7px!important;
+}
+
+.mat-mdc-text-field-wrapper {
+    border: rgb(209 213 219) solid 1px!important;
+    background: white!important;
+    border-radius: 7px!important;
+}
+
+.mdc-text-field {
+    background: white!important;
+    border-radius: 7px!important;
+}
+
+.mat-primary {
+    background: white!important;
+}
+
+.mat-mdc-form-field-infix {
+    background: white!important;
+    border-radius: 7px!important;
+}
+
+.p-progress-spinner-circle {
+    stroke: #c0aa81 !important;
+    /*animation : none !important;*/
+}
+
+.quicksand {
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    color: #000;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+
+.important {
+    color: red;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none;
+}
+
+.button {
+    color: #c0aa81;
+    border: 2px solid #c0aa81;
+}
+
+.button:hover {
+    color: white;
+    background-color: #c0aa81;
+}
+
+
+/* Hide the scroll bar background */
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+    background-color: transparent;
+}
+
+
+/* Define the styles for the scrollable bar */
+
+::-webkit-scrollbar-thumb {
+  width: 3px;
+    border-radius: 7px;
+    background-color: grey;
+    /* Set background to transparent */
+}
+
+
+/* Optional: Add hover effects to the scrollable bar */
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b3b3b3;
+    /* Change this color to suit your design */
+}
+
+
+/* For WebKit browsers (e.g., Chrome, Safari) */
+
+::-webkit-scrollbar-button {
+    display: none;
+    /* Hide the scrollbar buttons */
+}
+
+
+/* For Firefox */
+
+
+/* Note: Firefox currently does not support styling the scrollbar background */
+
+
+/* Styles for the checkbox container */
+
+.multiselect-item-checkbox {
+    position: relative;
+    /* Ensure relative positioning for the ::before pseudo-element */
+}
+
+
+/* Styles for the custom checkbox */
+
+.multiselect-item-checkbox {
+    /*border:5px solid #c0aa81;*/
+    /*background-color:red;*/
+}
+
+ng-multiselect-dropdown>div>div>ul>li>div::before {
+    /*border:2px solid #c0aa81;*/
+    /*background: rgb(199, 131, 0);*/
+    border: 2px solid #c0aa81 !important;
+    background: rgba(192, 170, 129, 0) !important;
+}
+
+ng-multiselect-dropdown>div>div>ul>li>div::after {
+    border-color: #c0aa81 !important;
+}
+
+
+/*div.mt-3.sm\:ml-4.sm\:mt-0.sm\:text-left > div > div > div > ng-multiselect-dropdown > div > div.dropdown-list > ul > li  > div::after {*/
+
+
+/*   !*color: red; !* Change the color of the content *!*!*/
+
+
+/*   !*font-size: 24px; !* Adjust the font size *!*!*/
+
+
+/*   !*margin-right: 5px; !* Add some spacing to the right of the content *!*!*/
+
+
+/*  border-color: #c0aa81;*/
+
+
+/* }*/
+
+
+/*!* Styles for the custom checkbox *!*/
+
+
+/* form > div > div.px-2.-mt-2 > div > div.mt-3.sm\:ml-4.sm\:mt-0.sm\:text-left > div > div > div  > ng-multiselect-dropdown > div > div.dropdown-list > ul.item1 > li > div::before {*/
+
+
+/*   border:2px solid #c0aa81;*/
+
+
+/*   background: rgba(192, 170, 129, 0);*/
+
+
+/* }*/
+
+
+/* form > div > div.px-2.-mt-2 > div > div.mt-3.sm\:ml-4.sm\:mt-0.sm\:text-left > div > div > div  > ng-multiselect-dropdown > div > div.dropdown-list > ul.item1 > li > div::after {*/
+
+
+/*   border-color: #c0aa81;*/
+
+
+/* }*/
+
+ng-multiselect-dropdown>div>div:nth-child(1)>span>span.selected-item-container.ng-star-inserted>span {
+    background: #c0aa81 !important;
+    border: 2px solid #c0aa81 !important;
+}
+
+ng-multiselect-dropdown>div>div>span {
+    border-radius: 6px !important;
+    border: 1px solid rgba(209, 213, 219, 0.71) !important;
+}
+
+.mat-expansion-panel-header {
+    background-color: rgba(246, 246, 246, 0) !important;
+    /*color: white !important;*/
+    padding: 0 0 0 0 !important;
+}
+
+.mat-focus-indicator {
+    background-color: rgba(246, 246, 246, 0) !important;
+    color: white !important;
+    padding: 0 0 0 0 !important;
+}
+
+.mat-expansion-panel {
+    background-color: rgba(255, 255, 255, 0) !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+}
+
+.mat-expansion-panel:hover {
+    background-color: rgba(224, 224, 224, 0) !important;
+    box-shadow: none !important;
+}
+
+.p-accordion-header-link {
+    /*background: #c0aa81 !important;*/
+    color: #c0aa81 !important;
+    text-decoration: none !important;
+}
+
+
+/*#pn_id_2_header_action {*/
+
+
+/*  !*background: #c0aa81 !important;*!*/
+
+
+/*  color: #c0aa81 !important;*/
+
+
+/*  text-decoration: none !important;*/
+
+
+/*}*/
+
+
+/*#pn_id_3_header_action {*/
+
+
+/*  !*background: #c0aa81 !important;*!*/
+
+
+/*  color: #c0aa81 !important;*/
+
+
+/*  text-decoration: none !important;*/
+
+
+/*}*/
+
+
+/*#pn_id_4_header_action {*/
+
+
+/*  !*background: #c0aa81 !important;*!*/
+
+
+/*  color: #c0aa81 !important;*/
+
+
+/*  text-decoration: none !important;*/
+
+
+/*}*/
+
+a {
+    text-decoration: none;
+}
+
+
+/* styles.css */
+
+.p-progressbar-value {
+  background-color: #c0aa81 !important;
+}

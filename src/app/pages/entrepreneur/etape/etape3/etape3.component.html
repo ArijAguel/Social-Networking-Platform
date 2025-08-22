@@ -1,0 +1,111 @@
+<div [dir]="'dir'|translate" class="sticky-button" [ngClass]="{'left': ('dir'|translate)==='ltr', 'right': ('dir'|translate)==='rtl'}">
+    <button *ngIf="isEditable" (click)="save() " class="btn btn-circle btn-xl help"><i class="fa-solid fa-floppy-disk" style="font-size: 20px;cursor: pointer;"></i>&nbsp;&nbsp;{{'SAVE'|translate}}</button><br> <br>
+</div>
+<div class="col-12 d-flex align-items-center justify-content-center mt-4 ml-2">
+    <img alt="" src="{{etape33.project.logo | defaultimage :etape33.project.name:'':true}}" class="size-20 rounded-lg object-contain shadow-sm mr-3" />
+    <h1 class="text-center flex-grow-1">{{'CONCEPT_DEVELOPMENT'|translate}}</h1>
+</div>
+
+<br>
+<br>
+<h4 *ngIf="isEditable" style="margin-left: 3%;position:relative;">
+    {{'DOWNLOAD_CONCEPT_DEVELOPMENT_AS'|translate}} <a (click)="downloadPDF()" style="cursor: pointer;text-decoration: underline; font-weight: bold;">PDF</a> {{'OR'|translate}} <a style="cursor: pointer;text-decoration: underline; font-weight: bold;" (click)="downloadWord()">Word(.docs)</a>
+</h4>
+<form [formGroup]="etape3" (ngSubmit)="onSubmit()">
+    <div class="main-conatiner" id="certificate">
+        <div class="Mapping">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <br>
+                <div class="card mb-4 card-radius">
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="table-responsive">
+                            <h2><i class="fa-regular fa-circle-question" style="font-size: 30px;cursor: pointer;" (click)="infoidea()"></i></h2>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="partenaires">{{'CUSTOMER_SEGMENTS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="clienteles" rows="4" class="form-control" name="partenaires" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="ressources">{{'VALUE_PROPOSITIONS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="valeurs" rows="4" class="form-control" name="ressources" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="activites">{{'CHANNELS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="distribution" rows="4" class="form-control" name="activites" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="valeurs">{{'CUSTOMER_RELATIONSHIPS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="relations" rows="4" class="form-control" name="valeurs" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="relations">{{'REVENUE_STREAMS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="revenus" rows="4" class="form-control" name="relations" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="distribution">{{'KEY_RESOURCES'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="ressources" rows="4" class="form-control" name="distribution" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="clienteles">{{'KEY_ACTIVITIES'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="activites" rows="4" class="form-control" name="clienteles" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="couts"> {{'KEY_PARTNERSHIPS'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="partenaires" rows="4" class="form-control" name="couts" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-dash">
+                                <div class="form-group">
+                                    <label for="revenus">{{'COST_STRUCTURE'|translate}}<span class="important ">*</span></label>
+                                    <textarea dir="auto" type="text" formControlName="couts" rows="4" class="form-control" name="revenus" required></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 mt-5">
+                                <button type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="generateBMC()">{{'GENERATE_BMC'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button style="position: relative;" *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('THE_IDEA')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+    </div>
+    <br>
+    <br>
+    <div class="flex justify-content-around" style="position:relative;">
+        <button type="button" class="btn btn-outline-primary startnow"><a style="text-decoration: none;"  [routerLink]="'/feed/etape/' + projectId + '/2'">{{'PREVIOUS_STEP'|translate}}</a></button>
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-primary startnow">{{'NEXT_STEP'|translate}}</button>
+    </div>
+</form>
+
+<p-dialog [(visible)]="idea" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'THE_IDEA'|translate}}</h4>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+</p-dialog>
+
+<p-dialog [(visible)]="showremarque" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'REMARK'|translate}}</h4>
+    <div class="d-flex flex justify-content-center" style="text-align: center;">
+        <textarea #remarqueTextarea name="remarque" cols="50" rows="10" placeholder="{{'WRITE_REMARK'|translate}}" style="display: block;border-radius: 10px;border: 2px solid #c0aa81;"></textarea>
+        <br>
+    </div>
+    <button type="button" class="btn btn-outline-primary startnow" style="display: block;" (click)="sendRemark(remarqueTextarea.value)">{{'SEND'|translate}}</button>
+</p-dialog>

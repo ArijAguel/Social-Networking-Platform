@@ -1,0 +1,49 @@
+<div [dir]="'dir'|translate" class="row  ">
+    <div class="   hidden   lg:block  col-2  ">
+        <app-side-bar></app-side-bar>
+    </div>
+    <div class="col " *ngIf="projects$ | async as projects">
+        <div class=" mt-8  px-8 lg:ml-4 mr-4 ">
+            <div class="flex justify-center" *ngIf="projects.length == 0">
+                <div class="flex flex-col justify-center py-12 items-center">
+                    <div class="flex justify-center items-center text-gray-500 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-64 h-64">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"/>
+            </svg>
+
+                    </div>
+                    <h1 class="text-gray-700 font-medium text-2xl text-center mb-3">{{'START_THRIVING'|translate}}
+                    </h1>
+                    <p class="text-gray-500 text-center mb-6">{{'JOIN_THRIVING_COMMUNITY'|translate}}
+                    </p>
+                    <div class="flex flex-col justify-center">
+                        <button class="flex items-center px-4 py-2 bg-main text-white rounded hover:bg-tertiary" (click)="showDialog()">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                   stroke="currentColor" class="w-6 h-6  mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+             {{'CREATE_NEW_COMPANY'|translate}}
+            </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end " *ngIf="projects.length != 0">
+                <button type="button" class="rounded-md text-white px-4 py-2 ring-1 ring-gray-300 bg-main" (click)="showDialog()"><i
+                class="fa-solid fa-plus"></i> &nbsp; {{'ADD_A_BUSINESS'|translate}}
+                </button>
+            </div>
+            <!-- <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"> -->
+            <div class=" grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+                <div class="  mt-4 rounded-lg    " *ngFor="let project of projects;let i = index">
+
+                    <app-business-card [project]="project" [i]="i" [menuVisible]="true"></app-business-card>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

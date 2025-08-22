@@ -1,0 +1,267 @@
+<div [dir]="'dir'|translate" class="row  ">
+  <div class="   hidden   lg:block  col-2  ">
+    <app-side-bar></app-side-bar>
+  </div>
+  <div class="col m-3">
+    <ng-container *ngIf="business$ | async as business">
+      <div class=" w-full lg:px-8 mt-2   ">
+        <img alt="{{business+' cover'}}" class=" rounded-tl-md  rounded-tr-md object-cover h-52  w-full"
+             src="{{business.image?business.image:'assets/images/default.png'}}">
+
+        <div class="w-full shadow-md rounded-md bg-white">
+          <div class="pl-12">
+            <div class="row">
+              <div class="col-2"><img alt="{{business.name}}"
+                                      class="-mt-16 h-32 w-32 rounded-md ring-2 shadow object-cover ring-white"
+                                      src="{{business.logo | defaultimage :business.name:'':true }}"></div>
+              <div class="col">
+
+                <h1 class="font-extrabold"> {{ business.name |titlecase }} <i
+                  [ngClass]="{'bi-lock':!business.publique,'bi-unlock':business.publique}"
+                  class="bi   text-gray-500 text-[15px]"></i>
+                  <p class="text-lg   text-gray-800">
+                    {{ business.description }}
+                  </p>
+                  <span *ngIf="business.learnBusiness" class="text-main text-sm">Academic business</span>
+                </h1>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 border-b-gray-200 border-t-2 pt-2  px-8  w-full mt-4">
+            <div class="flex justify-start gap-8 ">
+              <p
+                class="text-gray-500 hover:text-gray-700 hover:border-gray-300 shrink-0 border-b-2  px-1 pb-2 text-lg font-medium border-main text-main border-transparent ">{{ 'ABOUT'|translate }}</p>
+            </div>
+            <div class="flex justify-end gap-2 pb-2">
+
+              <div *ngIf="isAuthorized(business)" class="col  mt-2">
+                <div class="flex justify-center">
+                  <button (click)="GoToSteps(business)"
+                          class="inline-block rounded bg-main text-white border px-6 py-2 border-indigo-600 text-sm font-medium  hover:bg-tertiary hover:text-white focus:outline-none   ">
+                    <i class="fa-solid fa-toolbox mr-2"></i> {{ "BUSINESS_TOOLS"|translate }}
+                  </button>
+                  <button (click)="leaveBusiness(business.id)" *ngIf="!this.edit"
+                          class="inline-block rounded bg-red-600 text-white border px-6 py-2   text-sm font-medium  hover:bg-tertiary hover:text-white focus:outline-none   ">
+                    <i class="bi bi-box-arrow-left"></i> Leave business
+                  </button>
+                  <button (click)="makePublicOrPrivate(business.id)" *ngIf="edit"
+                          class=" ml-4  rounded border border-indigo-600 px-6 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none   "
+                          role="menuitem"
+                          type="submit">
+
+                    <i *ngIf="business.publique" class="fa-solid fa-lock mr-2 ml-2"></i>
+                    <i *ngIf="!business.publique" class="fa-solid fa-globe  mr-2 ml-2"></i>
+
+                    {{ getTranslationKey(business) }}
+
+                  </button>
+
+                  <div *ngIf="edit" class="relative">
+                    <button (click)="toggleMenu()"
+                            class=" ml-4  rounded border border-indigo-600 px-3 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none  ">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+
+                    <div *ngIf="menu"
+                         class=" absolute end-0 z-10 mt-2 w-56 divide-y divide-gray-100 rounded-md border border-gray-100 bg-white shadow-lg"
+                         role="menu">
+
+                      <div class="p-1 ">
+                        <button (click)="update(business)"
+                                class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-tertiary"
+                                role="menuitem">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                          </svg>
+
+                          {{ "MODIFY"|translate }}
+                        </button>
+                      </div>
+                      <div class="p-1 ">
+                        <button (click)="delete(business.id)"
+                                class="flex text-red-600 w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-tertiary"
+                                role="menuitem" type="submit">
+                          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+                               viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                          </svg>
+
+                          {{ "DELETE"|translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="lg:px-8 mt-4 mb-4">
+        <div [dir]="'dir'|translate" class="bg-white overflow-hidden shadow-sm rounded-lg border">
+          <div class="px-4 py-2 sm:px-6">
+            <h3 class="text-lg leading-6 font-medium text-main">
+              <i class="bi bi-building"></i> {{ 'BUSINESS_DETAILS'|translate }}
+            </h3>
+          </div>
+          <div class="border-t border-gray-200 px-4 py-2 sm:p-0">
+
+            <div class="flow-root">
+              <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ "CONTACT"|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    <div class="flex h-16 shrink-0 items-center">
+                      <img [dir]="'dir'|translate" alt="{{business.entrepreneur.nom}}{{business.entrepreneur.prenom}}"
+                           class="h-10 w-10 rounded-full"
+                           src="{{business.entrepreneur.photo | defaultimage:business.entrepreneur.prenom :business.entrepreneur.nom }}">
+                      <div [dir]="'dir'|translate" class="mx-2 text-s">
+                        <a [dir]="'dir'|translate" [queryParams]="{id:business.entrepreneur.id}"
+                           [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']"
+                           class="m-0  text-primaryBlue text-decoration-none">{{ business.entrepreneur.prenom + ' ' + business.entrepreneur.nom|titlecase }}</a>
+                      </div>
+                    </div>
+                  </dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ 'NAME_OF_BUSINESS'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    {{ business.name }}
+                  </dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ 'DESCRIPTION1'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    {{ business.description }}
+                  </dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ 'ESTABLISHMENT_DATE'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    {{ business.creationDate|date }}
+                  </dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ 'FOUNDERS'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    <div class="flex h-16 shrink-0 items-center">
+                      <img [dir]="'dir'|translate" alt="{{business.entrepreneur}}{{business.entrepreneur.prenom}}"
+                           class="h-10 w-10 rounded-full"
+                           src="{{business.entrepreneur.photo | defaultimage:business.entrepreneur.prenom :business.entrepreneur.nom }}">
+                      <div [dir]="'dir'|translate" class="mx-2 text-s">
+                        <a [dir]="'dir'|translate" [queryParams]="{id:business.entrepreneur.id}"
+                           [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']"
+                           class="m-0  text-primaryBlue text-decoration-none">{{ business.entrepreneur.prenom + ' ' + business.entrepreneur.nom|titlecase }}</a>
+                      </div>
+                    </div>
+                    <div *ngFor="let cofounder of business.coFounders ; trackBy: trackById " class="form-group ">
+                      <div class="flex h-16 shrink-0 items-center">
+                        <img [dir]="'dir'|translate" alt="{{cofounder.nom}}{{cofounder.prenom}}"
+                             class="h-10 w-10 rounded-full"
+                             src="{{cofounder.photo | defaultimage:cofounder.prenom :cofounder.nom }}">
+                        <div [dir]="'dir'|translate" class="mx-2 text-s">
+                          <a [dir]="'dir'|translate" [queryParams]="{id:cofounder.id}"
+                             [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']"
+                             class="m-0  text-primaryBlue text-decoration-none">{{ cofounder.prenom + ' ' + cofounder.nom|titlecase }}</a>
+                        </div>
+                      </div>
+                    </div>
+                  </dd>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900">{{ 'PHONE_NUMBER'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    <a class="text-gray-700 no-underline hover:text-main"
+                       href="{{'tel:'+business.phoneNumber}}"> {{ business.phoneNumber }}</a>
+                  </dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900"> {{ 'PROFESSIONALS'|translate }}</dt>
+                  <dd *ngIf="business.coaches && business.coaches.length !=0" class="text-gray-700 sm:col-span-2">
+                    <div *ngFor="let coach of business.coaches ; trackBy: trackById " class="form-group ">
+                      <div class="flex h-16  shrink-0 items-center justify-between">
+                        <div class="flex h-16 shrink-0 items-center">
+                          <img [dir]="'dir'|translate" alt="{{coach.nom}}{{coach.prenom}}"
+                               class="h-10 w-10 rounded-full"
+                               src="{{coach.photo | defaultimage:coach.prenom :coach.nom }}">
+                          <div [dir]="'dir'|translate" class="mx-2 text-s">
+                            <a [dir]="'dir'|translate" [queryParams]="{id:coach.id}"
+                               [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']"
+                               class="m-0  text-primaryBlue text-decoration-none">{{ coach.prenom + ' ' + coach.nom|titlecase }}</a>
+                          </div>
+
+                        </div>
+                        <div *ngIf="edit" class="flex justify-end ">
+                          <button (click)="removeCoach(coach.id,business.id)"
+                                  class="text-white bg-red-600 px-2 border-red-600 border-2 rounded-md     p-1 text-sm  "
+
+
+                          >
+                            <i class="bi  bi-x"
+                            ></i>
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </dd>
+
+                  <div *ngIf="business.coaches.length==0">
+                    No professionals assigned yet
+                  </div>
+                </div>
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900">{{ 'INVESTORS'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    <div *ngFor="let cofounder of business.investors ; trackBy: trackById " class="form-group ">
+                      <div class="flex h-16 shrink-0 items-center">
+                        <img [dir]="'dir'|translate" alt="{{cofounder.nom}}{{cofounder.prenom}}"
+                             class="h-10 w-10 rounded-full"
+                             src="{{cofounder.photo | defaultimage:cofounder.prenom :cofounder.nom }}">
+                        <div [dir]="'dir'|translate" class="mx-2 text-s">
+                          <a [dir]="'dir'|translate" [queryParams]="{id:cofounder.id}"
+                             [routerLinkActive]="['navItemActive']" [routerLink]="['/profile']"
+                             class="m-0  text-primaryBlue text-decoration-none">{{ cofounder.prenom + ' ' + cofounder.nom|titlecase }}</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="business.investors.length==0">
+                      {{ 'NO_INVESTOR_YET'|translate }}
+                    </div>
+                  </dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 py-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900">{{ 'VIDEO_URL'|translate }}</dt>
+                  <dd class="text-gray-700 sm:col-span-2">
+                    <div style="text-align: center;">
+                      <iframe allowfullscreen frameborder="0" height="315" src="{{business.videoURL}}"
+                              width="560"></iframe>
+                    </div>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<app-delete-dialog (closeModal)="closeDelete()" (cofirmDelete)="confirmDelete()"
+                   [message]="'ARE_YOU_SURE_YOU_WANT_TO_DELETE_THIS_ITEM' | translate" [visible]="deleteDialog">
+</app-delete-dialog>

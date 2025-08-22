@@ -1,0 +1,45 @@
+<div [dir]="'dir'|translate" class="flex items-center justify-center ">
+
+    <div [dir]="'dir'|translate" class="mx-auto w-full max-w-[550px] box">
+        <h1 class="text-main font-extrabold flex items-center justify-center ">{{'CONTACT_FORM_NAME'|translate}}
+        </h1>
+        <form [dir]="'dir'|translate" [formGroup]="contact" (ngSubmit)="onSubmit()">
+            <div class="mb-1">
+                <label  for="name" class="mb-3  text-base font-medium text-[#07074D]">
+                    {{'FULL_NAME'|translate}}
+                </label>
+                <input type="text" formControlName="name" name="name" id="name" placeholder="{{'FULL_NAME'|translate}}" class="form-control w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                />
+            </div>
+            <div class="mb-1">
+                <label for="email" class="mb-3  text-base font-medium text-[#07074D]">
+                    {{'EMAIL_ADDRESS'|translate}}
+                </label>
+                <input type="email" formControlName="email" name="email" id="email" placeholder="example@domain.com" class="form-control w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                />
+            </div>
+            <div class="mb-1">
+                <label for="subject" class="mb-3  text-base font-medium text-[#07074D]">
+                    {{'SUBJECT'|translate}}
+                </label>
+                <select formControlName="subject" class="form-select" required>
+                        <option value="Inquiry" selected>{{'INQUIRY'|translate}}</option>
+                        <option value="Recruitment">{{'RECRUITMENT'|translate}}</option>
+                        <option value="Partnership">{{'PARTNERSHIP'|translate}}</option>
+                        <option value="Other">{{'OTHER'|translate}}</option>
+                </select>
+            </div>
+            <div class="mb-1">
+                <label for="message" class="mb-3  text-base font-medium text-[#07074D]">
+                    {{'MESSAGE'|translate}}
+                </label>
+                <textarea formControlName="message" rows="4" name="message" id="message" placeholder="{{'TYPE_YOUR_MESSAGE'|translate}}" class="form-control w-full resize-none rounded-md border border-[#e0e0e0] bg-white py-2 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="hover:shadow-form rounded-md bg-[#c0aa81] py-2 px-4 text-base font-semibold text-white outline-none">
+                    {{'SUBMIT'|translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

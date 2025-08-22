@@ -1,0 +1,26 @@
+<p-dialog [dir]="'dir' | translate" header="{{'MY_CONNECTIONS'|translate}}" [dismissableMask]="true" (onHide)="closeModal()" [(visible)]="visible" [modal]="true" [style]="{ 'width': '30vw','height': '85vh', 'overflow':'hidden' }" [draggable]="false" [resizable]="false"
+    [maximizable]="true">
+
+    <div class="w-full overflow-y-auto  max-h-[64vh]">
+        <ul role="list" *ngIf="requests$ | async as requests">
+            <li class="py-3 sm:py-4" *ngFor="let request of requests;let i=index">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <img class="w-10 h-10 object-cover rounded-full" src="{{request.user.photo |defaultimage : request.user.prenom : request.user.nom}}" alt="Neil image">
+                    </div>
+                    <div class="flex-1 min-w-0 ">
+                        <p class="text-sm font-medium text-gray-900 truncate mt-2">
+                            &nbsp;{{request.user.prenom}} {{request.user.nom}} <i *ngIf="request.user.verified" class="bi bi-patch-check-fill text-blue-500"></i>
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base px-4 font-semibold text-gray-900 dark:text-white">
+                        <button (click)="removeConnection(request.id)" class=" ml-2 px-2  rounded-md p-1 text-sm leading-6   bg-red-100 text-red-600 ">
+              <i class="bi bi-person-x text-lg" ></i>
+              &nbsp;{{'REMOVE'|translate}}
+            </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</p-dialog>

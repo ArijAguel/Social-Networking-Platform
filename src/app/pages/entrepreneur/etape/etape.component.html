@@ -1,0 +1,231 @@
+<ngx-ui-loader [bgsColor]="'#c0aa81'" [logoSize]="100" [fgsColor]="'#c0aa81'" [fgsType]="'fading-circle'" [pbColor]="'#c0aa81'" [logoUrl]="'assets/images/logo/favicon.png'"></ngx-ui-loader>
+<div [dir]="'dir'|translate" class="block lg:hidden">
+    <div class="flex justify-center">
+        <div class="flex flex-col justify-center py-12 items-center">
+
+            <div class="flex justify-center items-center text-gray-500 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-48 h-48">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+        </svg>
+
+            </div>
+            <h1 class="text-gray-700 font-medium text-2xl text-center mb-3">{{'BIG_SCREEN_REQUIRED'|translate}}</h1>
+        </div>
+    </div>
+</div>
+<div class="hidden lg:block">
+    <div class="sticky-button" [ngClass]="{'left': ('dir'|translate)==='ltr', 'right': ('dir'|translate)==='rtl'}">
+
+        <button [dir]="'dir'|translate" (click)="help()"  class="btn btn-success btn-circle btn-xl help" tourAnchor="remarks">
+            <i class="fa-solid fa-list-check" style="font-size: 20px;cursor: pointer;"></i>&nbsp;&nbsp;{{'REMARKS'|translate}}
+        </button>
+        <br><br>
+        
+        <button [dir]="'dir'|translate" *ngIf="editable" (click)="info()" class="btn btn-success  btn-circle btn-xl help animate-bounce  btn-help" tourAnchor="assistance">
+            <span class="relative flex h-3 w-3 ">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+              </span>
+              <span >&nbsp;&nbsp;{{'HELP'|translate}}</span>
+        </button>
+    </div>
+    <div [dir]="'dir'|translate" class="container-fluid mt-0">
+        <div [class.sidenav-rtl]="('dir'|translate) === 'rtl'" [class.sidenav-ltr]="('dir'|translate) === 'ltr'" class="sidenav">
+            <div class="fixed flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 h-[calc(100vh-2rem)] w-full max-w-[19rem] shadow-xl shadow-blue-gray-900/5">
+                <div class="pt-4">
+                    <h5 class="Feature_title">
+                        <i class="fa-solid fa-bars" style="color:#2F4858;cursor: pointer;" (click)="toggleDrawer()"></i> &nbsp; &nbsp; {{'BUSINESS_TOOLS'|translate}}
+                    </h5>
+                </div>
+                <nav class="flex flex-col gap-1 min-w-[240px] p-2 font-sans text-base font-normal text-gray-700">
+                    <a [dir]="'dir'|translate" class="nav-link flex items-center" [routerLink]="[id,'1']" [routerLinkActive]="['active']">
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#2F4858;">
+                                <i class="fa-solid fa-users" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="mr-5">{{'BUSINESS_FUNDAMENTALS'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'2']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#345F67;">
+                                <i class="fa-solid fa-business-time" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'BUSINESS_ENVIRONMENT'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'3']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#46756E;">
+                                <i class="fa-regular fa-lightbulb" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'CONCEPT_DEVELOPMENT'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'4']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#678970;">
+                                <i class="fa-solid fa-shop" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'MARKET_STUDY'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'5']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#919B74;">
+                                <i class="fa-solid fa-gear" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'TECHNICAL_STUDY'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'6']" [routerLinkActive]="['active']">
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#c0aa81;">
+                                <i class="fa-solid fa-money-bill" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'FINANCIAL_STUDY'|translate}}</p>
+                        </div>
+                    </a>
+                    <a class="nav-link flex items-center" [routerLink]="[id,'7']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#e1c797;">
+                                <i class="fa-solid fa-building" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'COMPANY_PROFILE'|translate}}</p>
+                        </div>
+                    </a>
+                    <!--
+                    <a class="nav-link flex items-center" [routerLink]="[id,'8']" [routerLinkActive]="['active']">
+
+                        <div role="button" tabindex="0" class="flex items-center w-full p-2 rounded-lg text-start leading-tight transition-all hover:bg-blue-50 hover:bg-opacity-80 focus:bg-blue-50 focus:bg-opacity-80 active:bg-gray-50 active:bg-opacity-80 hover:text-blue-900 focus:text-blue-900 active:text-blue-900 outline-none">
+                            <div class="mr-4 ml-2 borderIcon grid place-items-center" style="background-color:#D8CFC0;">
+                                <i class="fa-solid fa-list-check" style="font-size: 20px; cursor: pointer; color: white;"></i>
+                            </div>
+                            <p class="m-0">{{'INVESTMENT_READINESS'|translate}}</p>
+                        </div>
+                    </a>
+                    -->
+                </nav>
+            </div>
+        </div>
+        <div [class.content-rtl]="('dir'|translate) === 'rtl'" [class.content-ltr]="('dir'|translate) === 'ltr'" class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<p-dialog [(visible)]="Openhelp" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'REMARKS'|translate}}</h4>
+    <div class="form-dash" style="margin: 30px;">
+        <div class="card mb-4 card-radius" style="border: none;">
+            <table dir="auto" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{{'SECTION'|translate}}</th>
+                        <th>{{'NOTICED'|translate}}</th>
+                        <th>{{'PROFESSIONAL2'|translate}}</th>
+                        <th>{{'STATUS'|translate}}</th>
+                        <th>{{'NOTES'|translate}}</th>
+                        <th>{{'ACTIONS'|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="remarques.length>0">
+                    <tr *ngFor="let remarque of remarques">
+                        <td>{{remarque.rubrique}}
+                        </td>
+                        <td>
+                            {{remarque.remarque}}
+                        </td>
+                        <td>
+                            {{remarque.user.nom}} {{remarque.user.prenom}}
+                        </td>
+                        <td [ngClass]="{
+                            'status-done': remarque.etat === 'Done',
+                            'status-pending': remarque.etat === 'Pending',
+                            'status-ongoing': remarque.etat === 'Ongoing',
+                            'status-blocked': remarque.etat === 'Blocked'
+                            }">
+                            {{remarque.etat}}
+                        </td>
+                        <td>
+                            {{remarque.raison}}
+                        </td>
+                        <td *ngIf="remarque.myPost||editable">
+                            <i class="fa-solid fa-trash" style="color: red;font-size: 20px;margin-right:20%;cursor: pointer;" (click)="deleteRemark(remarque.id)"></i>
+                            <i class="fa-solid fa-edit" style="font-size: 20px;cursor: pointer;" (click)="openupdateRemark(remarque)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center;" *ngIf="remarques.length==0">
+                {{'NO_REMARK_STEP'|translate}}
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<p-dialog [(visible)]="OpenUpdate" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'UPDATE_REMARK'|translate}}</h4>
+    <div class="form-dash" style="margin: 30px;">
+        <div class="card mb-4 card-radius" style="padding: 30px;">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>{{'SECTION'|translate}}</th>
+                        <th>{{'NOTICED'|translate}}</th>
+                        <th>{{'PROFESSIONAL2'|translate}}</th>
+                        <th>{{'STATUS'|translate}}</th>
+                        <th>{{'NOTES'|translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input dir="auto" *ngIf="!this.editable" type="text" class="form-control" [(ngModel)]="selectedRemark.rubrique">
+                            <p *ngIf="this.editable">{{selectedRemark.rubrique}}</p>
+                        </td>
+                        <td>
+                            <input dir="auto" *ngIf="!this.editable" type="text" class="form-control" [(ngModel)]="selectedRemark.remarque">
+                            <p *ngIf="this.editable">{{selectedRemark.remarque}}</p>
+                        </td>
+                        <td>
+                            {{selectedRemark.user.nom}} {{selectedRemark.user.prenom}}
+                        </td>
+                        <td>
+                            <select dir="auto" *ngIf="this.editable" class="form-control" [(ngModel)]="selectedRemark.etat">
+                                <option value="Done">{{'DONE'|translate}}</option>
+                                <option value="Pending" selected>{{'PENDING'|translate}}</option>
+                                <option value="Ongoing">{{'ONGOING'|translate}}</option>
+                                <option value="Blocked">{{'BLOCKED'|translate}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input dir="auto" *ngIf="this.editable" type="text" class="form-control" [(ngModel)]="selectedRemark.raison">
+                            <p *ngIf="!this.editable">{{selectedRemark.raison}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: center;">
+                <button class="btn updatebutton" (click)="updateRemark()">{{'UPDATE'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<app-chooseprofessional [typeModel]="'help'" [idProject]="id" [visible]="Openinfo" (close)="closeInfo()"></app-chooseprofessional>
+<!-- drawer component -->
+<div id="drawer-navigation" class="fixed top-0 z-40 w-64 h-screen p-4 transition-transform toggled-menu" [ngClass]="{'translate-x-0': showDrawer, '-translate-x-full': !showDrawer&&translationService.getDirection() === 'ltr',  '-translate-x-full2': !showDrawer&&translationService.getDirection() === 'rtl','left-0': translationService.getDirection() === 'ltr','right-0': translationService.getDirection() === 'rtl'}"
+    tabindex="-1" aria-labelledby="drawer-navigation-label">
+    <button type="button" (click)="toggleDrawer()" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white close">
+    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+    </svg>
+    <span class="sr-only">{{'Close'|translate}}</span>
+    </button>
+    <app-side-bar></app-side-bar>
+</div>
+
+<!-- <tour-step-template></tour-step-template> -->

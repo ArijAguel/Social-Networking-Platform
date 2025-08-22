@@ -1,0 +1,17 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Ensures image won't overflow container */
+}
+
+.centered-image {
+    max-width: 100%;
+    /* Ensures image won't exceed container width */
+    max-height: 100%;
+    /* Ensures image won't exceed container height */
+    object-fit: contain;
+    margin: auto;
+    /* Keeps image proportions and fits it within container */
+}

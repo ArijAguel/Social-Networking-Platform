@@ -1,0 +1,79 @@
+<div [dir]="'dir'|translate" class="row">
+    <div class="hidden lg:block  col-2  ">
+        <app-side-bar></app-side-bar>
+    </div>
+    <div (scrolled)="onScroll()" [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="900" infiniteScroll class="col mt-4 px-4 ml-6 mb-5" *ngIf="projects$| async as publicProjects">
+        <div class="flex justify-center" *ngIf="publicProjects.length == 0">
+            <div class="flex flex-col justify-center py-12 items-center">
+
+                <h2>{{'KEEP_YOU_INFORMED'|translate}}</h2>
+            </div>
+        </div>
+        <div class=" ml-8 mr-10 grid grid-cols-3 gap-4 lg:grid-cols-3 lg:gap-8 ">
+            <div [dir]="'dir'|translate" class="  mt-4 rounded-lg   " *ngFor="let project of publicProjects;let i = index">
+                <div class=" bg-white  shadow-md relative block  rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
+
+                    <div class=" sm:flex sm:justify-between sm:gap-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
+                                {{project.name }}&nbsp;&nbsp;<i class="fa-solid fa-earth-americas" style="font-size: 14px;"></i>
+                            </h3>
+                        </div>
+                        <div class="hidden sm:block sm:shrink-0">
+                            <img alt="" src="{{project.logo | defaultimage :project.name:''}}" class="size-16 rounded-lg object-cover shadow-sm" />
+                        </div>
+                    </div>
+                    <div class="-mt-6">
+                        <br>
+                        <p class="text-pretty text-sm text-gray-500">
+                            {{project.description }}
+                        </p>
+                    </div>
+                    <div class="flex justify-center  ">
+
+                        <button [dir]="'dir'|translate" (click)="showDialog2(project)" class=" w-full ml-4  rounded border-1 border-gray-400 px-16 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none   ">
+                {{"VIEW"|translate}}   <i
+                class="fa-solid fa-arrow-right ml-2 mr-2"></i>
+              </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="loadingSubject | async" class="loading-spinner-overlay">
+            <div class="loading-spinner">
+                <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------------------------detail projet-------------------------------------------->
+<p-dialog header="Business Info" [(visible)]="visible2" [modal]="true" [style]="{ width: '70vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{project.name}}</h4>
+    <h4 style="color: gray; text-align: center;font-size: 15px;font-weight: bold;">Created the {{project.creationDate}}</h4>
+    <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img style="height:300px;width:300px;" src="{{project.logo | defaultimage :project.name:''}}" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item" *ngIf="project.image">
+                <img style="height:300px;width:300px;" src="{{project.image}}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">{{'PREVIOUS'|translate}}</span>
+    </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">{{'NEXT'|translate}}</span>
+    </button>
+    </div>
+    <br/>
+
+    <h4 style="color: gray; text-align: center;font-size: 18px;">{{project.description}}</h4>
+    <br><br>
+    <div style="text-align: center;">
+        <iframe width="560" height="315" src="{{project.videoURL}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</p-dialog>

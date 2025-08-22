@@ -1,0 +1,9 @@
+export class RessourceMaterielle {
+    constructor(
+        public id: number,
+        public name: string,
+        public fondateur: string,
+        public description: string,
+        public disponibilite: string
+    ) {}
+}

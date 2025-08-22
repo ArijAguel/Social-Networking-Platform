@@ -1,0 +1,564 @@
+<div [dir]="'dir'|translate" class="sticky-button" [ngClass]="{'left': ('dir'|translate)==='ltr', 'right': ('dir'|translate)==='rtl'}">
+    <button *ngIf="isEditable" (click)="onSaveClick() " class="btn btn-circle btn-xl help"><i class="fa-solid fa-floppy-disk" style="font-size: 20px;cursor: pointer;"></i>&nbsp;&nbsp;{{'SAVE'|translate}}</button><br> <br>
+</div>
+<div class="col-12 d-flex align-items-center justify-content-center mt-4 ml-2">
+    <img alt="" src="{{etape66.project.logo | defaultimage :etape66.project.name:'':true}}" class="size-20 rounded-lg object-contain shadow-sm mr-3" />
+    <h1 class="text-center flex-grow-1">{{'FINANCIAL_STUDY'|translate}}</h1>
+</div>
+
+<br>
+<br>
+<h4 *ngIf="isEditable" style="margin-left: 3%;font-weight: normal;">
+    {{'D_FINANCIAL_STUDY'|translate}} <a (click)="downloadPDF()" style="cursor: pointer;text-decoration: underline; font-weight: bold;">PDF</a> {{'OR'|translate}} <a style="cursor: pointer;text-decoration: underline; font-weight: bold;" (click)="downloadWord()">Word(.docs)</a>
+</h4>
+<div class="main-conatiner" id="certificate">
+    <form [formGroup]="etape5" (ngSubmit)="onSubmit()">
+
+        <h3 id="accordion-collapse-heading-1" style="font-size: 20px;position:relative">
+            <button type="button" class="flex items-center justify-between w-full hover:bg-gray-100 px-2 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(1)">
+            <h2>{{'I_EXPENSES'|translate}} <i class="fa-regular fa-circle-question" style="font-size: 20px;cursor: pointer;" (click)="infoCharges()"></i></h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-5" [ngClass]="{'hidden': !isOpen(1)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <p>{{'COLLECT_EXPENSES'|translate}} for year1</p>
+                            <p class="text-sm text-red-600">Verify your duration of the working capital period in months in Technical Study</p>
+                            <table class="table table-bordered" formArrayName="fonds">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ELEMENT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'CATEGORY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'QUANTITY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'UNIT_PRICE'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'PRIODICITY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'ANNUAL_TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WORKING_CAPITAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WORKING_CAPITAL_TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of fond().controls; trackBy: trackById ;let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="element" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="type" class="form-select" required>
+                                                <option  value="Rent" selected>{{'RENT'|translate}}</option>
+                                                <option value="Salaries" >{{'SALARIES'|translate}}</option>
+                                                <option value="external services" >{{'EXTERNAL_SERVICES'|translate}} </option>
+                                                <option value="Utilities" >{{'UTILITIES'|translate}}</option>
+                                                <option value="Loan repayments" >{{'LOAN_REPAYMENTS'|translate}}</option>
+                                                <option value="Administrative expenses" >{{'ADMINISTRATIVE_EXPENSES'|translate}}</option>
+                                                <option value="Raw materials and components" >{{'RAW_MATERIALS_AND_COMPONENTS'|translate}}</option>
+                                                <option value="Maintenance" >{{'MAINTENANCE'|translate}}</option>
+                                                <option value="Other" >{{'OTHER'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="quantite" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="prix" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="periodicity" class="form-select" (change)="updateTotalFond(i)" required>
+                                                <option value="Every 1 month" >{{'EVERY_1_MONTH'|translate}}</option>
+                                                <option value="Every 2 month" >{{'EVERY_2_MONTH'|translate}}</option>
+                                                <option value="Every 3 month" >{{'EVERY_3_MONTH'|translate}}</option>
+                                                <option value="Every 4 month" >{{'EVERY_4_MONTH'|translate}}</option>
+                                                <option value="Every 6 month" >{{'EVERY_6_MONTH'|translate}}</option>
+                                                <option value="Every 12 month" >{{'EVERY_12_MONTH'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="annualTotal" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input class="custom-checkbox" type="checkbox" formControlName="workingCapital"  (change)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="total" class="form-control">
+                                        </td>
+                                        <td>
+                                            <i *ngIf="i > 0  && isEditable" (click)="removefond(i)" class="fa-solid fa-trash" style="color: red; font-size: 25px; margin-top: 10px;"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button *ngIf="isEditable" type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="addfond('','',0,0,0,'',false,0,0,0,0,0,0,0,0,0)">{{'ADD'|translate}}</button>
+                            <br>
+                            <br>
+                            <p>{{'COLLECT_EXPENSES'|translate}} for year1, year2 , year3 , year4 and year5</p>
+                            <br>
+                            <br>
+
+                            <table class="table table-bordered" formArrayName="fonds">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ELEMENT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">Total year1</th>
+                                        <th scope="col" style="color: #c0aa81;">Augmentation year2 (%)</th>
+                                        <th scope="col" style="color: #c0aa81;">Total year2</th>
+                                        <th scope="col" style="color: #c0aa81;">Augmentation year3 (%)</th>
+                                        <th scope="col" style="color: #c0aa81;">Total year3</th>
+                                        <th scope="col" style="color: #c0aa81;">Augmentation year4 (%)</th>
+                                        <th scope="col" style="color: #c0aa81;">Total year4</th>
+                                        <th scope="col" style="color: #c0aa81;">Augmentation year5 (%)</th>
+                                        <th scope="col" style="color: #c0aa81;">Total year5</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of fond().controls; trackBy: trackById ;let i=index" [formGroupName]="i">
+                                        <td>
+                                            <fieldset [disabled]="true">
+                                                <input maxlength="255" dir="auto" type="text" formControlName="element" [value]="ben.value.element" class="form-control" [disabled]="true">
+                                             </fieldset>
+                                        </td>
+                                        
+                                        <td>
+                                            <fieldset [disabled]="true">
+                                                <input dir="auto" type="number"  formControlName="annualTotal" [value]="ben.value.annualTotal?.toFixed(2)"  class="form-control">
+                                            </fieldset>
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="augYear2" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="annualTotal2" class="form-control">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="augYear3" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="annualTotal3" class="form-control" >
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="augYear4" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="annualTotal4" class="form-control" >
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="augYear5" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"  formControlName="annualTotal5" class="form-control" >
+                                        </td>
+
+
+
+                                    </tr>
+                                    <tr>
+                                        <td>Total per year</td>
+                                        <td>{{totalYear1}}</td>
+                                        <td></td>
+                                        <td>{{totalYear2}}</td>
+                                        <td></td>
+                                        <td>{{totalYear3}}</td>
+                                        <td></td>
+                                        <td>{{totalYear4}}</td>
+                                        <td></td>
+                                        <td>{{totalYear5}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('I_EXPENSES')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+
+                </div>
+            </div>
+        </div>
+
+
+        <h3 id="accordion-collapse-heading-2" style="font-size: 20px;position:relative">
+            <button type="button" class="flex items-center justify-between w-full hover:bg-gray-100 px-2 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(2)">
+            <h2>{{'DEPRECIATION'|translate}}  </h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-5" [ngClass]="{'hidden': !isOpen(2)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <table class="table table-bordered" formArrayName="infrastructures">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ELEMENT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'CATEGORY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'NUMBER_OF_YEARS'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR1'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR2'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR3'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR4'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR5'|translate}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of infrastructure().controls; trackBy: trackById ;let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="element" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="type" class="form-select" required>
+                                                <option value="Land" selected>{{'LAND'|translate}}</option>
+                                                <option value="Facilities" selected>{{'FACILITIES'|translate}}</option>
+                                                <option value="Fit-out" selected>{{'FIT_OUT'|translate}} </option>
+                                                <option value="Equipement" selected>{{'EQUIPMENT'|translate}}</option>
+                                                <option value="Transportation" selected>{{'TRANSPORTATION'|translate}}</option>
+                                                <option value="Furniture and office equipment" selected>{{'FURNITURE_AND_OFFICE_EQUIPMENT'|translate}}</option>
+                                                <option value="Technology" selected>{{'TECHNOLOGY'|translate}}</option>
+                                                <option value="Other" selected>{{'OTHER'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="total" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="nbOfYears" class="form-control" (input)="updateDepreciation(i)">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="depreciationYear1" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="depreciationYear2" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="depreciationYear3" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="depreciationYear4" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number"   formControlName="depreciationYear5" class="form-control">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">{{'TOTAL_PER_YEAR'|translate}}</td>
+                                        <td>{{DepreciationTotalYear1}}</td>
+                                        <td>{{DepreciationTotalYear2}}</td>
+                                        <td>{{DepreciationTotalYear3}}</td>
+                                        <td>{{DepreciationTotalYear4}}</td>
+                                        <td>{{DepreciationTotalYear5}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('DEPRECIATION')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <form [formGroup]="etape6" (ngSubmit)="onSubmit()">
+
+
+        <h3 id="accordion-collapse-heading-3" style="font-size: 20px;position:relative">
+            <button type="button" class="flex items-center justify-between w-full hover:bg-gray-100 px-2 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(3)">
+            <h2>{{'INTEREST_EXPENSES'|translate}}</h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-3" [ngClass]="{'hidden': !isOpen(3)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash" style="margin: 30px;">
+                            <div class="form-group">
+                                <label for="frais">{{'SPECIFY_INTEREST_EXPENSES'|translate}}</label>
+                                <input dir="auto" type="number"  formControlName="frais" rows="4" class="form-control" name="frais" (input)="updateTotal(0,'augmentation')" required/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('INTEREST_EXPENSES')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <h3 id="accordion-collapse-heading-4" style="font-size: 20px;position:relative">
+            <button type="button" class="flex items-center justify-between w-full hover:bg-gray-100 px-2 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(4)">
+            <h2>{{'PROJECTED_INCOME_STATEMENT'|translate}}</h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-4" [ngClass]="{'hidden': !isOpen(4)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <div class="form-group">
+                                <label for="augmentation">{{'PROJECTED_REVENUE_GROWTH'|translate}}</label>
+                                <input dir="auto" type="number"  formControlName="augmentation" class="form-control" name="augmentation" (input)="updateTotal(0,'augmentation')" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="justification">{{'REVENUE_GROWTH_REASONING'|translate}}</label>
+                                <textarea dir="auto" formControlName="justification" rows="4" class="form-control" name="justification"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="taxes">{{'TAX_PERCENTAGE'|translate}}</label>
+                                <input dir="auto" type="number"  formControlName="taxes" class="form-control" name="taxes" (input)="updateTotal(0,'augmentation')" />
+                            </div>
+                        </div>
+
+                        <div class="form-dash" style="margin: 30px;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR_1'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR_2'|translate}} </th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR_3'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR_4'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'YEAR_5'|translate}}</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            {{'TURNOVER'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chiffreAffaire1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chiffreAffaire2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chiffreAffaire3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chiffreAffaire4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chiffreAffaire5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'EXPENSES'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chargesTotal1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chargesTotal2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chargesTotal3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chargesTotal4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('chargesTotal5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'OPERATING_PROFIT'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('rbe1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('rbe2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('rbe3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('rbe4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('rbe5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'DEPRECIATION2'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('amortissement1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('amortissement2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('amortissement3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('amortissement4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('amortissement5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'INTEREST_EXPENSES2'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('frais')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('frais2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('frais3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('frais4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('frais5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{'GROSS_PROFIT'|translate}}</td>
+                                        <td>
+                                            {{ etape6.get('beneficeBrut1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeBrut2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeBrut3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeBrut4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeBrut5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'TAXES'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('impot1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('impot2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('impot3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('impot4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('impot5')?.value }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'NET_PROFIT'|translate}}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeNet1')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeNet2')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeNet3')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeNet4')?.value }}
+                                        </td>
+                                        <td>
+                                            {{ etape6.get('beneficeNet5')?.value }}
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('PROJECTED_INCOME_STATEMENT')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="flex justify-content-around" style="position:relative;">
+            <button type="button" class="btn btn-outline-primary startnow"><a  [routerLink]="'/feed/etape/' + projectId + '/5'">{{'PREVIOUS_STEP'|translate}}</a></button>
+            <button type="button" (click)="onSubmit()" class="btn btn-outline-primary startnow">{{'NEXT_STEP'|translate}}</button>
+        </div>
+    </form>
+</div>
+
+<p-dialog [(visible)]="Charges" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'FINANCIAL_STUDY'|translate}}</h4>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+</p-dialog>
+<p-dialog [(visible)]="showremarque" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'REMARK'|translate}}</h4>
+    <div class="d-flex flex justify-content-center" style="text-align: center;">
+        <textarea dir="auto" #remarqueTextarea name="remarque" cols="50" rows="10" placeholder="{{'WRITE_REMARK'|translate}}" style="display: block;border-radius: 10px;border: 2px solid #c0aa81;"></textarea>
+        <br>
+    </div>
+    <button type="button" class="btn btn-outline-primary startnow" style="display: block;" (click)="sendRemark(remarqueTextarea.value)">{{'SEND'|translate}}</button>
+</p-dialog>

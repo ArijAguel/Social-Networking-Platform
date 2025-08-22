@@ -1,0 +1,125 @@
+<h1>{{'PROGRAMS'|translate}}</h1>
+<button type="button" class="btn btn-outline-primary addprogram" (click)="showDialog()"><i class="fa-solid fa-plus"></i>{{'ADD_PROGRAM'|translate}}</button>
+<div [dir]="'dir'|translate" class="all">
+    <!---->
+    <div class="container" *ngIf="user.role==='SSO'">
+        <br>
+        <div class="row allcards mt-4 justify-content-center">
+            <div class="col-md-12 mb-5">
+                <div class="card ">
+                    <div class="d-flex justify-content-between" style="align-items: center;">
+                        <div class="p-2">
+                            <span class="project-name">{{'PROGRAM1'|translate}}</span>
+                        </div>
+                        <div class="p-2">
+                            <span>{{'NO_PROJECT_PRESENT'|translate}}</span>
+                        </div>
+                        <div class="p-2">
+                            <span> 28-02-2024 on 19:50	</span>
+                        </div>
+                        <div class="p-2">
+                            <img src="{{project.image | defaultimage :project.name:'' }}" class="image-projet">
+                            <span class="project-name">{{'STRIPE'|translate}} </span>
+                        </div>
+                        <div class="p-2">
+                            <div class="nav-item dropdown language">
+                                <a class="nav-link " id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" (click)="showDialog3()"><i class="fa-solid fa-pen-to-square"></i> &nbsp; {{'MODIFY'|translate}}</a>
+                                    <a class="dropdown-item" (click)="delete()" style="color: red;"><i class="fa-solid fa-trash"></i> &nbsp; {{'DELETE'|translate}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container" *ngIf="user.role==='ENTREPRENEUR'">
+        <br>
+        <div class="row allcards mt-4 justify-content-center">
+            <div class="col-md-12 mb-5">
+                <div class="card ">
+                    <div class="d-flex justify-content-between" style="align-items: center;">
+                        <div class="p-2">
+                            <span class="project-name">{{'PROGRAM1'|translate}}</span>
+                        </div>
+                        <div class="p-2">
+                            <span>{{'NO_PROJECT_PRESENT'|translate}}</span>
+                        </div>
+                        <div class="p-2">
+                            <span> 28-02-2024 on 19:50	</span>
+                        </div>
+                        <div class="p-2">
+                            <img src="{{project.image | defaultimage :project.name:'' }}" class="image-projet">
+                            <span class="project-name">{{'STRIPE'|translate}} </span>
+                        </div>
+                        <div class="p-2">
+                            <div class="nav-item dropdown language">
+                                <a class="nav-link " id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" *ngIf="user.role==='ENTREPRENEUR'">
+                                    <a class="dropdown-item" (click)="showDialog3()"><i class="fa-solid fa-folder-plus"></i> &nbsp; {{'TO_APPLY'|translate}}</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--------------------------Ajouter projet -------------------------------------------->
+<p-dialog [dir]="'dir'|translate" header="{{'ADD_PROGRAM'|translate}}" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <form #projectForm="ngForm">
+        <div class="row center-div">
+            <div class="col-12 center-div">
+                <div class="card mb-4 card-radius">
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="table-responsive p-0">
+                            <div class="container form-dash">
+                                <div class="form-group">
+                                    <br>
+                                    <label>{{'NAME_OF_THE_PROGRAM'|translate}}:</label>
+                                    <input type="text" class="form-control" ngModel name="projectname" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>{{'SELECT_A_PROJECT'|translate}}:</label>
+                                    <select id="founders" class="form-select" required ngModel name="founders">
+                                        <option value="founder1">{{'FOUNDER1'|translate}}</option>
+                                        <option value="founder2">{{'FOUNDER2'|translate}}</option>
+                                        <option value="founder3">{{'FOUNDER3'|translate}}</option>
+                                        <option value="founder4">{{'FOUNDER4'|translate}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select a coach:</label>
+                                    <select id="founders" class="form-select" required ngModel name="founders">
+                                        <option value="founder1">{{'FOUNDER1'|translate}}</option>
+                                        <option value="founder2">{{'FOUNDER2'|translate}}</option>
+                                        <option value="founder3">{{'FOUNDER3'|translate}}</option>
+                                        <option value="founder4">{{'FOUNDER4'|translate}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row center-div">
+            <div class="col-md-2 center-div">
+                <button type="submit" [disabled]="projectForm.invalid" class="btn btn-add-project" (click)="onSubmitAdd()"><i class="fa-solid fa-plus"></i>{{'ADD'|translate}}</button>
+            </div>
+        </div>
+    </form>
+</p-dialog>

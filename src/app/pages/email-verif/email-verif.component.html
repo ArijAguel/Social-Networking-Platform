@@ -1,0 +1,65 @@
+<div [dir]="'dir'|translate" class="w-screen h-screen" id="fullscreen">
+  <div class="absolute inset-0">
+    <img alt="A computer background"
+         class="object-cover w-full h-full"
+         src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+  </div>
+  <div class="relative flex items-center justify-center h-screen">
+    <div class="bg-white rounded-md shadow-md   px-4  max-w-3xl md:max-h-2xl  text-black text-center">
+      <div class="  flex rounded-md  flex-col items-center justify-center overflow-hidden  bg-white">
+        <div class=" py-6 w-full text-main flex items-center justify-center flex-col gap-5">
+          <div class="flex  flex-col gap-3">
+            <div class="mt-2 text-center text-sm sm:text-xl tracking-widest font-normal">
+              {{ 'THANKS_SIGNING_UP'|translate }}
+            </div>
+            <div class="text-xl sm:text-3xl tracking-wider font-medium capitalize">
+              {{ 'VERIFY_EMAIL_ADDRESS'|translate }}
+            </div>
+          </div>
+        </div>
+        <div class="max-w-xl   pb-8 pt-2 text-center">
+          <div class="  px-8  mb-2 text-lg text-zinc-400">
+
+            <!--                      {{'GLAD_YOU_ARE_WITH_US'|translate}}-->
+            <!--                      <span class="font-medium text-secondaryBlue">{{user.email}}</span> -->
+            We are glad that you’re with us! We’ve sent you a code to the email address .
+            <div class="mt-4">
+              <ng-otp-input (onInputChange)="onOtpChange($event)" [(ngModel)]="value"
+                            [config]="{length:6}"></ng-otp-input>
+
+            </div>
+            <br> {{ 'CHECK_SPAM_FOLDER'|translate }}
+          </div>
+          <div class="flex justify-center gap-8">
+            <div>
+
+              <button (click)="sendCode()" [disabled]="resend.wait"
+                      class="mt-4 inline-block disabled:cursor-not-allowed   disabled:bg-tertiary  rounded bg-white border-main border-2 px-12 py-2 font-medium text-main  hover:bg-tertiary">
+
+                <i class="bi bi-arrow-counterclockwise"></i> &nbsp; {{ 'RESEND_CODE'|translate }}
+              </button>
+            </div>
+            <div>
+              <button (click)="verifyAccount()" [disabled]="value.length!=6"
+                      class="mt-4 inline-block disabled:cursor-not-allowed   disabled:bg-tertiary  rounded bg-main px-12 py-2 font-medium text-white  hover:bg-tertiary">
+
+                <i class="bi bi-check-lg"></i> &nbsp; Verify Account
+              </button>
+            </div>
+          </div>
+          <p *ngIf="resend.wait" class=" mt-2 text-sm text-zinc-400"> Wait {{ resend.waitingTime }}s to resend
+            code</p>
+          <div class="mt-4">
+            <p-progressBar [hidden]="!loading.isLoading" [style]="{ height: '4px'   }" mode="indeterminate"/>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

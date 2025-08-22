@@ -1,0 +1,720 @@
+<ng-container *ngIf="loggedUser$ | async as loggedUser">
+  <ng-container *ngIf="user$ | async as user">
+    <div [dir]="('dir'|translate)" class="row">
+
+      <div class="   hidden   lg:block  col-2  ">
+        <app-side-bar></app-side-bar>
+      </div>
+      <div class="col">
+        <ng-container>
+          <div class=" w-full lg:px-16  mt-9  ">
+            <img alt="" class=" rounded-tl-md  rounded-tr-md object-cover h-52  w-full"
+              src="{{user.cover?user.cover:'assets/images/default.png'}}" />
+
+            <div class="w-full shadow-md rounded-md bg-white">
+              <div class="pl-12">
+
+                <img alt="" class="-mt-16   h-32 w-32 rounded-full border-2 object-cover border-white"
+                  src="{{user.photo | defaultimage :user.prenom:user.nom }}">
+              </div>
+
+              <div class="grid grid-cols-2 px-6 pb-4 gap-32">
+                <div>
+                  <h1 class="font-extrabold"> {{ user.prenom + ' ' + user.nom |titlecase }} <i *ngIf="user.verified"
+                      class="bi bi-patch-check-fill text-blue-500 text-[35px]"></i>
+
+                    <p class="text-lg   text-gray-800">
+                      {{ user.jobTitle }}
+                      <br>
+                      <span class="text-gray-700 text-sm -mt-4">{{ user.adresse }} </span>
+                    </p>
+                  </h1>
+                  <div class=" mb-4 grid grid-cols-4 gap-4">
+                    <a *ngIf="user.linkedinLink" href="{{user.linkedinLink}}" target="_blank"><i
+                        class="fa-brands fa-linkedin text-main text-[30px]"></i></a>
+                    <a *ngIf="!user.linkedinLink"><i class="fa-brands fa-linkedin text-main text-[30px]"></i></a>
+                    <a *ngIf="user.facebook" class=" " href="{{user.facebook}}" target="_blank"><i
+                        class=" fa-brands fa-facebook text-main text-[30px]"></i></a>
+                    <a *ngIf="!user.facebook" class=" "><i class="fa-brands fa-facebook text-main text-[30px]"></i></a>
+                    <a *ngIf="user.xTwitter" class=" " href="{{user.xTwitter}}" target="_blank"><i
+                        class="fa-brands fa-x- text-main text-[30px]"></i></a>
+                    <a *ngIf="!user.xTwitter" class=" "><i class="fa-brands fa-x-twitter text-main text-[30px]"></i></a>
+                    <a *ngIf="user.instagram" class=" " href="{{user.instagram}}" target="_blank"><i
+                        class="fa-brands fa-instagram text-main text-[30px]"></i></a>
+                    <a *ngIf="!user.instagram" class=" "><i
+                        class="fa-brands fa-instagram text-main text-[30px]"></i></a>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="grid grid-cols-2 border-b-gray-200 border-t-2 pt-2  px-8  w-full  ">
+                <div class="flex justify-start gap-8 ">
+                  <button (click)="changeKey('main')" [ngClass]="{
+              'border-main':key == 'main',
+              'text-main':key == 'main',
+              'border-transparent':key != 'main',
+              'text-gray-500':key != 'main',
+              'hover:border-gray-300':key != 'main',
+              ' hover:text-gray-700':key != 'main',
+              }" class="shrink-0 border-b-2  px-1 pb-2 text-lg font-medium ">
+                    {{ 'POSTS'|translate }}
+                  </button>
+
+                  <button (click)="changeKey('about')" [ngClass]="{
+              'border-main':key == 'about',
+              'text-main':key == 'about',
+              'border-transparent':key != 'about',
+              'text-gray-500':key != 'about',
+              'hover:border-gray-300':key != 'about',
+              ' hover:text-gray-700':key != 'about',
+              }" class="shrink-0 border-b-2  px-1 pb-2 text-lg font-medium ">
+                    {{ 'ABOUT'|translate }}
+                  </button>
+                </div>
+                <div class="flex justify-end gap-2 pb-2">
+                  <ng-container *ngIf="user.canReceiveConnections">
+                    <button (click)="connect(user.id,user.sentRequest)"
+                      *ngIf="!(loggedUser.id == user.id) && !user.connected" [ngClass]="{
+                        'bg-main': !User.sentRequest,
+                        'text-white': !User.sentRequest,
+                        'hover:bg-tertiary': !User.sentRequest,
+                        'bg-white': User.sentRequest,
+                        'text-main': User.sentRequest,
+                      }"
+                      class="inline-block rounded     border px-6 py-2 border-indigo-600 text-sm font-medium    focus:outline-none   ">
+                      <i [ngClass]="{
+                  'fa-user-plus': !User.sentRequest,
+                  'fa-user-clock': User.sentRequest,
+                }" class="fa-solid "></i> <span *ngIf="User.sentRequest; else connectLabel">
+                        {{ 'REQUEST_SENT' | translate }}
+                      </span>
+                      <ng-template #connectLabel>
+                        {{ 'CONNECT' | translate }}
+                      </ng-template>
+                    </button>
+                  </ng-container>
+                  <button (click)="disconnect(user.id)" *ngIf="!(loggedUser.id == user.id) && user.connected"
+                    class="inline-block rounded  text-main  bg-white border px-6 py-2 border-indigo-600 text-sm font-medium    focus:outline-none   ">
+                    <i class="fa-solid fa-user-check"></i> {{ 'CONNECTED'|translate }}
+                  </button>
+                  <button (click)="messageUser(user.id)" *ngIf="!(loggedUser.id == user.id) && user.canReceiveMessages"
+                    class=" ml-4  rounded border border-indigo-600 px-6 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none   ">
+                    <i class="fa-regular fa-comment-dots"></i> {{ 'MESSAGE'|translate }}
+                  </button>
+
+                  <button (click)="openMyConnection()" *ngIf="(loggedUser.id == user.id)"
+                    class="   rounded border border-indigo-600 px-6 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none   ">
+                    <i class="fa-solid fa-users"></i> &nbsp; &nbsp;{{ 'MY_CONNECTIONS'|translate }}
+                  </button>
+
+                  <div class="relative">
+                    <button (click)="toggleMenu()"
+                      class=" ml-4  rounded border border-indigo-600 px-3 py-2   text-sm font-medium text-main hover:bg-tertiary hover:text-white focus:outline-none  ">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </button>
+
+                    <div [hidden]="!profileMenu"
+                      class=" absolute end-0 z-10 mt-2 w-56   rounded-md border border-gray-100 bg-white shadow-lg"
+                      role="menu">
+
+                      <div class="p-1 ">
+                        <button *ngIf="!(loggedUser.id == user.id)"
+                          class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-tertiary"
+                          role="menuitem" type="submit">
+                          <svg class="w-4 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                          {{ 'REPORT'|translate }}
+                        </button>
+                      </div>
+                      <div *ngIf="(loggedUser.id == user.id)" class="p-1 ">
+                        <button [routerLink]="['/settings']"
+                          class="flex w-full items-center gap-2 rounded-lg px-4 py-2 text-sm text-gray-700 hover:bg-tertiary"
+                          role="menuitem" type="submit">
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" stroke-linecap="round"
+                              stroke-linejoin="round" />
+                          </svg>
+
+                          {{ 'SETTINGS'|translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <ng-container *ngIf="key=='main'">
+            <div class="row px-16 mb-4">
+              <div class="col-5   ">
+                <div class="          ">
+                  <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+
+                    <p class="text-lg   text-gray-800">
+                      <i class="fa-solid fa-star text-yellow-400"></i> {{ overallRating() }} ({{ ratings.length }})
+                      <button (click)="ratingModal = true" *ngIf="!isRatedByMe && !(loggedUser.id == user.id)"
+                        class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">Rate
+                      </button>
+                      <button (click)="showRatingModal()" *ngIf="isRatedByMe"
+                        class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">Edit Rating
+                      </button>
+                    </p>
+                    <h1 class="font-medium"> {{ 'ABOUT'|translate }}</h1>
+                    <p> {{ user.bio }}</p>
+
+
+                  </div>
+                </div>
+                <div class="       mt-4   ">
+                  <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+
+                    <h1 class="text-main">
+                      <i class="fa-regular fa-star"></i> {{ 'REVIEWS'|translate }}
+                    </h1>
+
+                    <div>
+                      <div *ngFor="let rate of ratings" class="flex space-x-4 text-sm text-gray-500">
+                        <div class="flex-none pt-10">
+                          <img alt="" class="size-8 rounded-full object-cover"
+                            src="{{rate.sender.photo |defaultimage : rate.sender.prenom : rate.sender.nom}}">
+                        </div>
+                        <div class="flex-1 pt-10">
+                          <h3 class="font-medium text-gray-900">{{ rate.sender.nom }} {{ rate.sender.prenom }}</h3>
+                          <p>
+                            <time datetime="2021-07-16">{{ rate.date | date }}</time>
+                          </p>
+
+                          <div class="mt-4 flex items-center">
+                            <svg *ngFor="let n of stars(rate.rating)" aria-hidden="true"
+                              class="text-yellow-400 h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path clip-rule="evenodd"
+                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                fill-rule="evenodd" />
+                            </svg>
+                            <svg *ngFor="let n of stars(5-rate.rating)" aria-hidden="true"
+                              class="text-gray-300 h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                              <path clip-rule="evenodd"
+                                d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                                fill-rule="evenodd" />
+                            </svg>
+                          </div>
+                          <p class="sr-only">{{ rate.rating }} out of 5 stars</p>
+
+                          <div class="prose prose-sm mt-4 max-w-none text-gray-500">
+                            <p>
+                              {{ rate.comment }}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div (scrolled)="onScroll()" *ngIf="feeds$ |async  " [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="500" class="col" infiniteScroll>
+
+
+                <div *ngFor="let post of feeds" class="mt-4 bg-white shadow-md rounded-lg w-full">
+                  <app-post (refreshPosts)="reloadPosts()" [feed]="feed" [post]="post" [user]="loggedUser"></app-post>
+                </div>
+
+
+
+              </div>
+
+
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="key=='about'">
+            <div class=" w-full lg:px-16  mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-ranking-star"></i>&nbsp; {{ 'SKILLS'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.skills.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_SKILLS_YET'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.skills.length!=0" class="grid grid-cols-2 gap-8">
+                    <div *ngFor="let skill of user.skills"
+                      class="border-2 border-main text-main rounded-lg py-1 px-3 text-sm">
+                      {{ skill }}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-school"></i> &nbsp; {{ 'EDUCATION'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.educations.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_EDUCATION_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.educations.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+                      <div *ngFor="let education of user.educations"
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2 w-full">
+
+                          <div class="flex justify-end">
+                            <button
+                              (click)="education.validated = !education.validated;validate(education.id,education.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ education.validated ? 'Uncheck' :
+                              'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ education.degree }}
+                              - {{ education.specialty }} <i *ngIf="education.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i></span>
+                            <br>
+                            <span>{{ education.university }}</span><br>
+                            <span>{{ education.startDate|date }}
+                              - {{ education.onProgress ? 'Current' : education.endDate | date }}</span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-user-tie"></i>&nbsp; {{ 'EXPERIENCES'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.experiences.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_EXPERIENCES_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.experiences.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div *ngFor="let experience of user.experiences"
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <div class="flex justify-end">
+                            <button
+                              (click)="experience.validated = !experience.validated;validate(experience.id,experience.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ experience.validated ? 'Uncheck' :
+                              'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ experience.title }} <i *ngIf="experience.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i></span>
+                            <br>
+                            <span class="font-semibold  ">{{ experience.workplace }}</span><br>
+                            <span>{{ experience.description }}</span><br>
+                            <span>{{ experience.startDate|date }}
+                              - {{ experience.onProgress ? 'Current' : experience.endDate | date }}</span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-certificate"></i>&nbsp; {{ 'CERTIFICATES'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.skills.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_CERTIFICATE_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.skills.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div *ngFor="let certificate of user.certificates"
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <div class="flex justify-end">
+                            <button
+                              (click)="certificate.validated = !certificate.validated;validate(certificate.id,certificate.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ certificate.validated ? 'Uncheck'
+                              : 'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ certificate.certificate }} <i
+                                *ngIf="certificate.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i></span>
+                            <br>
+                            <span>{{ certificate.organization }}</span><br>
+                            <span>{{ certificate.date|date }} </span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-bolt-lightning"></i>&nbsp; {{ 'MISSIONS'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.missions.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_MISSION_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.missions.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div *ngFor="let mission of user.missions"
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2">
+
+                          <div class="flex justify-end">
+                            <button
+                              (click)="mission.validated = !mission.validated;validate(mission.id,mission.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ mission.validated ? 'Uncheck' :
+                              'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ mission.title }}<i *ngIf="mission.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i> </span>
+                            <br>
+                            <span class="font-semibold  ">{{ mission.client }}</span><br>
+                            <span>{{ mission.description }}</span><br>
+                            <span>{{ mission.startDate|date }}
+                              - {{ mission.onProgress ? 'Current' : mission.endDate | date }}</span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-business-time"></i>&nbsp; {{ 'TRAINING'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.trainings.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_TRAINING_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.trainings.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div *ngFor="let training of user.trainings"
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2">
+
+                          <div class="flex justify-end">
+                            <button
+                              (click)="training.validated = !training.validated;validate(training.id,training.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ training.validated ? 'Uncheck' :
+                              'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ training.subject }}
+                              ({{ training.numberOfHours }} Hr) <i *ngIf="training.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i></span>
+                            <br>
+                            <span>{{ training.organisation }}</span><br>
+                            <span>{{ training.startDate | date }}
+                              - {{ training.onProgress ? 'Current' : training.endDate | date }}</span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-handshake-angle"></i>&nbsp; {{ 'VOLUNTEERING'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div *ngIf="user.benevolats.length==0" class="flex justify-center">
+                    <p class="text-gray-600 text-sm">{{ 'NO_VOLUNTEERING_PRESENT'|translate }}</p>
+                  </div>
+                  <div *ngIf="user.benevolats.length!=0">
+
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div *ngFor="let benevolat of user.benevolats "
+                        class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+
+                        <dd class="text-gray-700 sm:col-span-2">
+
+                          <div class="flex justify-end">
+                            <button
+                              (click)="benevolat.validated = !benevolat.validated;validate(benevolat.id,benevolat.validated )"
+                              *ngIf="loggedUser.roles.includes('ADMIN')"
+                              class="text-white mx-2 px-4 py-1 bg-gold rounded-lg">{{ benevolat.validated ? 'Uncheck' :
+                              'Check' }}
+                            </button>
+                          </div>
+                          <p>
+                            <span class="font-bold text-lg">{{ benevolat.title }}<i *ngIf="benevolat.validated"
+                                class="bi bi-patch-check-fill text-blue-500 text-[15px]"></i> </span>
+                            <br>
+                            <span>{{ benevolat.organisation }}</span><br>
+                            <span>{{ benevolat.description }}</span><br>
+                            <span>{{ benevolat.startDate | date }}
+                              - {{ benevolat.onProgress ? 'Current' : benevolat.endDate | date }}</span>
+                          </p>
+
+                        </dd>
+                      </div>
+
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div *ngIf="user.entrepreneur" class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main">
+                  <i class="fa-solid fa-suitcase"></i>&nbsp; {{ 'ENTREPRENEUR_DETAILS'|translate }}
+                </h1>
+                <div class="  px-4 py-2 sm:p-0">
+
+                  <div class="flow-root">
+                    <dl class="-my-3 divide-y divide-gray-200 text-sm">
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'SITUATION'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.entrepreneur.situation }}
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'STARTUP_IDEA'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.entrepreneur.ideeStartup }}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div *ngIf="user.coach" class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+                <h1 class="text-main"><i class="fa-solid fa-user-tie"></i>&nbsp;
+                  &nbsp; {{ 'PROFESSIONAL_DETAILS'|translate }} </h1>
+                <div class="  px-4 py-2 sm:p-0">
+                  <div class="flow-root">
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'ROLES'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <span *ngFor="let ind of user.coach.role">{{ ind }} </span> &nbsp;
+                        </dd>
+                      </div>
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'INDUSTRIES'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <span *ngFor="let ind of user.coach.industry">{{ ind }} </span> &nbsp;
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'CAPABILITIES'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <span *ngFor="let ind of user.coach.capabilities">{{ ind }} </span> &nbsp;
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'YEARS_OF_EXPERIENCE'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.coach.years_experience }}
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'STANDARD_FEED'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.coach.standardFees }} {{ user.coach.currency }} / {{ user.coach.per }}
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'COUNTRY'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.coach.country }} {{ user.coach.governonate }}
+                        </dd>
+                      </div>
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900">{{ 'USEFUL_INFORMATION'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.coach.useful_information }}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="user.investisseur" class=" w-full  lg:px-16   mt-9  ">
+              <div class="w-full mt-4 px-4 py-2 shadow-md rounded-md bg-white">
+
+                <h1 class="text-main">
+                  <i class="fa-solid fa-money-bills"></i>&nbsp; {{ 'INVESTOR_DETAILS'|translate }}
+                </h1>
+
+                <div class="  px-4 py-2 sm:p-0">
+
+                  <div class="flow-root">
+                    <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900"> {{ 'ACTIVITY_AREAS'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          <span *ngFor="let ind of user.investisseur.activty_area">{{ ind }} </span> &nbsp;
+
+                        </dd>
+                      </div>
+
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900"> {{ 'INVESTMENTS_TICKET'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.investisseur.investment_ticket }} {{ user.investisseur.currency }}
+                        </dd>
+                      </div>
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900"> {{ 'PREVIOUS_INVESTMENTS'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.investisseur.previous_investments }}
+                        </dd>
+                      </div>
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900"> {{ 'WORKING_AREA'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.investisseur.working_area }} {{ user.investisseur.governonate }}
+                        </dd>
+                      </div>
+
+                      <div class="grid grid-cols-1 gap-1 py-2 sm:grid-cols-3 sm:gap-4">
+                        <dt class="font-medium text-gray-900"> {{ 'USEFUL_INFORMATION'|translate }}</dt>
+                        <dd class="text-gray-700 sm:col-span-2">
+                          {{ user.investisseur.useful_information }}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </div>
+    <app-delete-dialog (closeModal)="closeRemove()" (cofirmDelete)="confirmDisconnect()"
+      [message]="'ARE_YOU_SURE_YOU_WANT_TO_DISCONNECT' | translate" [visible]="removeConnection">
+    </app-delete-dialog>
+
+    <app-user-connections (close)="closeMyConnection()" *ngIf="loggedUser.id == user.id"
+      [visible]="myConnections"></app-user-connections>
+
+    <p-dialog [(visible)]="ratingModal" [closable]="true" [dismissableMask]="true" [modal]="true"
+      [style]="{width: '50vw'}" header="Rate this user">
+      <div *ngIf="!isRatedByMe">
+        <p>{{ 'RATE_THIS_USER_BY_CLICKING_ON_THE_STARS_BELOW'|translate }}</p>
+
+        <p-rating [(ngModel)]="rating" [cancel]="false" [readonly]="false" [stars]="5"
+          class="text-yellow-400"></p-rating>
+
+        <textarea [(ngModel)]="ratingComment" class="w-full h-32 border-2 border-gray-300 p-2 rounded-lg mt-4"
+          placeholder="{{'WRITE_COMMENT'|translate}}"></textarea>
+
+        <button (click)="rate()" class="bg-main text-white px-4 py-2 rounded-lg mt-4">{{ 'RATE'|translate }}</button>
+
+      </div>
+
+      <div *ngIf="isRatedByMe">
+        <p>{{ 'RATE_THIS_USER_BY_CLICKING_ON_THE_STARS_BELOW'|translate }}</p>
+
+
+        <p-rating [(ngModel)]="rating" [cancel]="false" [readonly]="false" [stars]="5"
+          class="text-yellow-400"></p-rating>
+
+        <textarea [(ngModel)]="ratingComment" class="w-full h-32 border-2 border-gray-300 p-2 rounded-lg mt-4"
+          placeholder="{{'WRITE_COMMENT'|translate}}"></textarea>
+
+        <button (click)="editRating()" class="bg-main text-white px-4 py-2 rounded-lg mt-4">{{ 'EDIT_RATING'|translate
+          }}
+        </button>
+        <button (click)="deleteRating()" class="mx-2 bg-white border-2 border-main text-main px-4 py-2 rounded-lg mt-4">
+          {{ 'DELETE_RATING'|translate }}
+        </button>
+      </div>
+    </p-dialog>
+
+
+  </ng-container>
+</ng-container>

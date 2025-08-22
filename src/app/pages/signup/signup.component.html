@@ -1,0 +1,191 @@
+<div class="row row-height fontStyle">
+  <div class="hidden lg:block col img">
+
+  </div>
+  <div class="col  colBack heropattern-linesinmotion-gold/10  ">
+    <div class="row mt-3 ml-8">
+      <div class="col ml-6 ">
+        <a [routerLink]="['/']"> <img class="mt-3 ml-4  h-4 " src="assets/images/logo/logo-dark-blue.png" alt="Your Company"></a>
+      </div>
+      <div class="col py-3 text-right mr-6">
+        <a [routerLink]="['/login']" class=" text-decoration-none text-second no-underline"> {{'ALREADY_HAVE_ACCOUNT'|translate}}</a>
+      </div>
+    </div>
+
+    <div class="flex justify-center  flex-col px-6 py-1 lg:px-8  ">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h1 class=" text-center mt-0 " style="font-size: 25px;">{{'CREATE_YOUR_ACCOUNT'|translate}}</h1>
+        <h2 class="text-center title2 mt-0">{{'SIGN_UP_INTO_YOUR_ACCOUNT'|translate}}</h2>
+      </div>
+      <div class="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form [dir]="'dir'|translate" [formGroup]="signupForm" class="signin-form" (ngSubmit)="onSubmit()">
+          <div>
+            <div class="row">
+              <div class="col">
+                <label for="name" class="block text-sm font-medium leading-6 text-gray-900">{{'NAME'|translate}} </label>
+                <div class="mt-2">
+                  <input id="name" type="text" required formControlName="name" name="name"
+                         [ngClass]="{
+                         'border-1':signupForm.get('name')?.touched && signupForm.get('name')?.value=='' && signupForm.get('name')?.hasError('required'),
+                         'border-red-600':signupForm.get('name')?.touched && signupForm.get('name')?.value=='' && signupForm.get('name')?.hasError('required'),
+                         'border-0':!(signupForm.get('name')?.touched && signupForm.get('name')?.value=='' && signupForm.get('name')?.hasError('required')),
+                         }"
+                         class="px-2 block w-full  rounded-md  py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+                </div>
+              </div>
+              <div class="col">
+                <label for="firstname" class="block text-sm font-medium leading-6 text-gray-900">{{'FIRSTNAME'|translate}} </label>
+                <div class="mt-2">
+                  <input id="firstname" type="text" required formControlName="firstname" name="firstname"
+                         [ngClass]="{
+                         'border-1':signupForm.get('firstname')?.touched && signupForm.get('firstname')?.value=='' && signupForm.get('firstname')?.hasError('required'),
+                         'border-red-600':signupForm.get('firstname')?.touched && signupForm.get('firstname')?.value=='' && signupForm.get('firstname')?.hasError('required'),
+                         'border-0':!(signupForm.get('firstname')?.touched && signupForm.get('firstname')?.value=='' && signupForm.get('firstname')?.hasError('required')),
+                         }"
+                         class="px-2 block w-full rounded-md  py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2">
+            <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{'EMAIL'|translate}} </label>
+            <div class="mt-2">
+              <input id="email" formControlName="email" name="email" type="email" autocomplete="email"
+                     [ngClass]="{
+                         'border-1':signupForm.get('email')?.touched && signupForm.get('email')?.value=='' && signupForm.get('email')?.hasError('required') || signupForm.get('email')?.hasError('email'),
+                         'border-red-600':signupForm.get('email')?.touched && signupForm.get('email')?.value=='' && signupForm.get('email')?.hasError('required')|| signupForm.get('email')?.hasError('email'),
+                         'border-0':!(signupForm.get('email')?.touched && signupForm.get('email')?.value=='' && signupForm.get('email')?.hasError('required')|| signupForm.get('email')?.hasError('email')),
+                         }"
+                     required class="px-2 block w-full rounded-md   py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+
+            </div>
+          </div>
+
+          <div class="mt-2">
+            <div class="flex items-center justify-between">
+              <label for="password-field" class="block text-sm font-medium leading-6 text-gray-900">{{'PASSWORD'|translate}}</label>
+            </div>
+            <div class="relative">
+              <input [type]="type" autocomplete="current-password" formControlName="password" id="password-field"
+                     name="password" placeholder="{{'PASSWORD'|translate}}"
+                     [ngClass]="{
+                         'border-1':signupForm.get('password')?.touched && signupForm.get('password')?.value=='' && signupForm.get('password')?.hasError('required') || signupForm.get('password')?.hasError('invalidPassword'),
+                         'border-red-600':signupForm.get('password')?.touched && signupForm.get('password')?.value=='' && signupForm.get('password')?.hasError('required')|| signupForm.get('password')?.hasError('invalidPassword'),
+                         'border-0':!(signupForm.get('password')?.touched && signupForm.get('password')?.value=='' && signupForm.get('password')?.hasError('required')|| signupForm.get('password')?.hasError('invalidPassword')),
+                         }"
+                     class="px-2 block w-full rounded-md   py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6">
+
+              <span (click)="showPassword(1)"
+                    class="absolute inset-y-0 end-0 grid place-content-center px-4 cursor-pointer">
+          <svg
+            class="size-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </span>
+            </div>
+            <div
+              *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.value!='' && (signupForm.get('password')?.hasError('invalidPassword') || signupForm.get('password')?.hasError('minlength'))"
+              class="text-[12px]  text-red-700"> {{ 'PASSWORD_REQUIREMENTS'|translate }}
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="flex items-center justify-between">
+              <label for="password-field" class="block text-sm font-medium leading-6 text-gray-900">{{'CONFIRM_PASSWORD'|translate}} </label>
+            </div>
+            <div class="relative">
+              <input
+                [ngClass]="{
+                         'border-1':signupForm.get('password')?.value !== signupForm.get('repeatPassword')?.value && signupForm.get('repeatPassword')?.touched && signupForm.get('repeatPassword')?.value!='',
+                         'border-red-600':signupForm.get('password')?.value !== signupForm.get('repeatPassword')?.value && signupForm.get('repeatPassword')?.touched && signupForm.get('repeatPassword')?.value!='',
+                         'border-0':!(signupForm.get('password')?.value !== signupForm.get('repeatPassword')?.value && signupForm.get('repeatPassword')?.touched && signupForm.get('repeatPassword')?.value!=''),
+                         }" [type]="type2" class="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900   ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" formControlName="repeatPassword"
+                id="repeat-password-field" minlength="6" name="repeatPassword"
+                placeholder="{{'REPEAT_PASSWORD'|translate}}"
+                required
+
+              />
+
+              <span (click)="showPassword(2)"
+                    class="absolute inset-y-0 end-0 grid place-content-center px-4 cursor-pointer">
+          <svg
+            class="size-4 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+            <path
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </span>
+            </div>
+            <div class="mt-2">
+              <div *ngIf="signupForm.get('password')?.value !== signupForm.get('repeatPassword')?.value && signupForm.get('repeatPassword')?.touched && signupForm.get('repeatPassword')?.value!=''" class="text-[12px] text-red-700">{{'PASSWORDS_DO_NOT_MATCH'|translate}}
+              </div>
+            </div>
+          </div>
+          <div class="mt-2">
+            <div class="flex items-center justify-between">
+              <label for="password-field" class="block text-sm font-medium leading-6 text-gray-900">{{'PHONE_NUMBER'|translate}}</label>
+            </div>
+            <div class="mt-2">
+              <mat-form-field style="width: 100%;border: none;">
+                <ngx-mat-intl-tel-input formControlName="phoneNumber" [preferredCountries]="['tn', 'us']" [enablePlaceholder]="true" [enableSearch]="true" name="phoneNumber" #phone ngModel>
+                </ngx-mat-intl-tel-input>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="mt-4">
+            <label for="Option1" class="flex cursor-pointer items-start gap-4">
+              <div class="flex items-center">
+                &#8203;
+                <input formControlName="acceptTerms" required type="checkbox" name="policy"
+                       class="mt-2 size-4 checked:bg-second rounded border-gray-300" id="Option1"/>
+              </div>
+
+              <div>
+                <strong class="mr-5font-medium text-gray-900">{{'AGREE_TO_OUR'|translate}}<span
+                  class="text-second underline font-semibold" ><a href="/termes-condition">{{'TERMS'|translate}}</a> </span> </strong>
+              </div>
+            </label>
+
+          </div>
+          <div class="mt-4">
+            <button type="submit" [disabled]="signupForm.invalid" class=" flex disabled:cursor-not-allowed w-full justify-center rounded-md bg-main px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              {{'SIGNUP'|translate}}
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

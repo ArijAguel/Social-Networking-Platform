@@ -1,0 +1,48 @@
+h2 {
+    margin-top: 50px;
+    font-weight: bold;
+    color: #c0aa81;
+    text-align: center;
+    align-items: center;
+}
+
+.certificate {
+    position: relative;
+    /* Make the container relatively positioned */
+    display: flex;
+    justify-content: center;
+}
+
+.name-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000;
+}
+
+.name {
+    font-size: 50px;
+    font-weight: bold;
+    color: #f8c315;
+    font-family: Lucida Handwriting;
+}
+
+.dateandproject {
+    display: flex;
+    margin-top: 340px;
+    width: 1550px !important;
+    justify-content: space-around;
+    margin-left: 50px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.project-conatiner {
+    align-items: center;
+    text-align: center;
+    width: 250px;
+    margin-left: 220px;
+}

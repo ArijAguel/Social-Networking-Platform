@@ -1,0 +1,78 @@
+<div [dir]="'dir'|translate" class="block lg:hidden">
+    <div class="flex justify-center">
+        <div class="flex flex-col justify-center py-12 items-center">
+
+            <div class="flex justify-center items-center text-gray-500 ">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-48 h-48">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
+        </svg>
+
+            </div>
+            <h1 class="text-gray-700 font-medium text-2xl text-center mb-3">{{'BIG_SCREEN_REQUIRED'|translate}}</h1>
+        </div>
+    </div>
+</div>
+<div class="hidden lg:block">
+    <div [dir]="('dir'|translate)" class="bmc" id="exportable-content">
+        <div style="padding-right: 20px;padding-left: 20px;padding-top: 20px;">
+            <img [height]="50" [width]="50" src="../../../../assets/images/logo/favicon.png" alt="logo">
+        </div>
+        <h1>{{'BUSINESS_CANVAS_MODEL'|translate}}</h1>
+        <h2>{{'PROJECT'|translate}} : {{project.name}}</h2>
+        <div class="row1">
+            <div class="column1">
+                <p class="title">{{'KEY_PARTNERSHIPS1'|translate}}</p>
+                <p>{{etape3.partenaires}}</p>
+            </div>
+            <div class="column2">
+                <div class="row11">
+                    <p class="title">{{'KEY_ACTIVITIES1'|translate}}</p>
+                    <p>{{etape3.activites}}</p>
+                </div>
+                <div class="row11">
+                    <p class="title">{{'KEY_RESOURCES1'|translate}}</p>
+                    <p>{{etape3.ressources}}</p>
+                </div>
+            </div>
+            <div class="column3">
+                <p class="title">{{'VALUE_PROPOSITIONS1'|translate}}</p>
+                <p>{{etape3.valeurs}}</p>
+
+            </div>
+            <div class="column2">
+                <div class="row11">
+                    <p class="title">{{'CUSTOMER_RELATIONSHIP1'|translate}}</p>
+                    <p>{{etape3.relations}}</p>
+
+                </div>
+                <div class="row11">
+                    <p class="title">{{'CHANNELS1'|translate}}</p>
+                    <p>{{etape3.distribution}}</p>
+                </div>
+            </div>
+            <div class="column3">
+                <p class="title">{{'CUSTOMER_SEGMENT1'|translate}}</p>
+                <p>{{etape3.clienteles}}</p>
+            </div>
+        </div>
+        <div class="row2">
+            <div class="column21">
+                <p class="title">{{'COST_STRUCTURE1'|translate}}</p>
+                <p>{{etape3.couts}}</p>
+
+            </div>
+            <div class="column22">
+                <p class="title">{{'REVENUE_STREAM1'|translate}}</p>
+                <p>{{etape3.revenus}}</p>
+
+            </div>
+        </div>
+        <br>
+        <br>
+
+    </div>s
+    <div class="d-flex justify-content-around mb-6">
+        <button type="button" class="btn btn-outline-primary startnow" (click)="revenir()">{{'GO_BACK'|translate}}</button>
+        <button type="button" class="btn btn-outline-primary startnow" (click)="handleDownloadPDF()">{{'DOWNLOAD_BMC'|translate}} &nbsp; &nbsp; <i class="fa-solid fa-download" style="font-size: 20px;"></i></button>
+    </div>
+</div>

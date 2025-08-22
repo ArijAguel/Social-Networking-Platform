@@ -1,0 +1,124 @@
+<div class="container" *ngIf="user$ | async as userr">
+    <div class="main-body">
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body col1">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="{{userr.photo | defaultimage:userr.prenom :userr.nom }}" alt="image" class="rounded-circle" width="150">
+                            <div class="mt-3">
+                                <h2>{{userr.nom}} {{userr.prenom}}</h2>
+                                <p class="text-secondary mb-1">{{userr.entrepreneur}}</p>
+                                <p class="text-muted font-size-sm"></p>
+                                <div class="form-check form-switch d-flex justify-content-center">
+                                    <input style="color: #c0aa81;" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" [(ngModel)]="!userr.prive" (change)="changeVisibility()">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">
+                                    &nbsp; Private account
+                                </label>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <button class="btn button" style="margin-right: 5px;" (click)="updateImage()">Change your photo</button>
+                                <button class="btn button" (click)="updatePassword()">Change password</button>
+                                <br>
+                                <br>
+                                <br>
+                                <button class="btn button" (click)="deleteUserImage()">Delete profile image</button>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-7 ml-2 ">
+                <div class="card-body p-5 " style="border: 1px solid #c0aa8169;">
+                    <h2>Edit my profile</h2>
+                    <form #loginForm="ngForm" class="signin-form">
+                        <div class="form-group" *ngIf="loginForm.value.userRole === 'Organisation'">
+                            <input id="organisationname" type="text" class="login-input" placeholder="Organisation name" required ngModel name="organisationname">
+                        </div>
+                        <div class="form-group" style="display: flex; justify-content: space-between;">
+                            <div style="width: 48%;">
+                                <input id="name" type="text" class="login-input" placeholder="Name" required [(ngModel)]="user.nom" name="{{user.nom}}">
+                            </div>
+                            <div style="width: 48%;">
+                                <input id="firstname" type="text" class="login-input" [(ngModel)]="user.prenom" name="{{user.prenom}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="inputEmail" type="email" class="login-input" [(ngModel)]="user.email" name="{{user.email}}">
+                        </div>
+
+                        <div class="form-group" style="display: flex; justify-content: space-between;">
+                            <div style="width: 48%;">
+                                <input id="birthday" type="date" class="login-input" placeholder="birthday" style="height: 55px;" required [(ngModel)]="user.dateNaissance" name="{{user.dateNaissance}}">
+                            </div>
+                            <div style="width: 48%;">
+                                <div class="form-width">
+                                    <mat-form-field appearance="outline" style="width: 100%;">
+                                        <ngx-mat-intl-tel-input [(ngModel)]="phoneNumber" [preferredCountries]="['tn', 'us']" [enablePlaceholder]="true" [enableSearch]="true" name="phoneNumber" #phone ngModel></ngx-mat-intl-tel-input>
+                                    </mat-form-field>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse">Address</label>
+                            <input id="address" type="text" class="login-input" required name="adresse">
+                        </div>
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="situation">Current Situation</label>-->
+<!--                            <input id="situation" type="text" class="login-input" required [(ngModel)]="user.entrepreneur.situation" name="situation">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="idea">Statup Idea</label>-->
+<!--                            <input id="idea" type="text" class="login-input" required [(ngModel)]="user.entrepreneur.ideeStartup" name="ideeStartup">-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="idea">Linkedin Link</label>-->
+<!--                            <input id="idea" type="text" class="login-input" required [(ngModel)]="user.linkedinLink" name="{{user.linkedinLink}}">-->
+<!--                        </div>-->
+                        <br>
+                        <div class="form-group center-div">
+                            <button type="submit" class="btn button" (click)="onSubmit(user)">update</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<p-dialog header="Update your image" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <form #imageForm="ngForm">
+        <div class="form-group">
+            <label>Logo :</label>
+            <input type="file" class="form-control" (change)="onFileChange($event)" name="" filr>
+        </div>
+        <button class="btn button" type="submit" (click)="submitUpdateImage(imageForm)">Change Image</button>
+    </form>
+
+</p-dialog>
+
+<p-dialog header="Change your password" [(visible)]="visible2" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <form #passwordForm="ngForm">
+        <div class="form-group">
+            <input id="password-field" type="password" class="login-input" placeholder="Password" required minlength="6" ngModel name="password">
+        </div>
+        <div class="form-group">
+            <input id="repeat-password-field" type="password" class="login-input" placeholder="Repeat Password" required minlength="6" ngModel name="repeatPassword">
+            <!-- Error message if passwords don't match -->
+            <div *ngIf="passwordForm.controls['password'].value && passwordForm.controls['password'].value !== passwordForm.controls['repeatPassword'].value" style="color: red;font-size: 14px;">
+                * Passwords do not match
+            </div>
+        </div>
+        <button type="submit" [disabled]="passwordForm.value.password !== passwordForm.value.repeatPassword" class="form-control btn submit btn-login" (click)="submitUpdatePassword(passwordForm)">Change password</button>
+    </form>
+</p-dialog>

@@ -1,0 +1,14 @@
+<div class="card cardsteps" style="border: none;">
+    <!-- Add class 'active' to progress -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <ul id="progressbar" class="text-center">
+                <li *ngFor="let step of steps; let i = index" [ngClass]="{ 'active': i <= activeStep-1 }">
+                    <a [routerLink]="['/entrepreneur/etape', projectId,step]">
+                        <span class="one-step"> Step {{ step }}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  
+  .navbar-brand {
+    margin-right: auto; /* Push to the left */
+  }
+  
+  .navbar-nav {
+    margin-left: auto; /* Push to the right */
+  }
+  .signup{
+    margin-right: 10px; 
+    margin-left: 15px;
+    color: #c0aa81;
+    border:2px solid #c0aa81;
+  }
+.signin{
+  color: white ;
+    background-color: #c0aa81;
+    border:2px solid #c0aa81;
+}
+.signup:hover{
+    color: white ;
+    background-color: #c0aa81;
+}
+.signin:hover {
+  box-shadow:  0 0 1em grey;
+}
+.nav-link:hover{
+    color: #c0aa81;
+    border-bottom:3px solid #c0aa81;
+}
+.navbar-nav .nav-item a.nav-link.active {
+    color: #c0aa81;
+    border-bottom: 3px solid #c0aa81;
+  }
+  
+.language:hover{
+   border-bottom: none; 
+}
+@media screen and (max-width: 1000px) {
+  .navbar-collapse  {
+    background-color: white;/* Hide the SVG overlay on smaller screens */
+    text-align: center;
+  }
+  .signup{
+    margin-right: 10px; 
+    margin-left: 6px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    
+  }
+}
+.navbar.scrolled {
+  background-color: white; /* Change to your desired color */
+}

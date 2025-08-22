@@ -1,0 +1,190 @@
+<div [dir]="'dir'|translate" class="row  ">
+    <div class="   hidden   lg:block  col-2  ">
+        <app-side-bar></app-side-bar>
+    </div>
+    <div class="col ">
+        <div class="flex justify-center mt-5">
+
+            <div class="   bg-white rounded shadow-md p-4 lg:p-8 mb-6 w-[90%]">
+                <div class=" ">
+
+                    <div class=" ">
+
+                        <div class="text-gray-600">
+                            <p *ngIf="business.id==0" class="font-medium text-lg">{{'ADD_A_BUSINESS'|translate}}</p>
+                            <p *ngIf="business.id!=0" class="font-medium text-lg">{{'EDIT_BUSINESS'|translate}}</p>
+                        </div>
+                        <form #businessForm="ngForm">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-6">
+                                <div class="md:col-span-6">
+                                    <label for="name" class="text-gray-500 font-semibold">{{'NAME_OF_BUSINESS'|translate}}</label>
+                                    <input required type="text" name="name" id="name" [(ngModel)]="business.name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50  " />
+                                </div>
+                                <div class="md:col-span-6">
+                                    <label for="name" class="text-gray-500 font-semibold">{{'DESCRIPTION1'|translate}}</label>
+                                    <input required type="text" name="description" id="description" [(ngModel)]="business.description" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50  " />
+                                </div>
+                                <div class="md:col-span-6" [ngClass]="{'cursor:not-allowed':!canAddCoFounder}">
+                                    <label class="text-gray-500 font-semibold">{{'FOUNDERS'|translate}}</label>
+                                    <div>
+                                      <!-- Search Input -->
+                                      <input
+                                        type="text"
+                                        name="searchControl"
+                                        [formControl]="searchControl"
+                                        placeholder="Search founder by email"
+                                        class="border p-2 rounded w-full"
+                                      />
+                                    
+                                      <ng-multiselect-dropdown
+                                          #dropdown 
+                                          [ngModelOptions]="{standalone: true}" 
+                                          name="selectedItems" 
+                                          [placeholder]="'SELECT_COFOUNDER' | translate"
+                                          [data]="dropdownList"
+                                          [(ngModel)]="selectedItems"
+                                          [settings]="dropdownSettings"
+                                          (onSelect)="onItemSelect($event)"
+                                          (onDeSelect)="onItemSelect($event)"
+                                        >
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <p *ngIf="!canAddCoFounder" class="text-red-600">* {{'GO_PREMIUM_ADD_COFOUNDERS'|translate}}</p>
+                                </div>
+                                <div class="md:col-span-6" *ngIf="business.id!=0" [ngClass]="{'cursor:not-allowed':!canAddCoFounder}">
+                                  <label class="text-gray-500 font-semibold">{{'ADMINISTRATOR'|translate}}</label>
+                                  <ng-multiselect-dropdown [disabled]="!canAddCoFounder" [placeholder]="'SELECT_COFOUNDER'|translate" name="selectedItems2" [settings]="dropdownSettings2" [data]="dropdownList2" [(ngModel)]="selectedItems2">
+                                  </ng-multiselect-dropdown>
+                                  <p *ngIf="!canAddCoFounder" class="text-red-600">* {{'GO_PREMIUM_ADD_COFOUNDERS'|translate}}</p>
+                                </div>
+                                <div class="md:col-span-3">
+                                    <label for="Phone" class="text-gray-500 font-semibold"> {{'PHONE_NUMBER'|translate}}</label>
+                                    <mat-form-field style="width: 100%;border: none;">
+                                        <ngx-mat-intl-tel-input [(ngModel)]="business.phoneNumber" [preferredCountries]="['tn', 'us']" [enablePlaceholder]="true" [enableSearch]="true" name="phoneNumber" #phone ngModel>
+                                        </ngx-mat-intl-tel-input>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="md:col-span-3">
+                                    <label for="name" class="text-gray-500 font-semibold">{{'VIDEO_URL'|translate}}</label>
+                                    <input  type="text" name="videourl" placeholder="{{'ENTER_VIDEO_URL'|translate}}" [(ngModel)]="business.videoURL" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50  " />
+                                </div>
+                                <div class="md:col-span-6">
+                                  <label class="text-gray-500 font-semibold text text-m">
+                                    <input
+                                    [(ngModel)]="business.learnBusiness" (change)="changing()" [checked]="business.learnBusiness"
+                                    class="size-5 rounded border-gray-300 disabled:cursor-not-allowed custom-checkbox" id="learnBusiness"
+                                    name="learnBusiness" type="checkbox"/> &nbsp;&nbsp;{{'CHECK_LEARNING_PURPOSES'|translate}}  &nbsp;                        
+                                  </label>   
+                              </div>
+                                <div class="md:col-span-1 flex justify-center">
+                                    <img src="{{imageMin??business.logo| defaultimage : business.name: ''  }}" class="h-20 w-20 object-cover rounded-full" alt="">
+                                </div>
+
+
+                                <div class="md:col-span-4">
+                                    <label for="email" class="text-gray-500 font-semibold ml-2">{{'LOGO'|translate}}</label>
+
+
+                                    <div class="flex      ">
+                                        <label for="dropzone-file" class=" mt-2 flex flex-col items-center justify-center   ml-2    py-2 px-4   font-bold    ring-1 ring-gray-400 rounded-md   cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100    ">
+                {{'CHANGE_PICTURE'|translate}}
+                <input (change)="onFileChange($event)" id="dropzone-file" type="file" class="hidden"/>
+              </label>
+                                        <button (click)="business.logo = ''" class="ml-4 mt-2 flex flex-col items-center justify-center font-bold    py-2 px-4       text-white ring-1 ring-gray-400 rounded-md   cursor-pointer bg-red-600    ">
+                {{'DELETE_PICTURE'|translate}}
+              </button>
+                                    </div>
+                                </div>
+
+                                <div class="md:col-span-6">
+                                    <label for="email" class="text-gray-500 font-semibold">{{'COVER_PICTURE'|translate}}</label>
+
+                                    <div class="flex items-center justify-center w-full">
+                                        <label class=" mt-2 flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800  hover:bg-gray-100    ">
+
+                                          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <ng-container *ngIf="!imageMin2" >   <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                                                                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                                            </svg>
+                                              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span
+                                                class="font-semibold">{{'UPLOAD_FILE'|translate}}</span> {{'OR_DRAG_DROP'|translate}}</p>
+                                              <p class="text-xs text-gray-500 dark:text-gray-400">{{'FILE_FORMATS'|translate}}</p>
+
+
+                                            </ng-container>
+                                            <div  class="-mt-14" *ngIf="imageMin2">
+                                              <div class="flex justify-end">
+                                                <i (click)="imageMin2 = null" class="bi bi-x-circle hover:cursor-pointer text-red-600 text-[20px]"></i>
+                                              </div>
+                                              <img *ngIf="imageMin2" src="{{imageMin2}}" class="h-32 w-auto" alt="">
+                                            </div>
+                                          </div>
+                                          <input  (change)="onFileChange2($event)"   type="file" class="hidden"/>
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="md:col-span-6">
+                                    <label for="email" class="text-gray-500 font-semibold"> {{'PRIVACY'|translate}}</label>
+                                    <fieldset>
+                                        <div class="divide-y divide-gray-200">
+                                            <label for="Option1" class="flex cursor-pointer items-start gap-4  py-2">
+                  <div class="flex items-center">
+                    &#8203;
+                    <input (change)="business.publique = true" type="radio" class="size-4 rounded border-gray-300" id="Option1" name="accessOption"   [checked]="business.publique"  />
+                  </div>
+
+                  <div>
+                    <strong class="font-medium text-gray-700">
+                      <i class="bi bi-globe"></i>
+
+                      {{'PUBLIC_ACCESS'|translate}}</strong>
+                    <p class="mt-1 text-pretty text-sm text-gray-700">
+                      {{'PUBLIC_ACCESS_DESCRIPTION2'|translate}}
+                    </p>
+                  </div>
+                </label>
+
+                                            <label for="Option2" class="flex cursor-pointer items-start gap-4  py-2">
+                  <div class="flex items-center">
+                    &#8203;
+                    <input (change)="business.publique= false"  type="radio" class="size-4 rounded border-gray-300" id="Option2" name="accessOption"   [checked]="!business.publique" />
+                  </div>
+
+                  <div>
+                    <strong class="font-medium text-gray-700">
+                      <i class="fa-solid fa-lock"></i>
+                      {{'PRIVATE_ACCESS'|translate}}</strong>
+                    <p class="mt-1 text-pretty text-sm text-gray-700">
+                      {{'PRIVATE_ACCESS_DESCRIPTION2'|translate}}
+                    </p>
+                  </div>
+                </label>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+
+
+
+
+                                <div class="md:col-span-6 text-right">
+                                    <div class="inline-flex items-end">
+                                        <button [disabled]="businessForm.invalid" (click)="submit()" class="bg-main disabled:cursor-not-allowed   text-white     hover:bg-tertiary    font-bold py-2 px-4 rounded-md">{{'SUBMIT'|translate}}
+              </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

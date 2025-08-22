@@ -1,0 +1,144 @@
+<div class="bg-white">
+    <app-navbar></app-navbar>
+
+  <section [dir]="'dir'|translate" class="relative heropattern-linesinmotion-gold/10">
+    <div class="absolute lg:hidden inset-0 bg-white opacity-[88%]"></div>
+
+    <div class="relative mt-20   ">
+            <div class="text-center lg:text-left">
+
+                <img src="/assets/images/home/SCBClogo.png" class="h-auto mx-auto mb-8 lg:mb-12 mt-5">
+
+
+              <div class="relative bg-gradient-to-r mt-8 from-amin to-tertiary py-16 font-[sans-serif]">
+                <div class="absolute inset-0">
+                  <img alt="Background Image" class="w-full h-full object-cover opacity-50"
+                       src="/assets/images/home/SCBCbackground.svg"/>
+                </div>
+
+                <div class="relative max-w-screen-xl mx-auto px-8 z-10 text-left text-second font-[sans-serif]">
+                  <p class="text-3xl  font-bold leading-tight mb-6"> Siratify Certified Business Coaches Training </p>
+                  <p class="text-lg mt-4 md:text-xl mb-12"> Program equips <span
+                    class="font-bold">coaches, consultants,</span> and <span class="font-bold">professionals</span> with
+                    the right skills
+                    <br> to effectively guide entrepreneurs.</p>
+                  <button [routerLink]="['/signup']" class="bg-main  mt-4 hover:bg-tertiary text-white text-base tracking-wide px-6 py-3 rounded-md transition duration-300 ease-in-out shadow-lg hover:shadow-xl"
+                          type="button">
+                    Earn your certification
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
+                  <div class="text-center ">
+                    <div class="flex justify-center">
+                      <div
+                        class=" mb-6      h-12 md:w-14 md:h-14 bg-tertiary rounded-full flex items-center justify-center -ml-3">
+                        <img alt="" src="/assets/images/logo/favicon.png" width="24">
+                      </div>
+
+                    </div>
+
+                    <h2 class="text-gray-800 text-5xl  font-semibold mb-3">Siratify Tools Mastering</h2>
+                  </div>
+
+                  <div class="text-center ">
+                    <div class="flex justify-center">
+                      <div
+                        class=" mb-6      h-12 md:w-14 md:h-14 bg-tertiary rounded-full flex items-center justify-center -ml-3">
+                        <img alt="" src="https://img.icons8.com/?size=100&id=BILt5kJcRGqo&format=png&color=1B4156"
+                             width="24">
+                      </div>
+
+                    </div>
+
+                    <h2 class="text-gray-800 text-5xl  font-semibold mb-3">Professional Coaching</h2>
+                  </div>
+
+                  <div class="text-center ">
+                    <div class="flex justify-center">
+                      <div
+                        class=" mb-6      h-12 md:w-14 md:h-14 bg-tertiary rounded-full flex items-center justify-center -ml-3">
+                        <img alt="" src="https://img.icons8.com/?size=100&id=3141&format=png&color=1B4156" width="24">
+                      </div>
+
+                    </div>
+
+                    <h2 class="text-gray-800 text-5xl  font-semibold mb-3">Entrepreneurship Raw Reality</h2>
+                  </div>
+
+                  <div class="text-center ">
+                    <div class="flex justify-center">
+                      <div
+                        class=" mb-6      h-12 md:w-14 md:h-14 bg-tertiary rounded-full flex items-center justify-center -ml-3">
+                        <img alt="" src="https://img.icons8.com/?size=100&id=KHamPFkk3RRx&format=png&color=1B4156"
+                             width="24">
+                      </div>
+
+                    </div>
+
+                    <h2 class="text-gray-800 text-5xl  font-semibold mb-3">Certification Exam</h2>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="mt-6 w-full max-lg:max-w-3xl mx-auto   rounded-lg">
+                <div class="grid lg:grid-cols-2  gap-14 sm:p-8 p-4 font-[sans-serif]">
+                  <div class="mt-72">
+                    <p class="text-5xl font-bold text-second">Don't Miss Out!</p>
+                    <p class="text-xl text-gray-600 mt-4 leading-relaxed"> The Siratify Certified Business Coaches
+                      Program is set to start soon,<br> Contact us to benefit from a discount of up to <span
+                        class="font-bold text-main text-2xl">50%!</span></p>
+                  </div>
+
+                  <div class="bg-gray-100 p-6 rounded-lg">
+                    <form class="mt-8 space-y-4">
+                      <input [(ngModel)]="form.fullName" class="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-main" name="fullName" placeholder='Full Name'
+                             type='text'/>
+                      <input [(ngModel)]="form.email" class="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-main" name="email" placeholder='Email'
+                             type='email'/>
+                      <input [(ngModel)]="form.phone" class="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-main" name="phone" placeholder='Phone Number'
+                             type='text'/>
+                      <input [(ngModel)]="form.title" class="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-main" name="title" placeholder='Current Title'
+                             type='text'/>
+                      <select [(ngModel)]="form.experience" class="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-main "
+                              name="experience">
+                        <option class="text-gray-800" value="">Professional Experience</option>
+                        <option value="< 1 Year"> < 1 Year</option>
+                        <option value="1 - 2 Years"> 1 - 2 Years</option>
+                        <option value="3 - 5 Years"> 3 - 5 Years</option>
+                        <option value="6 - 8 Years"> 6 - 8 Years</option>
+                        <option value="9 - 10 Years"> 9 - 10 Years</option>
+                        <option value="> 10 Years"> > 10 Years</option>
+                      </select>
+                      <textarea [(ngModel)]="form.motivation" class="w-full rounded-lg px-4 text-gray-800 text-sm pt-3 outline-main" name="motivation"
+                                placeholder='Why do you wish to participate in this program?'
+                                rows="6"></textarea>
+                      <textarea [(ngModel)]="form.goals" class="w-full rounded-lg px-4 text-gray-800 text-sm pt-3 outline-main"
+                                name="goals" placeholder='What are your professional goals in taking this training ?'
+                                rows="6"></textarea>
+                      <button (click)="submit()" class="text-white bg-main hover:bg-tertiary tracking-wide rounded-lg text-sm px-4 py-3 flex items-center justify-center w-full !mt-6"
+                              type='button'>
+                        <svg class="mr-2" fill='#fff' height="16px" viewBox="0 0 548.244 548.244" width="16px"
+                             xmlns="http://www.w3.org/2000/svg">
+                          <path clip-rule="evenodd"
+                                d="M392.19 156.054 211.268 281.667 22.032 218.58C8.823 214.168-.076 201.775 0 187.852c.077-13.923 9.078-26.24 22.338-30.498L506.15 1.549c11.5-3.697 24.123-.663 32.666 7.88 8.542 8.543 11.577 21.165 7.879 32.666L390.89 525.906c-4.258 13.26-16.575 22.261-30.498 22.338-13.923.076-26.316-8.823-30.728-22.032l-63.393-190.153z"
+                                data-original="#000000" fill-rule="evenodd"/>
+                        </svg>
+                        Send Message
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+        </div>
+
+  </section>
+</div>

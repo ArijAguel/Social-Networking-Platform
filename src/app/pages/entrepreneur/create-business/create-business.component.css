@@ -1,0 +1,7 @@
+.custom-checkbox,
+.custom-radio {
+    /* Adjust the size as needed */
+    accent-color: #172741;
+    color: white;
+    border-radius:20px
+}

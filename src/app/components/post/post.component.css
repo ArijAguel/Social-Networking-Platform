@@ -1,0 +1,81 @@
+.ui-dialog-titlebar {
+    display: none;
+}
+
+.icon-heart {
+    background: url(http://i.imgur.com/MIP7hPg.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: auto;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    display: inline-block;
+    &--clicked {
+        -webkit-animation: animateLove 1s steps(14, start);
+        background-position: right;
+    }
+}
+
+@-webkit-keyframes animateLove {
+    0% {
+        background-position: 0px 0px;
+    }
+    100% {
+        background-position: -2800px 0px;
+    }
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* Ensures image won't overflow container */
+}
+
+.centered-image {
+    max-width: 100%;
+    /* Ensures image won't exceed container width */
+    max-height: 100%;
+    /* Ensures image won't exceed container height */
+    object-fit: contain;
+    /* Keeps image proportions and fits it within container */
+}
+
+:host ::ng-deep .icon-styled {
+    color: #c0aa81;
+    font-size: 20px;
+}
+
+.ifShow {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ifShow.show {
+    display: block;
+    overflow: visible;
+
+}

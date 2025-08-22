@@ -1,0 +1,647 @@
+<div [dir]="'dir'|translate" class="sticky-button" [ngClass]="{'left': ('dir'|translate)==='ltr', 'right': ('dir'|translate)==='rtl'}">
+    <button *ngIf="isEditable" (click)="onSaveClick() " class="btn btn-circle btn-xl help"><i class="fa-solid fa-floppy-disk" style="font-size: 20px;cursor: pointer;"></i>&nbsp;&nbsp;{{'SAVE'|translate}}</button><br> <br>
+</div>
+<div class="col-12 d-flex align-items-center justify-content-center mt-4 ml-2">
+    <img alt="" src="{{etape55.project.logo | defaultimage :etape55.project.name:'':true}}" class="size-20 rounded-lg object-contain shadow-sm mr-3" />
+    <h1 class="text-center flex-grow-1">{{'TECHNICAL_STUDY'|translate}}</h1>
+</div>
+
+<br>
+<br>
+<h4 *ngIf="isEditable" style="margin-left: 3%;position:relative;">
+    {{'DOWNLOAD_TECHNICAL_STUDY'|translate}} <a (click)="downloadPDF()" style="cursor: pointer;text-decoration: underline; font-weight: bold;">PDF</a> {{'OR'|translate}} <a style="cursor: pointer;text-decoration: underline; font-weight: bold;" (click)="downloadWord()">Word(.docs)</a>
+</h4>
+<form [formGroup]="etape5" (ngSubmit)="onSubmit()">
+    <div class="main-conatiner" id="certificate">
+        <h3 id="accordion-collapse-heading-1" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(1)">
+                <h2>{{'OVERVIEW'|translate}}:</h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-2" [ngClass]="{'hidden': !isOpen(1)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="card mb-4 card-radius" style="border: none;">
+                <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="productService">{{'PRODUCT_SERVICE_DESCRIPTION'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="productService" rows="4" class="form-control" name="productService" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="process">{{'PRODUCTION_PROCESS'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="process" rows="4" class="form-control" name="process" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="quality">{{'QUALITY_CONTROL'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="quality" rows="4" class="form-control" name="quality" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="humanResources">{{'HUMAN_RESOURCES'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="humanResources" rows="4" class="form-control" name="humanResources" required></textarea dir="auto">
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="resourceRequirements">{{'RESOURCE_REQUIREMENTS'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="resourceRequirements" rows="4" class="form-control" name="resourceRequirements" required></textarea dir="auto">
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="supplyChain">{{'SUPPLY_CHAIN_MANAGEMENT'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="supplyChain" rows="4" class="form-control" name="supplyChain" required></textarea dir="auto">
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="risqueManagement">{{'RISK_MANAGEMENT'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="risqueManagement" rows="4" class="form-control" name="risqueManagement" required></textarea dir="auto">
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="timelineMileStone">{{'TIMELINE_MILESTONES'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="timelineMileStone" rows="4" class="form-control" name="timelineMileStone" required></textarea dir="auto">
+                        </div>
+                    </div>
+                    <div class="form-dash">
+                        <div class="form-group">
+                            <label for="compliance">{{'REGULATORY_COMPLIANCE'|translate}}</label>
+                            <textarea dir="auto" type="text" formControlName="compliance" rows="4" class="form-control" name="compliance" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h3 id="accordion-collapse-heading-2" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(2)">
+            <h2>{{'SUPPLIERS'|translate}} <i class="fa-regular fa-circle-question" style="font-size: 20px;cursor: pointer;" (click)="infosuppliers()"></i></h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-2" [ngClass]="{'hidden': !isOpen(2)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <table class="table table-bordered" formArrayName="fournisseurs">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'SUPPLIER'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'TESTED'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'STRENGTHS'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WEAKNESSES'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'DECISION'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of fournisseur().controls; let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="fournisseur" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="teste" class="form-select" required>
+                                              <option value="true" selected>{{'YES'|translate}}</option>
+                                              <option value="false">{{'NO'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="pointsFort" class="form-control">
+                                        </td>
+
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="pointsFaible" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="decision" class="form-select" required>
+                                              <option value="To try" selected>{{'TO_TRY'|translate}}</option>
+                                              <option value="Keep">{{'KEEP'|translate}}</option>
+                                              <option value="Cancel">{{'CANCEL'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <i *ngIf="i > 0  && isEditable" (click)="removefournisseur(i)" class="fa-solid fa-trash" style="color: red; font-size: 25px; margin-top: 10px;"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button *ngIf="isEditable" type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="addfournisseur('',false,'','','')">{{'ADD_SUPPLIER'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('SUPPLIERS')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <h3 id="accordion-collapse-heading-3" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(3)">
+            <h2>{{'PARTNERS'|translate}}</h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-3" [ngClass]="{'hidden': !isOpen(3)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <table class="table table-bordered" formArrayName="partenaires">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'PARTNER'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'TESTED'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'STRENGTHS'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WEAKNESSES'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'DECISION'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of partenaire().controls; let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="partenaire" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="teste" class="form-select" required>
+                                                <option value="true" selected>{{'YES'|translate}}</option>
+                                                <option value="false">{{'NO'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="pointsForts" class="form-control">
+                                        </td>
+
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="pointsFaibles" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="decision" class="form-select" required>
+                                              <option value="To try" selected>{{'TO_TRY'|translate}}</option>
+                                              <option value="Keep">{{'KEEP'|translate}}</option>
+                                              <option value="Cancel">{{'CANCEL'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <i *ngIf="i > 0  && isEditable" (click)="removepartenaire(i)" class="fa-solid fa-trash" style="color: red; font-size: 25px; margin-top: 10px;"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button *ngIf="isEditable" type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="addpartenaire('',false,'','','')">{{'ADD_PARTNER'|translate}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('PARTNERS')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <h3 id="accordion-collapse-heading-4" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(4)">
+            <h2>{{'INFRASTRUCTURE'|translate}} <span class="important ">*</span></h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-4" [ngClass]="{'hidden': !isOpen(4)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <table class="table table-bordered" formArrayName="infrastructures">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ELEMENT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'CATEGORY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'QUANTITY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'UNIT_PRICE'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'SUPPLIERS'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of infrastructure().controls; let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="element" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="type" class="form-select" required>
+                                                <option value="Land" selected>{{'LAND'|translate}}</option>
+                                                <option value="Facilities" selected>{{'FACILITIES'|translate}}</option>
+                                                <option value="Fit-out" selected>{{'FIT_OUT'|translate}} </option>
+                                                <option value="Equipement" selected>{{'EQUIPMENT'|translate}}</option>
+                                                <option value="Transportation" selected>{{'TRANSPORTATION'|translate}}</option>
+                                                <option value="Furniture and office equipment" selected>{{'FURNITURE_AND_OFFICE_EQUIPMENT'|translate}}</option>
+                                                <option value="Technology" selected>{{'TECHNOLOGY'|translate}}</option>
+                                                <option value="Other" selected>{{'OTHER'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="quantite" class="form-control" (input)="updateTotal(i)">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  step="any" formControlName="prix" class="form-control" (input)="updateTotal(i)">
+                                        </td>
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="fournisseur" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  step="any" formControlName="total" class="form-control">
+                                        </td>
+
+                                        <td>
+                                            <i *ngIf="i > 0  && isEditable" (click)="removeinfrastructure(i)" class="fa-solid fa-trash" style="color: red; font-size: 25px; margin-top: 10px;"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <button *ngIf="isEditable" type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="addinfrastructure('','',0,0,'',0,0,0,0,0,0,0)">{{'ADD_INFRASTRUCTURE'|translate}}</button>
+                            <h4 style="color: gray;font-weight: bold;margin-top: 10px;text-align: center;">{{'TOTAL'|translate}} {{cumulativeTotal}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('INFRASTRUCTURE')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+        <h3 id="accordion-collapse-heading-5" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(5)">
+            <h2>{{'WORKING_CAPITAL'|translate}}<span class="important ">*</span></h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-5" [ngClass]="{'hidden': !isOpen(5)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <br>
+                            <div class="form-group">
+                                <p>{{'DURATION'|translate}}</p>
+                                <input type="number" step="0.001"  formControlName="periodDeFonds" class="form-control" required (input)="updateAllFond()" />
+                            </div>
+                        </div>
+                        <div class="form-dash">
+                            <p>{{'COLLECT_EXPENSES'|translate}}</p>
+                            <table class="table table-bordered" formArrayName="fonds">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ELEMENT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'CATEGORY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'QUANTITY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'UNIT_PRICE'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'PRIODICITY'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'ANNUAL_TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WORKING_CAPITAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'WORKING_CAPITAL_TOTAL'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let ben of fond().controls; let i=index" [formGroupName]="i">
+                                        <td>
+                                            <input maxlength="255" dir="auto" type="text" formControlName="element" class="form-control">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="type" class="form-select" required>
+                                                <option  value="Rent" selected>{{'RENT'|translate}}</option>
+                                                <option value="Salaries" >{{'SALARIES'|translate}}</option>
+                                                <option value="external services" >{{'EXTERNAL_SERVICES'|translate}} </option>
+                                                <option value="Utilities" >{{'UTILITIES'|translate}}</option>
+                                                <option value="Loan repayments" >{{'LOAN_REPAYMENTS'|translate}}</option>
+                                                <option value="Administrative expenses" >{{'ADMINISTRATIVE_EXPENSES'|translate}}</option>
+                                                <option value="Raw materials and components" >{{'RAW_MATERIALS_AND_COMPONENTS'|translate}}</option>
+                                                <option value="Maintenance" >{{'MAINTENANCE'|translate}}</option>
+                                                <option value="Other" >{{'OTHER'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="quantite" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="prix" class="form-control" (input)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <select dir="auto" formControlName="periodicity" class="form-select" (change)="updateTotalFond(i)" required>
+                                                <option value="Every 1 month" >{{'EVERY_1_MONTH'|translate}}</option>
+                                                <option value="Every 2 month" >{{'EVERY_2_MONTH'|translate}}</option>
+                                                <option value="Every 3 month" >{{'EVERY_3_MONTH'|translate}}</option>
+                                                <option value="Every 4 month" >{{'EVERY_4_MONTH'|translate}}</option>
+                                                <option value="Every 6 month" >{{'EVERY_6_MONTH'|translate}}</option>
+                                                <option value="Every 12 month" >{{'EVERY_12_MONTH'|translate}}</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="annualTotal" class="form-control">
+                                        </td>
+                                        <td>
+                                            <input class="custom-checkbox" type="checkbox" formControlName="workingCapital" (change)="updateTotalFond(i)">
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="total" class="form-control">
+                                        </td>
+                                        <td>
+                                            <i *ngIf="i > 0  && isEditable" (click)="removefond(i)" class="fa-solid fa-trash" style="color: red; font-size: 25px; margin-top: 10px;"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button *ngIf="isEditable" type="button" class="btn btn-outline-primary startnow exclude-from-pdf" (click)="addfond('','',0,0,0,'',false,0,0,0,0,0)">{{'ADD'|translate}}</button>
+                            <br>
+                            <h4 style="color: gray;font-weight: bold;margin-top: 10px;text-align: center;">{{'TOTAL'|translate}}: {{cumulativeTotalFond}}</h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('WORKING_CAPITAL')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+        <h3 id="accordion-collapse-heading-6" style="font-size: 20px;position:relative;">
+            <button type="button" class="flex items-center justify-between w-full px-2 hover:bg-gray-100 rtl:text-right text-gray-500 border border-b-0 border-gray-200 rounded-xl focus:ring-4  gap-3" (click)="toggleAccordion(6)">
+            <h2>{{'OPENING_BALANCE_SHEET'|translate}}</h2>
+                <svg class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h3>
+        <div id="accordion-collapse-body-5" [ngClass]="{'hidden': !isOpen(6)}" class="p-5 border border-b-0 border-gray-200 rounded-xl mb-5">
+            <div class="row center-div">
+                <div class="col-12 center-div">
+                </div>
+                <div class="card mb-4 card-radius" style="border: none;">
+
+                    <div class="card-body px-0 pt-0 pb-2 card-shadow">
+                        <div class="form-dash">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="color: #c0aa81;">{{'ASSETS'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'AMOUNT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'LIABILITIES'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">{{'AMOUNT'|translate}}</th>
+                                        <th scope="col" style="color: #c0aa81;">%</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{'LAND'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="fraisEtablissement" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+                                            {{'OWNERS_CAPITAL'|translate}}
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="ownerCapital" class="form-control" (input)="calculateTotal2()">
+                                        </td>
+                                        <td>
+                                            0.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'FACILITIES'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="terrain" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        
+                                        <td>
+                                            {{'SHORT_TERM_LOANS_PAYABLE'|translate}}
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="promoteur" class="form-control" (input)="calculateTotal2()">
+                                        </td>
+
+                                        <td>
+                                            0.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'FIT_OUT'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="genieCivil" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+                                            {{'LONG_TERM_LOANS_PAYABLE'|translate}}
+                                        </td>
+
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="foprodi" class="form-control" (input)="calculateTotal2()">
+                                        </td>
+
+                                        
+                                        <td>
+                                            0.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'EQUIPMENT'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="elementIncorporels" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+
+                                        </td>
+
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'TRANSPORTATION'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="amenagement" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+
+                                        </td>
+
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'FURNITURE_AND_OFFICE_EQUIPMENT'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="equipementProduction" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+
+                                        </td>
+
+                                        <td>
+
+                                        </td>
+                                        <td>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'TECHNOLOGY'|translate}}
+                                        </td>
+                                        <td>
+                                            <input dir="auto" type="number" step="0.001"  formControlName="materielTransport" class="form-control" (input)="calculateTotals()">
+                                        </td>
+                                        <td>
+                                        </td>
+
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            {{'WORKING_CAPITAL'|translate}}
+                                        </td>
+                                        <td>
+                                            {{cumulativeTotalFond}}
+                                        </td>
+                                        <td>
+                                        </td>
+
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{'TOTAL'|translate}}
+                                        </td>
+                                        <td>
+                                            {{total1}}
+                                        </td>
+                                        <td>
+                                            {{'TOTAL'|translate}}
+                                        </td>
+                                        <td>
+                                            {{total2}}
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div *ngIf="total1!=total2" id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                                <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div class="ms-3 text-sm font-medium">
+                                    {{'WARNING_CHECK_DATA'|translate}}<a href="#" class="font-semibold underline hover:no-underline"> {{'TOTALS_MUST_BE_EQUAL'|translate}}</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-around" style="position: relative;">
+                    <button *ngIf="!isEditable&&canAddRemark" type="button" (click)="remarque('OPENING_BALANCE_SHEET')" class="btn btn-outline-primary noticed mt-2"><i class="fa-regular fa-lightbulb"></i> &nbsp; {{'ADD_REMARK'|translate}}</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="flex justify-content-around" style="position:relative;">
+        <button type="button" class="btn btn-outline-primary startnow"><a  [routerLink]="'/feed/etape/' + projectId + '/4'">{{'PREVIOUS_STEP'|translate}}</a></button>
+        <button type="button" (click)="onSubmit()" class="btn btn-outline-primary startnow">{{'NEXT_STEP'|translate}}</button>
+    </div>
+</form>
+
+<p-dialog [(visible)]="suppliers" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'MARKETING_OF_PRODUCTS'|translate}}</h4>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <iframe width="560" height="315" [src]="videoUrl" frameborder="0" allowfullscreen></iframe>
+    </div>
+</p-dialog>
+<p-dialog [(visible)]="showremarque" [modal]="true" [style]="{ width: '50vw', 'overflow':'hidden' }" [draggable]="false" [resizable]="false" [maximizable]="true">
+    <h4 style="color: #c0aa81; text-align: center;font-size: 25px;font-weight: bold;">{{'REMARK'|translate}}</h4>
+    <div class="d-flex flex justify-content-center" style="text-align: center;">
+        <textarea dir="auto" #remarqueTextarea name="remarque" cols="50" rows="10" placeholder="{{'WRITE_REMARK'|translate}}" style="display: block;border-radius: 10px;border: 2px solid #c0aa81;"></textarea>
+        <br>
+    </div>
+    <button type="button" class="btn btn-outline-primary startnow" style="display: block;" (click)="sendRemark(remarqueTextarea.value)">{{'SEND'|translate}}</button>
+</p-dialog>

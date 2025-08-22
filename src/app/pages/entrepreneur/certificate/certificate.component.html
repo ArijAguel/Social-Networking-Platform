@@ -1,0 +1,19 @@
+<h2>Congratulation this is your certificate <i class="fa-solid fa-gift"></i></h2>
+<br>
+<br>
+<div class="certificate flex justify-content-center" id="certificate">
+    <img src="../../../../assets/images/Certif.png" alt="certificate" [height]="800" [width]="1400">
+    <div class="name-container">
+        <h3 class="name">{{project.entrepreneur.nom}} {{project.entrepreneur.prenom}}</h3>
+        <div class="dateandproject">
+            <p class="date">On {{ day }}/{{ month }}/{{ year }}</p>
+            <div class="project-conatiner">
+                <p class="project">Project : {{ project.name }} </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="m-4 flex justify-content-between">
+    <a [routerLink]="'/feed/etape/' + projectId + '/7'" class=" flex  justify-center rounded-md bg-main px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Go back</a>
+    <button (click)="handleDownloadPDF()" class=" flex  justify-center rounded-md bg-main px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Download Certifiacte &nbsp; &nbsp; <i class="fa-solid fa-download" style="font-size: 20px;"></i></button>
+</div>
